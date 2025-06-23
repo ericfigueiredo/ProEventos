@@ -42,6 +42,8 @@ namespace DJERICMAX_App.Dominio.Entidades
                 AdicionarCritica("Aviso: CEP de usuário deve ser preenchido.");
             if (string.IsNullOrEmpty(CEP_Evento))
                 AdicionarCritica("Aviso: CEP do local do evento deve ser preenchido.");
+            if (FormaPagamentoId == 0)
+                AdicionarCritica("Aviso: Não foi identificada forma de pagamento.");
         }
     }
 }

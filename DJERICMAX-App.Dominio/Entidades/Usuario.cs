@@ -19,7 +19,10 @@ namespace DJERICMAX_App.Dominio.Entidades
 
         public override void Validate()
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(Email))
+                AdicionarCritica("Aviso: E-mail não informado.");
+            if (string.IsNullOrEmpty(Senha))
+                AdicionarCritica("Aviso: Senha não informada.");
         }
     }
 }

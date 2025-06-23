@@ -9,7 +9,10 @@
 
         public override void Validate()
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(Nome))
+                AdicionarCritica("Aviso: Nome não foi preenchido corretamente.");
+            if (Preco_Hora == 0)
+                AdicionarCritica("Aviso: Preço precisa ser preenchido corretamente.");
         }
     }
 }

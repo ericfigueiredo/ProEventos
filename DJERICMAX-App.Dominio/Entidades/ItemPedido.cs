@@ -8,7 +8,10 @@
 
         public override void Validate()
         {
-            throw new System.NotImplementedException();
+            if (ServicoId == 0)
+                AdicionarCritica("Aviso: Não foi identificada a referência de Serviço.");
+            if (Quantidade_Horas == 0)
+                AdicionarCritica("Aviso: Não foi informada a quantidade de horas do evento.");
         }
     }
 }
