@@ -2,7 +2,7 @@
 
 namespace DJERICMAX_App.Dominio.Entidades
 {
-    public class Usuario
+    public class Usuario : Entidade
     {
         public int Id { get; set; }
         public string Email { get; set; }
@@ -16,5 +16,10 @@ namespace DJERICMAX_App.Dominio.Entidades
         /// Um usuário pode contratar nenhum ou muitos serviços
         /// </summary>
         public ICollection<Pedido> Pedidos { get; set; }
+
+        public override void Validate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using DJERICMAX_App.Dominio.ObjetoDeValor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DJERICMAX_App.Dominio.Entidades
 {
-    public class Pedido
+    public class Pedido : Entidade
     {
         public int Id { get; set; }
         public DateTime Data_Cadastro { get; set; }
@@ -30,6 +31,17 @@ namespace DJERICMAX_App.Dominio.Entidades
         /// Pedido deve ter pelo menos um item de pedido
         /// ou muitos itens de pedidos
         /// </summary>
-        public ICollection<ItemPedido> ItemPedido { get; set; }
+        public ICollection<ItemPedido> ItensPedido { get; set; }
+
+        public override void Validate()
+        {
+            LimparMensagensValidacao();
+            if (!ItensPedido.Any())
+                AdicionarCritica("Aviso: Pedidos não podem ser cadastrados sem itens.");
+            if (string.IsNullOrEmpty(CEP_Usuario))
+                AdicionarCritica("Aviso: CEP de usuário deve ser preenchido.");
+            if (string.IsNullOrEmpty(CEP_Evento))
+                AdicionarCritica("Aviso: CEP do local do evento deve ser preenchido.");
+        }
     }
 }
