@@ -5,8 +5,4 @@
     <RootNamespace>DJERICMAX_App.Dominio</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Contratos\" />
-  </ItemGroup>
-
 </Project>
