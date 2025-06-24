@@ -5,6 +5,5 @@ namespace DJERICMAX_App.Repositorio.Repositorios
 {
     class ServicoRepositorio : BaseRepositorio<Servico>, IServicoRepositorio
     {
-
     }
 }
