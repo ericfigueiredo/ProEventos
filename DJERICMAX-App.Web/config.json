@@ -1,0 +1,10 @@
+{
+  "Chave": "ValorChave",
+  "ConnectionStrings": {
+    "SqlServerConnection": "",
+    "DJERICMAX_AppDB": "Server=localhost;uid=root;pwd=123456;database=DJERICMAX_AppDB"
+  }
+}
+
+
+
