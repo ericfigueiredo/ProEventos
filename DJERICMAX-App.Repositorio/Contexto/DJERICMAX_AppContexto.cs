@@ -1,5 +1,6 @@
 ﻿using DJERICMAX_App.Dominio.Entidades;
 using DJERICMAX_App.Dominio.ObjetoDeValor;
+using DJERICMAX_App.Repositorio.Config;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,18 @@ namespace DJERICMAX_App.Repositorio.Contexto
 
         public DJERICMAX_AppContexto(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            /// classes de mapeamento aqui...
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new ServicoConfiguration());
+            modelBuilder.ApplyConfiguration(new PedidoConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemPedidoConfiguration());
+            modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
