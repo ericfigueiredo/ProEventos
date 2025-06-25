@@ -28,7 +28,8 @@ namespace DJERICMAX_App.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             var connectionString = Configuration.GetConnectionString("DJERICMAX_AppDB");
             services.AddDbContext<DJERICMAX_AppContexto>(option => 
-                                                         option.UseMySql(connectionString, m => 
+                                                         option.UseLazyLoadingProxies()
+                                                         .UseMySql(connectionString, m => 
                                                                             m.MigrationsAssembly("DJERICMAX-App.Repositorio")));
 
             // In production, the Angular files will be served from this directory

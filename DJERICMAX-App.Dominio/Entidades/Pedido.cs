@@ -13,7 +13,10 @@ namespace DJERICMAX_App.Dominio.Entidades
         public DateTime Data_Evento { get; set; }
         public bool Parcelado { get; set; }
         public int Qtde_Parcelas { get; set; }
+
         public int UsuarioId { get; set; }
+        public virtual Usuario Usuario { get; set; }
+
         public string CEP_Usuario { get; set; }
         public string UF_Usuario { get; set; }
         public string Cidade_Usuario { get; set; }

@@ -15,7 +15,7 @@ namespace DJERICMAX_App.Dominio.Entidades
         /// <summary>
         /// Um usuário pode contratar nenhum ou muitos serviços
         /// </summary>
-        public ICollection<Pedido> Pedidos { get; set; }
+        public virtual ICollection<Pedido> Pedidos { get; set; }
 
         public override void Validate()
         {

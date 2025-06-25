@@ -5,7 +5,7 @@ namespace DJERICMAX_App.Dominio.ObjetoDeValor
     public class FormaPagamento
     {
         public int Id { get; set; }
-        public string nome { get; set; }
+        public string Nome { get; set; }
         public string Descricao { get; set; }
 
         public bool EhBoleto
