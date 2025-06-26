@@ -27,14 +27,15 @@ namespace DJERICMAX_App.Dominio.Entidades
         public string Cidade_Evento { get; set; }
         public string Logradouro_Evento { get; set; }
         public int NumeroLogradouro_Evento { get; set; }
+
         public int FormaPagamentoId { get; set; }
-        public FormaPagamento FormaPagamento { get; set; }
+        public virtual FormaPagamento FormaPagamento { get; set; }
 
         /// <summary>
         /// Pedido deve ter pelo menos um item de pedido
         /// ou muitos itens de pedidos
         /// </summary>
-        public ICollection<ItemPedido> ItensPedido { get; set; }
+        public virtual ICollection<ItemPedido> ItensPedido { get; set; }
 
         public override void Validate()
         {

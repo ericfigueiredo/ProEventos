@@ -24,6 +24,10 @@ namespace DJERICMAX_App.Repositorio.Config
             builder.Property(p => p.Cidade_Evento).HasMaxLength(100);
             builder.Property(p => p.Logradouro_Evento).HasMaxLength(200);
             builder.Property(p => p.NumeroLogradouro_Evento).HasMaxLength(10);
+
+            //builder.HasOne(p => p.Usuario);
+
+            builder.HasOne(p => p.FormaPagamento);
         }
     }
 }

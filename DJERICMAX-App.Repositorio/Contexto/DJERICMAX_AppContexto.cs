@@ -29,6 +29,33 @@ namespace DJERICMAX_App.Repositorio.Contexto
             modelBuilder.ApplyConfiguration(new ItemPedidoConfiguration());
             modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());
 
+            modelBuilder.Entity<FormaPagamento>().HasData(
+                new FormaPagamento()
+                {
+                    Id = 1,
+                    Nome = "Boleto",
+                    Descricao = "Forma de pagamento é Boleto"
+                },
+                new FormaPagamento()
+                {
+                    Id = 2,
+                    Nome = "Cartão de Crédito",
+                    Descricao = "Forma de pagamento é Cartão de Crédito"
+                },
+                new FormaPagamento()
+                {
+                    Id = 3,
+                    Nome = "Depósito",
+                    Descricao = "Forma de pagamento é Depósito"
+                },
+                new FormaPagamento()
+                {
+                    Id = 4,
+                    Nome = "Pix",
+                    Descricao = "Forma de pagamento é Pix"
+                }
+                );
+
             base.OnModelCreating(modelBuilder);
         }
     }
