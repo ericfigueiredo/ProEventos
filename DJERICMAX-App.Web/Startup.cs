@@ -1,9 +1,9 @@
+using DJERICMAX_App.Dominio.Contratos;
 using DJERICMAX_App.Repositorio.Contexto;
+using DJERICMAX_App.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +31,7 @@ namespace DJERICMAX_App.Web
                                                          option.UseLazyLoadingProxies()
                                                          .UseMySql(connectionString, m => 
                                                                             m.MigrationsAssembly("DJERICMAX-App.Repositorio")));
+            services.AddScoped<IServicoRepositorio, ServicoRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
