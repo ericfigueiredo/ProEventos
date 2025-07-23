@@ -1,0 +1,69 @@
+<div>
+  <form action="" class="form-signin">
+    <img
+      src="../../../../assets/images/logo-djericmax.png"
+      [title]="logoTitle"
+    />
+    <h1 class="h4 mb-2 login">Acesso de Clientes</h1>
+
+
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input
+    type="email"
+    id="inputEmail"
+    name="email"
+    placeholder="informe o seu E-mail"
+    class="form-control mb-2"
+    #email="ngModel"
+    [(ngModel)]="usuario.email"
+    [ngClass]="{
+      'is-invalid': email.invalid && (email.dirty || email.touched),
+      'is-valid': email.valid && (email.dirty || email.touched)
+    }"
+    email
+    required
+    />
+
+    <div
+      class="invalid-feedback mb-2 respError" role="alert"
+      *ngIf="email.invalid && (email.dirty || email.touched)"
+    >
+      <div *ngIf="email.errors.required">O E-mail é de preenchimento obrigatório!</div>
+      <div *ngIf="email.errors.email">Formato de E-mail inválido!</div>
+    </div>
+
+
+    <label for="inputSenha" class="sr-only">Senha</label>
+    <input
+      type="password"
+      id="inputSenha"
+      name="senha"
+      placeholder="Senha"
+      class="form-control mb-2"
+      #senha="ngModel"
+      [(ngModel)]="usuario.senha"
+      [ngClass]="{
+        'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+        'is-valid': senha.valid && (senha.dirty || senha.touched)
+      }"
+      required
+      minlength="6"
+    />
+
+    <div
+      class="invalid-feedback mb-2 respError" role="alert"
+      *ngIf="senha.invalid && (senha.dirty || senha.touched)"
+    >
+      <div *ngIf="senha.errors.required">A Senha deve informada!</div>
+      <div *ngIf="senha.errors.minlength">A Senha deve ter pelo menos 6 caracteres.</div>
+    </div>
+
+    <button
+      class="btn btn-primary btn-block mb-2"
+      type="submit"
+      (click)="entrar()"
+    >
+      Entrar
+    </button>
+  </form>
+</div>
