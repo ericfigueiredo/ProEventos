@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { privateDecrypt } from 'crypto';
+import { UsuarioService } from './../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -12,26 +14,34 @@ export class LoginComponent implements OnInit {
   public logoTitle = "DJ PARA CASAMENTOS";
   public usuario;
   public usuaruiAutenticado: boolean;
+  public returnUrl: string;
   public email="";
   public senha="";
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private activatedRouter: ActivatedRoute;
+    private usuarioService: UsuarioService
+  ) {
     this.usuario =  new Usuario();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'];
   }
 
   entrar(){
 
-    // alert(`E-mail: ${this.usuario.email} | Senha: ${this.usuario.senha}`);
+    this.usuarioService.verificaUsuario(this.usuario)
+    .subscribe(
+      data => {
 
-    if (this.usuario.email == "djericmax@hotmail.com" && this.usuario.senha == "eusouodj") {
+      },
+      err => {
 
-      sessionStorage.setItem("usuario-autenticado", "1");
-      this.router.navigate(['/']);
+      }
+    );
 
-      // this.usuaruiAutenticado = true;
     }
   }
 

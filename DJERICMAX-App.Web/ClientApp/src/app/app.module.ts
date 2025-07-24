@@ -1,3 +1,4 @@
+import { ServicosService } from './services/servicos/servicos.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +15,7 @@ import { LoginComponent } from './components/usuarios/login/login.component';
 import { CadastroComponent } from './components/usuarios/cadastro/cadastro.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GuardaRotas } from './autorizer/guardaroutas';
+import { UsuarioService } from './services/usuario/usuario.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,10 @@ import { GuardaRotas } from './autorizer/guardaroutas';
       { path: 'entrar', component: LoginComponent  }
     ])
   ],
-  providers: [],
+  providers: [
+    UsuarioService,
+    ServicosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
