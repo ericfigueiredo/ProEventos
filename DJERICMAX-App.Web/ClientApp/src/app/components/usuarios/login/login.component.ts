@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   public email="";
   public senha="";
 
-  constructor() {
+  constructor(private router: Router) {
     this.usuario =  new Usuario();
   }
 
@@ -26,7 +27,11 @@ export class LoginComponent implements OnInit {
     // alert(`E-mail: ${this.usuario.email} | Senha: ${this.usuario.senha}`);
 
     if (this.usuario.email == "djericmax@hotmail.com" && this.usuario.senha == "eusouodj") {
-      this.usuaruiAutenticado = true;
+
+      sessionStorage.setItem("usuario-autenticado", "1");
+      this.router.navigate(['/']);
+
+      // this.usuaruiAutenticado = true;
     }
   }
 

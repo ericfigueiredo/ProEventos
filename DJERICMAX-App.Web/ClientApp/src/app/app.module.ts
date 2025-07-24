@@ -13,6 +13,7 @@ import { ServicosComponent } from './components/servicos/servicos.component';
 import { LoginComponent } from './components/usuarios/login/login.component';
 import { CadastroComponent } from './components/usuarios/cadastro/cadastro.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { GuardaRotas } from './autorizer/guardaroutas';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { FooterComponent } from './components/footer/footer.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'servicos', component: ServicosComponent  },
+      { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas] },
       { path: 'entrar', component: LoginComponent  }
     ])
   ],

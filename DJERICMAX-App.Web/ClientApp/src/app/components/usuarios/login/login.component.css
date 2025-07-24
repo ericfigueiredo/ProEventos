@@ -1,3 +1,7 @@
+.bodys{
+  overflow: hidden;
+}
+
 .form-signin {
     width: 100%;
     max-width: 420px;
@@ -25,11 +29,16 @@
   text-align: center;
 }
 
-.form-signin img{
+.logoTitle {
   max-width: 300px;
  display: block;
   margin: 0 auto;
+}
 
+.logoBottom {
+  max-width: 200px;
+ display: block;
+  margin: 0 auto;
 }
 
 .respError{
