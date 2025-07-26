@@ -32,6 +32,7 @@ namespace DJERICMAX_App.Web
                                                          .UseMySql(connectionString, m => m
                                                          .MigrationsAssembly("DJERICMAX-App.Repositorio")));
             services.AddScoped<IServicoRepositorio, ServicoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
