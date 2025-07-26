@@ -4,17 +4,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { HomeComponent } from './components/home/home.component';
-import { CounterComponent } from './components/counter/counter.component';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
-import { ServicosComponent } from './components/servicos/servicos.component';
-import { LoginComponent } from './components/usuarios/login/login.component';
-import { CadastroComponent } from './components/usuarios/cadastro/cadastro.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { GuardaRotas } from './autorizer/guardaroutas';
+import { NavMenuComponent } from './components/layout/nav-menu/nav-menu.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { ServicosComponent } from './components/pages/servicos/servicos.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { GuardaRotas } from './autorizer/guardarotas';
 import { UsuarioService } from './services/usuario/usuario.service';
 
 @NgModule({
@@ -22,8 +19,6 @@ import { UsuarioService } from './services/usuario/usuario.service';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ServicosComponent,
     LoginComponent,
     CadastroComponent,
@@ -35,8 +30,6 @@ import { UsuarioService } from './services/usuario/usuario.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas] },
       { path: 'entrar', component: LoginComponent  }
     ])

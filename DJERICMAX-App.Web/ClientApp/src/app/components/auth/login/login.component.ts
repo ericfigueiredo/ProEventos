@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
-import { privateDecrypt } from 'crypto';
-import { UsuarioService } from './../../../services/usuario/usuario.service';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +9,15 @@ import { UsuarioService } from './../../../services/usuario/usuario.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  public logoTitle = "DJ PARA CASAMENTOS";
   public usuario;
-  public usuaruiAutenticado: boolean;
   public returnUrl: string;
-  public email="";
-  public senha="";
+  public mensagem: string;
+  // public usuaruiAutenticado: boolean;
+  private ativar_spinner: boolean;
 
   constructor(
     private router: Router,
-    private activatedRouter: ActivatedRoute;
+    private activatedRouter: ActivatedRoute,
     private usuarioService: UsuarioService
   ) {
     this.usuario =  new Usuario();
@@ -31,20 +28,26 @@ export class LoginComponent implements OnInit {
   }
 
   entrar(){
-
+    this.ativar_spinner = true;
     this.usuarioService.verificaUsuario(this.usuario)
     .subscribe(
-      data => {
+      usuario_json => {
+        // executa sem erros
+        this.usuarioService.usuario = usuario_json;
 
+        if (this.returnUrl == null) {
+          this.router.navigate(['/']);
+        }
+        else{
+          this.router.navigate([this.returnUrl]);
+        }
       },
       err => {
-
+        // console.log(err.error);
+        this.mensagem = err.error;
+        this.ativar_spinner = false;
       }
     );
 
     }
   }
-
-
-
-}
