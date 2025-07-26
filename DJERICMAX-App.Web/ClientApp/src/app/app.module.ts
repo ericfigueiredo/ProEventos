@@ -9,10 +9,14 @@ import { NavMenuComponent } from './components/layout/nav-menu/nav-menu.componen
 import { HomeComponent } from './components/pages/home/home.component';
 import { ServicosComponent } from './components/pages/servicos/servicos.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { CadastroComponent } from './components/auth/cadastro/cadastro.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { GuardaRotas } from './autorizer/guardarotas';
 import { UsuarioService } from './services/usuario/usuario.service';
+import { GaleriaComponent } from './components/pages/galeria/galeria.component';
+import { PortfolioComponent } from './components/pages/portfolio/portfolio.component';
+import { FaqsComponent } from './components/pages/faqs/faqs.component';
+import { ContatoComponent } from './components/pages/contato/contato.component';
+import { CadastroUsuarioComponent } from './components/auth/cadastro-usuario/cadastro-usuario.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +25,12 @@ import { UsuarioService } from './services/usuario/usuario.service';
     HomeComponent,
     ServicosComponent,
     LoginComponent,
-    CadastroComponent,
-    FooterComponent
+    FooterComponent,
+    GaleriaComponent,
+    PortfolioComponent,
+    FaqsComponent,
+    ContatoComponent,
+    CadastroUsuarioComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,7 +38,11 @@ import { UsuarioService } from './services/usuario/usuario.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'galeria', component: GaleriaComponent, canActivate:[GuardaRotas] },
       { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas] },
+      { path: 'faqs', component: FaqsComponent },
+      { path: 'portfolio', component: PortfolioComponent, canActivate:[GuardaRotas] },
+      { path: 'contato', component: ContatoComponent},
       { path: 'entrar', component: LoginComponent  }
     ])
   ],

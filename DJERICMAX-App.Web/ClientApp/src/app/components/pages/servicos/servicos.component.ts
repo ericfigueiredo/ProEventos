@@ -1,17 +1,15 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector : "app-servicos",
-  template : "<html><body>{{ obterNome() }}</body></html>" 
+  selector: 'app-servicos',
+  templateUrl: './servicos.component.html',
+  styleUrls: ['./servicos.component.css']
 })
+export class ServicosComponent implements OnInit {
 
-export class ServicosComponent {  // Nome das classes por convenção PascalCase
-  /* camelCase para variáveis, atributos e nomes de funções*/
+  constructor() { }
 
-  public nome: string;
-  public sevicoAtivo: boolean;
-
-  public obterNome(): string {
-    return "Pacote PREMIUM";
+  ngOnInit() {
   }
+
 }
