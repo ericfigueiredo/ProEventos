@@ -1,3 +1,182 @@
-<p>
-  cadastro-usuario works!
-</p>
+<div class="bodys">
+  <form action="" class="form-signin">
+    <img
+      src="../../../../assets/images/logo-djericmax.png"
+      [title]="logoTitle"
+      class="logoTitle"
+    />
+    <h1 class="h4 mb-2 login">Cadastro de Clientes</h1>
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="inputNome" class="sr-only">Nome</label>
+        <input type="text" id="inputNome"
+        name="nome" placeholder="Informe seu nome"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+          'is-valid': nome.valid && (nome.dirty || nome.touched)
+        }"
+        [(ngModel)]="usuario.nome"
+        #nome="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="nome.invalid && (nome.dirty || nome.touched)" >
+        <div *ngIf="nome.errors.required">
+            Nome é de preenchimento obrigatório!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="inputSobreNome" class="sr-only">Sobrenome</label>
+        <input type="text" id="inputSobreNome"
+        name="sobreNome" placeholder="Informe seu sobrenome"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': sobreNome.invalid && (sobreNome.dirty || sobreNome.touched),
+          'is-valid': sobreNome.valid && (sobreNome.dirty || sobreNome.touched)
+        }"
+        [(ngModel)]="usuario.sobreNome"
+        #sobreNome="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="sobreNome.invalid && (sobreNome.dirty || sobreNome.touched)" >
+        <div *ngIf="sobreNome.errors.required">
+            Sobrenome é de preenchimento obrigatório!
+          </div>
+        </div>
+      </div>
+      </div>
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="inputCpf" class="sr-only">CPF</label>
+        <input type="text" id="inputCpf"
+        name="cpf" placeholder="Informe seu CPF"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': cpf.invalid && (cpf.dirty || cpf.touched),
+          'is-valid': cpf.valid && (cpf.dirty || cpf.touched)
+        }"
+        [(ngModel)]="usuario.cpf"
+        #cpf="ngModel"
+        required
+        minlength="11" />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)" >
+          <div *ngIf="cpf.errors.required">
+              O CPF é de preenchimento obrigatório!
+          </div>
+          <div *ngIf="cpf.errors.minlength">
+            O CPF deve ter pelo menos 11 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="inputRg" class="sr-only">RG</label>
+        <input type="text" id="inputRg"
+        name="rg" placeholder="Informe seu RG"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': rg.invalid && (rg.dirty || rg.touched),
+          'is-valid': rg.valid && (rg.dirty || rg.touched)
+        }"
+        [(ngModel)]="usuario.rg"
+        #rg="ngModel"
+        required
+        minlength="9" />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="rg.invalid && (rg.dirty || rg.touched)" >
+          <div *ngIf="rg.errors.required">
+            O RG deve informado!
+          </div>
+          <div *ngIf="rg.errors.minlength">
+            O RG deve ter pelo menos 9 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="inputEmail" class="sr-only">E-mail</label>
+        <input type="email" id="inputEmail"
+        name="email" placeholder="informe o seu E-mail"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': email.invalid && (email.dirty || email.touched),
+          'is-valid': email.valid && (email.dirty || email.touched)
+        }"
+        [(ngModel)]="usuario.email"
+        #email="ngModel"
+        email
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="email.invalid && (email.dirty || email.touched)" >
+          <div *ngIf="email.errors.required">
+            O E-mail é de preenchimento obrigatório!
+          </div>
+          <div *ngIf="email.errors.email">
+            Formato de E-mail inválido!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="inputSenha" class="sr-only">Senha</label>
+        <input type="password" id="inputSenha"
+        name="senha" placeholder="Informe uma Senha"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+          'is-valid': senha.valid && (senha.dirty || senha.touched)
+        }"
+        #senha="ngModel"
+        [(ngModel)]="usuario.senha"
+        senha
+        minlength="6"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
+          <div *ngIf="senha.errors.required">
+            Deve ser informada uma Senha!
+          </div>
+          <div *ngIf="senha.errors.minlength">
+            A Senha deve ter pelo menos 6 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-12 d-flex justify-content-end mb-3">
+        <button class="btn btn-success botao"
+        type="submit" (click)="cadastrar()" [disabled]="ativar_spinner">
+        <span class="spinner-border spinner-border-sm"
+        role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+          Salvar
+        </button>
+        <a [routerLink]="['/entrar']" class="btn btn-secondary botao" >
+          Cancelar
+        </a>
+      </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="mensagem">
+      {{ mensagem }}
+    </div>
+
+    <!-- <img
+      src="../../../../assets/images/usersBottom.png"
+      class="logoBottom"
+    /> -->
+  </form>
+</div>

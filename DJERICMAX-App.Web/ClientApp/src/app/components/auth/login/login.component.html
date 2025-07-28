@@ -9,14 +9,8 @@
 
 
     <label for="inputEmail" class="sr-only">Email</label>
-    <input
-    type="email"
-    id="inputEmail"
-    name="email"
-    placeholder="informe o seu E-mail"
-    class="form-control mb-2"
-    #email="ngModel"
-    [(ngModel)]="usuario.email"
+    <input type="email" id="inputEmail" name="email" placeholder="informe o seu E-mail"
+    class="form-control mb-2" #email="ngModel" [(ngModel)]="usuario.email"
     [ngClass]="{
       'is-invalid': email.invalid && (email.dirty || email.touched),
       'is-valid': email.valid && (email.dirty || email.touched)
@@ -35,14 +29,8 @@
 
 
     <label for="inputSenha" class="sr-only">Senha</label>
-    <input
-      type="password"
-      id="inputSenha"
-      name="senha"
-      placeholder="Senha"
-      class="form-control mb-2"
-      #senha="ngModel"
-      [(ngModel)]="usuario.senha"
+    <input type="password" id="inputSenha" name="senha" placeholder="Senha"
+      class="form-control mb-2" #senha="ngModel" [(ngModel)]="usuario.senha"
       [ngClass]="{
         'is-invalid': senha.invalid && (senha.dirty || senha.touched),
         'is-valid': senha.valid && (senha.dirty || senha.touched)
@@ -73,6 +61,11 @@
       ></span>
       Entrar
     </button>
+
+    <div>Novo por aqui?
+      <a [routerLink]="['/novo-usuario']"
+        routerLinkActive="router-link-active">Cadastre-se</a>
+      </div>
 
     <div class="alert alert-danger" *ngIf="mensagem">
       {{ mensagem }}

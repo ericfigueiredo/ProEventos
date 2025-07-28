@@ -32,8 +32,7 @@ export class UsuarioService {
   }
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.baseUrl = "https://localhost:44307";
-    // this.baseUrl = baseUrl;
+    this.baseUrl = baseUrl;
   }
 
   // public verificaUsuario(usuario: Usuario): Observable<Usuario>{
@@ -46,4 +45,21 @@ export class UsuarioService {
     // this.baseUrl = raiz do site da api
     return this.http.post<Usuario>(`${this.baseUrl}/api/usuario/verificarUsuario`, body, { headers });
   }
+
+  public cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
+    const headers = new HttpHeaders().set('content-type', 'application/json');
+    var body = {
+      email         :   usuario.email,
+      senha         :   usuario.senha,
+      nome          :   usuario.nome,
+      sobreNome     :   usuario.sobreNome,
+      cpf           :   usuario.cpf,
+      rg            :   usuario.rg
+    }
+
+    return this.http.post<Usuario>(`${this.baseUrl}/api/usuario`, body, { headers });
+  }
+
+
+
 }

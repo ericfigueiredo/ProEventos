@@ -4,6 +4,6 @@ export class Usuario{
   senha: string;
   nome: string;
   sobreNome: string;
-  CPF: string;
-  RG: string;
+  cpf: string;
+  rg: string;
 }

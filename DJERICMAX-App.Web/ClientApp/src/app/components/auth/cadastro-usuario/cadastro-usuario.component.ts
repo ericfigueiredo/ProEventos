@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -6,10 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastro-usuario.component.css']
 })
 export class CadastroUsuarioComponent implements OnInit {
+  public usuario: Usuario;
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) {
+
+  }
 
   ngOnInit() {
+    this.usuario = new Usuario();
+  }
+
+  public cadastrar(){
+    alert(
+      `Nome: ${this.usuario.nome}\n` +
+      `Sobrenome: ${this.usuario.sobreNome}\n` +
+      `CPF: ${this.usuario.cpf}\n` +
+      `RG: ${this.usuario.rg}\n` +
+      `Email: ${this.usuario.email}\n` +
+      `Senha: ${this.usuario.senha}`
+    );
+    // this.usuarioService.cadastrarUsuario(this.usuario)
+    // .subscribe(
+    //   usuarioJson => {
+
+    //   },
+    //   e => {
+
+    //   }
+    // );
   }
 
 }
