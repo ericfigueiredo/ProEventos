@@ -9,6 +9,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class CadastroUsuarioComponent implements OnInit {
   public usuario: Usuario;
+  public ativar_spinner: boolean;
 
   constructor(private usuarioService: UsuarioService) {
 
@@ -25,7 +26,8 @@ export class CadastroUsuarioComponent implements OnInit {
       `CPF: ${this.usuario.cpf}\n` +
       `RG: ${this.usuario.rg}\n` +
       `Email: ${this.usuario.email}\n` +
-      `Senha: ${this.usuario.senha}`
+      `Senha: ${this.usuario.senha}\n` +
+      `Foto: ${this.usuario.fotoUrl}`
     );
     // this.usuarioService.cadastrarUsuario(this.usuario)
     // .subscribe(

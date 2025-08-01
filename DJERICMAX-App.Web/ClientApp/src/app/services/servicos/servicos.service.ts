@@ -16,7 +16,7 @@ export class ServicosService implements OnInit {
   }
 
   ngOnInit(): void {
-    this.servicos: [];
+    this.servicos = [];
   }
 
   get headers(): HttpHeaders {
@@ -53,7 +53,7 @@ export class ServicosService implements OnInit {
   }
 
   public obterServico(servicoid: number): Observable<Servicos> {
-    
+
     return this.http.get<Servicos>(`${this._baseUrl}api/servicos/id`);
   }
 }

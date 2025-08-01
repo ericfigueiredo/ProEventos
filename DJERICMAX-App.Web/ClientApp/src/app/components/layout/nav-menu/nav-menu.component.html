@@ -1,6 +1,6 @@
-<header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
-    <div class="container">
+<!--
+<div class="container">
+<nav class='navbar'>
 
       <img
       src="../../../assets/images/logo-djericmax-novo-mini.png"
@@ -8,32 +8,20 @@
       [routerLink]='["/"]'
       alt="">
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+      <!- <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded"
+        (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> -->
 
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+      <!-- <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+              [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
-          </li>
-
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/galeria"]'>Galeria</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/servicos"]'>Serviços</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/portfolio"]'>Portfolio</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/faqs"]'>FAQS</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/contato"]'>Contato</a>
-          </li>
 
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
             <a class="nav-link text-dark" [routerLink]='["/entrar"]'>Entrar</a>
@@ -44,7 +32,99 @@
           </li>
 
         </ul>
+      </div> ->
+
+
+
+
+
+
+      <!- [ngClass]='{"show": isExpanded}' ->
+      <div class="acoes"
+      >
+
+        <ul class="navbar-nav flex-grow">
+
+          <!- Se não estiver logado, mostra "Entrar" ->
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
+            <a class="nav-link text-dark" [routerLink]='["/entrar"]'>Entrar</a>
+          </li>
+
+          <!- Se o usuário estiver logado, mostra nome, foto e dropdown ->
+          <li
+            class="nav-item dropdown"
+            [routerLinkActive]='["link-active"]'
+            *ngIf="usuarioLogado()">
+
+            <a class="nav-link text-dark dropdown-toggle d-flex align-items-center"
+              [routerLink]='[""]'
+              id="userDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              >
+
+                <!- [src]="usuario.fotoUrl || 'assets/images/default-user.png'" ->
+                <span>{{ usuario.nome }} {{ usuario.sobreNome }} &nbsp;&nbsp;</span>
+                  <img
+                    [src]="'../../../../assets/images/'+ usuario.fotoUrl + '.jpg'"
+                    [title]="usuario.nome + ' ' + usuario.sobreNome"
+                    class="rounded-circle me-2"
+                    width="32"
+                    height="32">
+              </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="userDropdown">
+
+              <li><a class="dropdown-item" [routerLink]="['/ajuda']">Ajuda</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/meus-dados']">Meus Dados</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" (click)="sair()">Sair</a></li>
+            </ul>
+          </li>
+
+
+
+  </ul>
+</div>
+
+
+
+
+
+</nav>
+
+</div>
+ -->
+
+
+<nav class="navbar">
+  <div class="container">
+
+    <!-- Logotipo à esquerda -->
+    <div class="logo">
+      <img src="../../../assets/images/logo-djericmax-novo-mini.png" alt="Logo">
+    </div>
+
+    <!-- Ações à direita -->
+    <div class="acoes">
+      <li class="nav-item" *ngIf="!usuarioLogado()">
+        <a class="nav-link text-dark" [routerLink]="['/entrar']">Entrar</a>
+      </li>
+
+      <div *ngIf="usuarioLogado()" class="usuario-dropdown">
+        <span>{{ usuario.nome }} {{ usuario.sobreNome }}</span>
+        <img [src]="'../../../assets/images/' + usuario.fotoUrl + '.jpg'" alt="Foto" class="foto">
+
+        <div class="dropdown-content">
+          <a class="nav-item nav-link text-dark" [routerLink]="['/ajuda']">Ajuda</a>
+          <a class="nav-item nav-link text-dark" [routerLink]="['/meus-dados']">Meus Dados</a>
+          <a class="nav-item nav-link text-dark" (click)="sair()">Sair</a>
+        </div>
       </div>
     </div>
-  </nav>
-</header>
+
+  </div>
+</nav>

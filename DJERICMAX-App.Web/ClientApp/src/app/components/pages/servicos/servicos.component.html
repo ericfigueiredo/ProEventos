@@ -1,3 +1,107 @@
-<p>
-  servicos works!
-</p>
+<div class="bodys">
+  <form action="" class="form-signin">
+    <img
+      src="../../../../assets/images/logo-djericmax.png"
+      [title]="logoTitle"
+      class="logoTitle"
+    />
+    <h1 class="h4 mb-2 login">Cadastro de Serviços</h1>
+
+    <div class="form-row">
+      <div class="col-md-8 mb-2">
+        <label for="inputNomeServico" class="sr-only">Serviço</label>
+        <input type="text" id="inputNomeServico"
+        name="nome" placeholder="Nome do Pacote de Serviços"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+          'is-valid': nome.valid && (nome.dirty || nome.touched)
+        }"
+        [(ngModel)]="servicos.nome"
+        #nome="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="nome.invalid && (nome.dirty || nome.touched)" >
+        <div *ngIf="nome.errors.required">
+            Pacote de Serviços é de preenchimento obrigatório!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-2">
+        <label for="inputPrecoHora" class="sr-only">$$ Valor por Hora</label>
+        <input type="number" id="inputPrecoHora"
+        name="precoHora" placeholder="$$ Valor por Hora"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': precoHora.invalid && (precoHora.dirty || precoHora.touched),
+          'is-valid': precoHora.valid && (precoHora.dirty || precoHora.touched)
+        }"
+        [(ngModel)]="servicos.precoHora"
+        #precoHora="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="precoHora.invalid && (precoHora.dirty || precoHora.touched)" >
+        <div *ngIf="precoHora.errors.required">
+            Valor por hora é obrigatório!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 mb-2">
+        <label for="inputDescricao" class="sr-only">Descrição</label>
+        <textarea id="inputDescricao" rows="5"
+        name="descricao" placeholder="Descrição do Pacote de Serviços"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': descricao.invalid && (descricao.dirty || descricao.touched),
+          'is-valid': descricao.valid && (descricao.dirty || descricao.touched)
+        }"
+        [(ngModel)]="servicos.descricao"
+        #descricao="ngModel"
+        required ></textarea>
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" >
+        <div *ngIf="descricao.errors.required">
+            A Descrição é de preenchimento obrigatório!
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputFile">
+          <label for="inputFile" class="custom-file-label">
+            Selecione uma imagem para o Pacote de Serviços
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+<div class="form-row">
+      <div class="col-12 d-flex justify-content-end mb-2">
+        <button class="btn btn-success botao"
+        type="submit" (click)="cadastrar()" [disabled]="ativar_spinner">
+        <span class="spinner-border spinner-border-sm"
+        role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+          Salvar
+        </button>
+        <a [routerLink]="['/entrar']" class="btn btn-secondary botao" >
+          Cancelar
+        </a>
+      </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="mensagem">
+      {{ mensagem }}
+    </div>
+
+
+  </form>
+</div>
+
+

@@ -7,6 +7,7 @@ import { GuardaRotas } from './autorizer/guardarotas';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/layout/nav-menu/nav-menu.component';
+import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { GaleriaComponent } from './components/pages/galeria/galeria.component';
@@ -32,7 +33,8 @@ import { ServicosService } from './services/servicos/servicos.service';
     PortfolioComponent,
     FaqsComponent,
     ContatoComponent,
-    CadastroUsuarioComponent
+    CadastroUsuarioComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,7 +43,8 @@ import { ServicosService } from './services/servicos/servicos.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'galeria', component: GaleriaComponent, canActivate:[GuardaRotas] },
-      { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas] },
+      // { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas] },
+      { path: 'servicos', component: ServicosComponent },
       { path: 'portfolio', component: PortfolioComponent, canActivate:[GuardaRotas] },
       { path: 'faqs', component: FaqsComponent },
       { path: 'contato', component: ContatoComponent},

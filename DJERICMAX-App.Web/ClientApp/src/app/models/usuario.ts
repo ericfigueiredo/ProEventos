@@ -6,4 +6,5 @@ export class Usuario{
   sobreNome: string;
   cpf: string;
   rg: string;
+  fotoUrl?: string;
 }

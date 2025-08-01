@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: #dc3545;
+}
+
+.valid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: #29d829;
+}

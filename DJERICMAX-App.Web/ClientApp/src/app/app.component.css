@@ -4,3 +4,59 @@
     padding-top: 50px;
   }
 }
+
+
+/* Layout de página com nav no topo e footer no fim */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* NAV-MENU fixo no topo */
+app-nav-menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 56px;
+}
+
+/* FOOTER fixo no rodapé */
+app-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 40px;
+}
+
+/* Espaço entre nav e footer */
+.main-area {
+  display: flex;
+  flex: 1;
+  margin-top: 56px;     /* altura do nav-menu */
+  margin-bottom: 40px;  /* altura do footer */
+  overflow: hidden;
+  height: calc(100vh - 96px); /* 56 + 40 */
+}
+
+/* Sidebar padrão */
+app-sidebar {
+  width: 250px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+/* Sidebar colapsada (opcional) */
+.sidebar-collapsed app-sidebar {
+  width: 60px;
+}
+
+/* Área do conteúdo */
+.content-area {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}

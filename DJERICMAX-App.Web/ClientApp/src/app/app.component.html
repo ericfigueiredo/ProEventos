@@ -1,7 +1,13 @@
-<body>
+<div class="layout">
   <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
+
+  <div class="main-area">
+    <app-sidebar (sidebarToggled)="isSidebarCollapsed = $event"></app-sidebar>
+
+    <div class="content-area" [class.sidebar-collapsed]="isSidebarCollapsed">
+      <router-outlet></router-outlet>
+    </div>
   </div>
+
   <app-footer></app-footer>
-</body>
+</div>

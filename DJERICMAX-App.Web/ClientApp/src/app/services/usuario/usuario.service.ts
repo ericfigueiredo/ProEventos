@@ -23,7 +23,9 @@ export class UsuarioService {
   }
 
   public usuario_autenticado(): boolean {
-    return this._usuario != null && this._usuario.email != "" && this._usuario.senha != "";
+    return  this._usuario != null &&
+            this._usuario.email != "" &&
+            this._usuario.senha != "";
   }
 
   public limpar_sessao(){
@@ -33,6 +35,11 @@ export class UsuarioService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
+
+    const json = localStorage.getItem('usuario');
+    if (json) {
+      this.usuario = JSON.parse(json);
+    }
   }
 
   // public verificaUsuario(usuario: Usuario): Observable<Usuario>{
@@ -43,7 +50,7 @@ export class UsuarioService {
       senha: usuario.senha
     }
     // this.baseUrl = raiz do site da api
-    return this.http.post<Usuario>(`${this.baseUrl}/api/usuario/verificarUsuario`, body, { headers });
+    return this.http.post<Usuario>(`${this.baseUrl}api/usuario/verificarUsuario`, body, { headers });
   }
 
   public cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
@@ -54,10 +61,11 @@ export class UsuarioService {
       nome          :   usuario.nome,
       sobreNome     :   usuario.sobreNome,
       cpf           :   usuario.cpf,
-      rg            :   usuario.rg
+      rg            :   usuario.rg,
+      fotoUrl       :   usuario.fotoUrl
     }
 
-    return this.http.post<Usuario>(`${this.baseUrl}/api/usuario`, body, { headers });
+    return this.http.post<Usuario>(`${this.baseUrl}api/usuario`, body, { headers });
   }
 
 
