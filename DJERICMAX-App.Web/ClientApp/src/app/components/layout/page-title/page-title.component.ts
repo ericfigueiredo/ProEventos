@@ -9,22 +9,31 @@ import { filter } from 'rxjs/operators';
 })
 export class PageTitleComponent implements OnInit {
 
-  pageTitle: string = '';
+  pageTitle: string;
 
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-  this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe(() => {
-      let route = this.activatedRoute.firstChild;
-      while (route && route.firstChild) {
-        route = route.firstChild;
-      }
-      this.pageTitle = (route && route.snapshot && route.snapshot.data['title']) || '';
-    });
-}
+    this.updateTitle();
+
+    this.router.events
+      .pipe(
+        filter((event: Event) => event instanceof NavigationEnd))
+        .subscribe(() => {
+        this.updateTitle();
+      });
+  }
+
+  private updateTitle() {
+    let route = this.router.routerState.root;
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    this.pageTitle = (route.snapshot && route.snapshot.data['title']) || '';
+  }
+
 
 
 

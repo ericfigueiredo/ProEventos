@@ -1,0 +1,9 @@
+.dashboard {
+  text-align: center;
+  padding: 1em;
+}
+
+h2 {
+  margin-bottom: 1em;
+  text-transform: uppercase;
+}

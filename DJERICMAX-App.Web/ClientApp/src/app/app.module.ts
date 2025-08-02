@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
 import { RouterModule } from '@angular/router';
 import { GuardaRotas } from './autorizer/guardarotas';
 
@@ -22,6 +23,8 @@ import { PosEventosComponent } from './components/pages/pos-eventos/pos-eventos.
 import { RelatoriosComponent } from './components/pages/relatorios/relatorios.component';
 import { ContratosComponent } from './components/pages/contratos/contratos.component';
 import { PageTitleComponent } from './components/layout/page-title/page-title.component';
+import { MeusDadosComponent } from './components/auth/meus-dados/meus-dados.component';
+import { AjudaUsuarioComponent } from './components/auth/ajuda-usuario/ajuda-usuario.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { PageTitleComponent } from './components/layout/page-title/page-title.co
     EventosComponent,
     PosEventosComponent,
     RelatoriosComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    MeusDadosComponent,
+    AjudaUsuarioComponent
   ],
   providers: [
     UsuarioService,
@@ -47,11 +52,13 @@ import { PageTitleComponent } from './components/layout/page-title/page-title.co
   bootstrap: [AppComponent],
 
   imports: [
+    ChartsModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent, pathMatch: 'full'},
+      { path: 'novo-usuario', component: CadastroUsuarioComponent},
       { path: 'home', component: HomeComponent, data: { title: 'Dashboard' }, canActivate:[GuardaRotas]},
       // { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas]},
       { path: 'servicos', component: ServicosComponent, data: { title: 'Serviços' }},
@@ -60,7 +67,8 @@ import { PageTitleComponent } from './components/layout/page-title/page-title.co
       { path: 'eventos', component: EventosComponent, data: { title: 'Eventos' }, canActivate:[GuardaRotas]},
       { path: 'pos-eventos', component: PosEventosComponent, data: { title: 'Pós-Eventos' }, canActivate:[GuardaRotas]},
       { path: 'relatorios', component: RelatoriosComponent, data: { title: 'Relatórios' }, canActivate:[GuardaRotas]},
-      { path: 'novo-usuario', component: CadastroUsuarioComponent}
+      { path: 'meus-dados', component: MeusDadosComponent, data: { title: 'Meus dados' }, canActivate:[GuardaRotas]},
+      { path: 'ajuda-usuario', component: AjudaUsuarioComponent, data: { title: 'Ajuda' }, canActivate:[GuardaRotas]}
     ])
   ]
 })
