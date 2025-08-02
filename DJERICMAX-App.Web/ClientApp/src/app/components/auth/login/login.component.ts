@@ -36,11 +36,12 @@ export class LoginComponent implements OnInit {
         this.usuarioService.usuario = usuario_json;
 
         if (this.returnUrl == null) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }
         else{
           this.router.navigate([this.returnUrl]);
         }
+
       },
       err => {
         // console.log(err.error);

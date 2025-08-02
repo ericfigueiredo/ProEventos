@@ -1,84 +1,57 @@
-<!-- <div class="sidebar" [class.collapsed]="isCollapsed">
-  <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
-  <ul *ngIf="!isCollapsed">
-
-    <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-      <a class="nav-link" [routerLink]='["/"]'>Home</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]='["link-active"]'>
-      <a class="nav-link" [routerLink]='["/galeria"]'>Galeria</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]='["link-active"]'>
-      <a class="nav-link" [routerLink]='["/servicos"]'>Serviços</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]='["link-active"]'>
-      <a class="nav-link" [routerLink]='["/portfolio"]'>Portfolio</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]='["link-active"]'>
-      <a class="nav-link" [routerLink]='["/faqs"]'>FAQS</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]='["link-active"]'>
-      <a class="nav-link" [routerLink]='["/contato"]'>Contato</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
-      <a class="nav-link" [routerLink]='["/entrar"]'>Entrar</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioLogado()">
-      <a class="nav-link" [routerLink]='["/sair"]' (click)="sair()">Sair</a>
-    </li>
-
-  </ul>
-</div> -->
-
-
-
-
 <div class="sidebar" [class.collapsed]="isCollapsed">
+
   <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
 
   <ul>
     <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-      <a class="nav-link" [routerLink]="['/']">
-        <i class="material-icons">home</i>
+      <a class="nav-link" [routerLink]="['/home']">
+        <i class="material-icons">home_app_logo</i>
         <!-- <i class="fa fa-home"></i> -->
         <span *ngIf="!isCollapsed">Página principal</span>
       </a>
     </li>
     <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/galeria']">
-        <i class="material-icons">photo</i>
+      <a class="nav-link" [routerLink]="['/prospeccao']">
+        <i class="material-icons">person_search</i>
         <!-- <i class="fa fa-image"></i> -->
         <span *ngIf="!isCollapsed">Prospecção</span>
       </a>
     </li>
     <li class="nav-item" [routerLinkActive]="['link-active']">
       <a class="nav-link" [routerLink]="['/servicos']">
-        <i class="material-icons">build</i>
+        <i class="material-icons">hotel_class</i>
         <!-- <i class="fa fa-cogs"></i> -->
-        <span *ngIf="!isCollapsed">Contrato</span>
+        <span *ngIf="!isCollapsed">Serviços</span>
       </a>
     </li>
     <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/portfolio']">
-        <i class="material-icons">work</i>
+      <a class="nav-link" [routerLink]="['/contratos']">
+        <i class="material-icons">handshake</i>
+        <!-- <i class="fa fa-cogs"></i> -->
+        <span *ngIf="!isCollapsed">Contratos</span>
+      </a>
+    </li>
+    <li class="nav-item" [routerLinkActive]="['link-active']">
+      <a class="nav-link" [routerLink]="['/eventos']">
+        <i class="material-icons">celebration</i>
         <!-- <i class="fa fa-briefcase"></i> -->
-        <span *ngIf="!isCollapsed">Evento</span>
+        <span *ngIf="!isCollapsed">Eventos</span>
       </a>
     </li>
     <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/faqs']">
-        <i class="material-icons">help</i>
+      <a class="nav-link" [routerLink]="['/pos-eventos']">
+        <i class="material-icons">event_available</i>
         <!-- <i class="fa fa-question-circle"></i> -->
         <span *ngIf="!isCollapsed">Pós-Evento</span>
       </a>
     </li>
     <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/contato']">
-        <i class="material-icons">mail</i>
+      <a class="nav-link" [routerLink]="['/relatorios']">
+        <i class="material-icons">task</i>
         <!-- <i class="fa fa-envelope"></i> -->
         <span *ngIf="!isCollapsed">Relatórios</span>
       </a>
     </li>
-    
+
   </ul>
 </div>

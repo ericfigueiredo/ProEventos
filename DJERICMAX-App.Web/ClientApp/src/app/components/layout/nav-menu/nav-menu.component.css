@@ -1,46 +1,16 @@
-.nav {
+/* .nav {
   position: fixed;
   width: 100%;
-}
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
+} */
 
 html {
-  font-size: 14px;
+  font-size: 12px;
 }
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
 }
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-.logoMini{
-  max-width: 120px;
-  cursor: pointer;
-}
-
-.rounded-circle {
-  object-fit: cover;
-}
-
-
-
-
-
-
-
-
-
-/* ------------------------------------------ */
-
 
 .navbar {
   display: flex;
@@ -79,6 +49,7 @@ html {
 }
 
 .dropdown-content {
+  font-size: 13px;
   display: none;
   position: absolute;
   right: 0;
@@ -100,3 +71,31 @@ html {
   background-color: #f0f0f0;
 }
 
+.usuario-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-size: 11px;
+}
+
+.usuario-dados {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.usuario-foto {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.material-icons {
+  vertical-align: middle;
+  font-size: 20px;
+  margin-right: 2px;
+  width: 24px;
+  text-align: center;
+  padding: 0;
+}

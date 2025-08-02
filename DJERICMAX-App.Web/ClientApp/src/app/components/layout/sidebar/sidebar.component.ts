@@ -13,13 +13,13 @@ export class SidebarComponent implements OnInit {
 
   @Output() sidebarToggled = new EventEmitter<boolean>();
 
-  constructor(private router: Router, private usuarioService: UsuarioService) {
-    
-  }
-  
-  ngOnInit() {
-  }
-  
+  constructor(
+              private router: Router,
+              private usuarioService: UsuarioService
+  ) { }
+
+  ngOnInit() { }
+
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
     this.sidebarToggled.emit(this.isCollapsed);

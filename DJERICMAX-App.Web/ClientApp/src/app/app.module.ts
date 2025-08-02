@@ -10,52 +10,58 @@ import { NavMenuComponent } from './components/layout/nav-menu/nav-menu.componen
 import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { GaleriaComponent } from './components/pages/galeria/galeria.component';
 import { ServicosComponent } from './components/pages/servicos/servicos.component';
-import { PortfolioComponent } from './components/pages/portfolio/portfolio.component';
-import { FaqsComponent } from './components/pages/faqs/faqs.component';
-import { ContatoComponent } from './components/pages/contato/contato.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { CadastroUsuarioComponent } from './components/auth/cadastro-usuario/cadastro-usuario.component';
 
 import { UsuarioService } from './services/usuario/usuario.service';
 import { ServicosService } from './services/servicos/servicos.service';
+import { ProspeccaoComponent } from './components/pages/prospeccao/prospeccao.component';
+import { EventosComponent } from './components/pages/eventos/eventos.component';
+import { PosEventosComponent } from './components/pages/pos-eventos/pos-eventos.component';
+import { RelatoriosComponent } from './components/pages/relatorios/relatorios.component';
+import { ContratosComponent } from './components/pages/contratos/contratos.component';
+import { PageTitleComponent } from './components/layout/page-title/page-title.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
+    SidebarComponent,
+    FooterComponent,
     HomeComponent,
     ServicosComponent,
     LoginComponent,
-    FooterComponent,
-    GaleriaComponent,
-    PortfolioComponent,
-    FaqsComponent,
-    ContatoComponent,
+    ContratosComponent,
     CadastroUsuarioComponent,
-    SidebarComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'galeria', component: GaleriaComponent, canActivate:[GuardaRotas] },
-      // { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas] },
-      { path: 'servicos', component: ServicosComponent },
-      { path: 'portfolio', component: PortfolioComponent, canActivate:[GuardaRotas] },
-      { path: 'faqs', component: FaqsComponent },
-      { path: 'contato', component: ContatoComponent},
-      { path: 'entrar', component: LoginComponent  },
-      { path: 'novo-usuario', component: CadastroUsuarioComponent }
-    ])
+    ProspeccaoComponent,
+    EventosComponent,
+    PosEventosComponent,
+    RelatoriosComponent,
+    PageTitleComponent
   ],
   providers: [
     UsuarioService,
     ServicosService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  imports: [
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot([
+      { path: '', component: LoginComponent, pathMatch: 'full'},
+      { path: 'home', component: HomeComponent, data: { title: 'Dashboard' }, canActivate:[GuardaRotas]},
+      // { path: 'servicos', component: ServicosComponent, canActivate:[GuardaRotas]},
+      { path: 'servicos', component: ServicosComponent, data: { title: 'Serviços' }},
+      { path: 'prospeccao', component: ProspeccaoComponent, data: { title: 'Prospecção' }, canActivate:[GuardaRotas]},
+      { path: 'contratos', component: ContratosComponent, data: { title: 'Contratos' }, canActivate:[GuardaRotas]},
+      { path: 'eventos', component: EventosComponent, data: { title: 'Eventos' }, canActivate:[GuardaRotas]},
+      { path: 'pos-eventos', component: PosEventosComponent, data: { title: 'Pós-Eventos' }, canActivate:[GuardaRotas]},
+      { path: 'relatorios', component: RelatoriosComponent, data: { title: 'Relatórios' }, canActivate:[GuardaRotas]},
+      { path: 'novo-usuario', component: CadastroUsuarioComponent}
+    ])
+  ]
 })
 export class AppModule { }
