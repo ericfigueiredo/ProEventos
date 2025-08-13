@@ -1,0 +1,55 @@
+<p *ngIf="!servicos">Carregando Serviços</p>
+
+<div *ngIf="servicos">
+  <div class="row align-items-center titulo" style="margin-top: -5em">
+    <div class="col">
+    </div>
+    <div class="col-auto">
+      <button
+        class="btn add"
+        title="Adicionar novo Serviço"
+        (click)="adicionarServico()"
+      ><i class="material-icons add">add_circle</i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Container da tabela -->
+  <div class="tabela-scroll-wrapper table-responsive">
+    <table class="table table-hover tabela-scroll">
+      <thead>
+        <tr>
+          <th style="width: 12%">Nome</th>
+          <th style="width: 49%">Descrição</th>
+          <th style="width: 7%">Preço</th>
+          <th style="width: 23%">Imagem</th>
+          <th style="width: 3%"></th>
+          <th style="width: 3%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of servicos">
+          <td style="font-weight: bold;">{{ s.nome }}</td>
+          <td style="text-align: justify;">{{ s.descricao }}</td>
+          <td *ngIf="s.preco_Hora !== undefined">
+            {{ s.preco_Hora | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+          </td>
+          <td>
+            <img style="width: 100%"
+              src="../../../../../../../../arquivos/{{ s.nomeArquivo }}" />
+          </td>
+          <td>
+            <button class="btn edit" title="Editar" (click)="editarServico(s)">
+              <i class="material-icons edit">edit_note</i>
+            </button>
+          </td>
+          <td>
+            <button class="btn del" title="Excluir" (click)="deletarServico(s)">
+              <i class="material-icons del">delete_forever</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

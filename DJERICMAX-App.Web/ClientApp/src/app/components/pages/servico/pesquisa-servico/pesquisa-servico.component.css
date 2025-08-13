@@ -1,0 +1,128 @@
+.titulo {
+  padding-bottom: 1em;
+}
+
+.botao {
+  background-color: green;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bolder;
+  height: 2em;
+  width: 2em;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background-color: darkgreen;
+}
+
+.custom-file-label::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: block;
+  height: calc(1.5em + .75rem);
+  padding: .375rem .75rem;
+  line-height: 1.5;
+  color: #ffffff;
+  content: "Selecionar";
+  background-color: #0b7cec;
+  border-left: inherit;
+  border-radius: 0 .25rem .25rem 0;
+}
+
+.tabela-scroll-wrapper {
+  max-height: 470px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: #95cbf9 1px solid;
+  border-radius: 0.5em;
+  background-color: #fff;
+
+/* padding-right: 2em !important; */
+  box-sizing: content-box;
+}
+
+/* Para evitar que conteúdo ultrapasse os cantos arredondados */
+.tabela-scroll-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tabela-scroll-wrapper::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background: #f1f1f1;
+}
+
+.tabela-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 12px;
+}
+
+/* Garante layout de tabela fixa para alinhar colunas */
+.tabela-scroll {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Cabeçalho fixo */
+.tabela-scroll thead th {
+  background-color: #fff;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Imagem dentro da célula */
+.tabela-scroll td img {
+  max-width: 90%;
+  height: auto;
+}
+
+.add {
+  font-size: 1.7em;
+  margin: -6px 0 -20px 0 !important;
+  color: #07af07;
+}
+
+.add:hover {
+  color: darkgreen;
+}
+
+.edit {
+  font-size: 1.8em;
+  margin-left: -11px !important;
+  width: 24px;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0;
+  color: #03498f;
+}
+
+.del {
+  font-size: 1.8em;
+  margin-left: -11px !important;
+  width: 24px;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0;
+  color: #a10202;
+}
+
+table  {
+  font-size: 11px;
+}
+
+table td  {
+  vertical-align: middle;
+  align-items: center;
+  text-align: center;
+}

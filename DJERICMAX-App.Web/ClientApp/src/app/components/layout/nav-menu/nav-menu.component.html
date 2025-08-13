@@ -9,7 +9,7 @@
     <!-- Ações à direita -->
     <div class="acoes">
       <div class="nav-item" *ngIf="!usuarioLogado()">
-        <a class="nav-link text-dark" [routerLink]="['/']">
+        <a class="nav-link text-dark" [routerLink]="['/entrar']">
           <i class="material-icons">login</i><span>Entrar</span>
         </a>
       </div>
@@ -20,7 +20,8 @@
             <div>{{ usuario.nome }} {{ usuario.sobreNome }}</div>
             <div>{{ usuario.cpf }}</div>
           </div>
-          <img [src]="'../../../assets/users/' + usuario.fotoUrl + '.jpg'" alt="Foto" class="usuario-foto">
+          <img src="../../../../../../ftsUsuarios/{{usuario.nomeArquivo}}"
+           alt="Foto" class="usuario-foto">
         </div>
 
         <div class="dropdown-content">

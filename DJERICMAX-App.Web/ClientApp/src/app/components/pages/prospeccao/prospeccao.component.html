@@ -1,3 +1,201 @@
-<p>
-  prospeccao works!
-</p>
+<div class="bodys">
+  <form action="" class="form-signin">
+    <!-- <h1 class="h4 mb-2 login">Prospecção de Clientes</h1> -->
+
+    <div class="form-row">
+      <div class="col-md-6 mb-2">
+        <label for="inputNomeProspeccao" class="sr-only">Nome do Possível Cliente</label>
+        <input type="text" id="inputNomeProspeccao"
+        name="nome" placeholder="Nome do Possível Cliente"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+          'is-valid': nome.valid && (nome.dirty || nome.touched)
+        }"
+        [(ngModel)]="prospeccao.nome"
+        #nome="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="nome.invalid && (nome.dirty || nome.touched)" >
+        <div *ngIf="nome.errors.required">
+            Nome do possível cliente é obrigatório!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-2">
+        <label for="inputDataEvento" class="sr-only">Data do Evento</label>
+        <input type="date" id="inputDataEvento"
+        name="dataEvento" placeholder="Data do Evento"
+
+        mat-raised-button matTooltip="Info about the action"
+        aria-label="Button that displays a tooltip when focused or hovered over"
+
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': dataEvento.invalid && (dataEvento.dirty || dataEvento.touched),
+          'is-valid': dataEvento.valid && (dataEvento.dirty || dataEvento.touched)
+        }"
+        [(ngModel)]="prospeccao.dataEvento"
+        #dataEvento="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="dataEvento.invalid && (dataEvento.dirty || dataEvento.touched)" >
+        <div *ngIf="dataEvento.errors.required">
+            Data do evento é obrigatória!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-2">
+        <label for="inputQtdConvidados" class="sr-only">Qtde Convidados</label>
+        <input type="number" id="inputQtdConvidados"
+        name="convidados" placeholder="Qtde Convidados"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': convidados.invalid && (convidados.dirty || convidados.touched),
+          'is-valid': convidados.valid && (convidados.dirty || convidados.touched)
+        }"
+        [(ngModel)]="prospeccao.convidados"
+        #convidados="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="convidados.invalid && (convidados.dirty || convidados.touched)" >
+        <div *ngIf="convidados.errors.required">
+            Quantidade de convidados é obrigatória!
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-2">
+          <label for="inputNomeProspeccao" class="sr-only">Escolha um Pacote</label>
+
+          <select
+          id="inputNomeProspeccao"
+          name="pacote"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': pacote.invalid && (pacote.dirty || pacote.touched),
+            'is-valid': pacote.valid && (pacote.dirty || pacote.touched)
+            }"
+            [(ngModel)]="prospeccao.pacote"
+            #pacote="ngModel"
+            required>
+
+            <option [ngValue]="undefined" disabled hidden>Escolha um pacote</option>
+            <ng-container *ngFor="let grupo of categorias">
+              <optgroup [label]="grupo">
+                <option *ngFor="let item of pacotesPorCategoria(grupo)"
+                [ngValue]="item.id"> {{ item.nome }} </option>
+              </optgroup>
+            </ng-container>
+          </select>
+
+          <div class="invalid-feedback mb-2 respError" role="alert"
+          *ngIf="pacote.invalid && (pacote.dirty || pacote.touched)" >
+          <div *ngIf="pacote.errors.required">
+            Pacote de Serviços é obrigatório!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-2">
+        <label for="inputHoraInicio" class="sr-only">Início do Evento</label>
+        <input type="time" id="inputHoraInicio"
+        name="horaInicio" placeholder="Início do Evento" title="Início do Evento"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': horaInicio.invalid && (horaInicio.dirty || horaInicio.touched),
+          'is-valid': horaInicio.valid && (horaInicio.dirty || horaInicio.touched)
+        }"
+        [(ngModel)]="prospeccao.horaInicio"
+        #horaInicio="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="horaInicio.invalid && (horaInicio.dirty || horaInicio.touched)" >
+        <div *ngIf="horaInicio.errors.required">
+            Hora de início é obrigatória!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-2">
+        <label for="inputHoraFinal" class="sr-only">Final do Evento</label>
+        <input type="time" id="inputHoraFinal"
+        name="horaFinal" placeholder="Final do Evento" title="Final do Evento"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': horaFinal.invalid && (horaFinal.dirty || horaFinal.touched),
+          'is-valid': horaFinal.valid && (horaFinal.dirty || horaFinal.touched)
+        }"
+        [(ngModel)]="prospeccao.horaFinal"
+        #horaFinal="ngModel"
+        required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="horaFinal.invalid && (horaFinal.dirty || horaFinal.touched)" >
+        <div *ngIf="horaFinal.errors.required">
+            Hora de finalização é obrigatória!
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form-row">
+      <div class="col-md-12 mb-2">
+        <label for="inputObservacoes" class="sr-only">Descrição</label>
+        <textarea id="inputObservacoes" rows="5"
+        name="observacoes" placeholder="Descrição do Pacote de Serviços"
+        class="form-control mb-2"
+        [ngClass]="{
+          'is-invalid': observacoes.invalid && (observacoes.dirty || observacoes.touched),
+          'is-valid': observacoes.valid && (observacoes.dirty || observacoes.touched)
+        }"
+        [(ngModel)]="prospeccao.observacoes"
+        #observacoes="ngModel"
+        required ></textarea>
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+        *ngIf="observacoes.invalid && (observacoes.dirty || observacoes.touched)" >
+        <div *ngIf="observacoes.errors.required">
+            A Descrição é obrigatória!
+          </div>
+        </div>
+      </div>
+
+
+
+      </div>
+
+
+<div class="form-row">
+      <div class="col-12 d-flex justify-content-end mb-2">
+        <button class="btn btn-success botao"
+        type="submit" (click)="cadastrar()" [disabled]="ativar_spinner">
+        <span class="spinner-border spinner-border-sm"
+        role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+          Salvar
+        </button>
+        <a [routerLink]="['/entrar']" class="btn btn-secondary botao" >
+          Cancelar
+        </a>
+      </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="mensagem">
+      {{ mensagem }}
+    </div>
+
+
+  </form>
+</div>
+
+

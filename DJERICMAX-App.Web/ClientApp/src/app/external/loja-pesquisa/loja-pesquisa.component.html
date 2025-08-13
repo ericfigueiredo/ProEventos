@@ -1,0 +1,24 @@
+<div class="container" style="
+  width: 120%;
+  background-color: #fff;
+  height: 113%;
+  overflow-y: auto;
+  margin: -31px auto auto auto;
+  border: #95cbf9 1px solid;
+  border-radius: 0.5em;
+">
+  <div class="row">
+    <div class="col-md-4 mb-3" style="padding: 1em 0.5em 0.5em 1em;"
+     *ngFor="let s of servicos">
+      <div class="card">
+        <img class="card-top" src="../../../../../arquivos/{{s.nomeArquivo}}"
+        style="padding: 2px;" alt="" />
+        <div class="card-body">
+          <h5 class="card-title">{{s.nome | truncate: 27}}</h5>
+          <div class="card-text">{{s.descricao | truncate: 100 }}</div>
+          <h5 class="h5">{{ s.preco_Hora | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,13 +1,23 @@
-<div class="dashboard">
-  <h2>Eventos realizados e agendados</h2>
+ <div class="athome">
 
-  <div style="display: block; max-width: 800px; margin: auto;">
-    <canvas baseChart
-      [datasets]="dadosEventos"
-      [labels]="meses"
-      [options]="chartOptions"
-      [legend]="true"
-      [chartType]="'bar'">
-    </canvas>
+  <div class="row row-card">
+
+    <div class="col-md-4 mb-2">
+      <app-conta-clientes></app-conta-clientes>
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <app-conta-contratos></app-conta-contratos>
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <app-conta-eventos></app-conta-eventos>
+    </div>
+
   </div>
+
+  <!-- <app-dashboard></app-dashboard> -->
+
 </div>
+
+<app-loja-pesquisa></app-loja-pesquisa>

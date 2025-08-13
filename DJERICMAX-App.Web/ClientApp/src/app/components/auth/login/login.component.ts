@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         this.usuarioService.usuario = usuario_json;
 
         if (this.returnUrl == null) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/dashboard']);
         }
         else{
           this.router.navigate([this.returnUrl]);

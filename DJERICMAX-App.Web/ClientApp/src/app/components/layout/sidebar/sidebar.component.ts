@@ -1,15 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
-  isCollapsed = false;
+  isCollapsed = true;
 
   @Output() sidebarToggled = new EventEmitter<boolean>();
 
@@ -18,7 +17,14 @@ export class SidebarComponent implements OnInit {
               private usuarioService: UsuarioService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Detecta resolução 1080x1920 e inicia fechada
+    if (window.innerWidth === 1080 && window.innerHeight <= 1920) {
+      this.isCollapsed = true;
+    } else {
+       this.isCollapsed = false;
+    }
+   }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
