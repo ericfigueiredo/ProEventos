@@ -34,10 +34,6 @@ namespace DJERICMAX_App.Repositorio.Config
                 .Property(u => u.RG)
                 .IsRequired()
                 .HasMaxLength(12);
-            builder
-                .Property(u => u.FotoUrl)
-                .IsRequired()
-                .HasMaxLength(12);
 
             builder
                 .HasMany(u => u.Pedidos)

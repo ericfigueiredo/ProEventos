@@ -15,5 +15,10 @@ namespace DJERICMAX_App.Repositorio.Repositorios
         {
             return DJERICMAX_AppContexto.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
+
+        public Usuario Obter(string email)
+        {
+            return DJERICMAX_AppContexto.Usuarios.FirstOrDefault(u => u.Email == email);
+        }
     }
 }

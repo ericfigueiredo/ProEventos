@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DJERICMAX_App.Repositorio.Migrations
 {
     [DbContext(typeof(DJERICMAX_AppContexto))]
-    [Migration("20250731131008_InserindoURLFotos_Usuario")]
-    partial class InserindoURLFotos_Usuario
+    [Migration("20250805181135_AlterarTamanhoPrecoServico")]
+    partial class AlterarTamanhoPrecoServico
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,7 +110,10 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<decimal>("Preco_Hora");
+                    b.Property<string>("NomeArquivo");
+
+                    b.Property<decimal>("Preco_Hora")
+                        .HasColumnType("decimal(19,4)");
 
                     b.HasKey("Id");
 
@@ -130,13 +133,11 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("FotoUrl")
-                        .IsRequired()
-                        .HasMaxLength(12);
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("NomeArquivo");
 
                     b.Property<string>("RG")
                         .IsRequired()

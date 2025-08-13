@@ -19,6 +19,7 @@ namespace DJERICMAX_App.Repositorio.Config
                 .HasMaxLength(500);
             builder
                 .Property(p => p.Preco_Hora)
+                .HasColumnType("decimal(19,4)")
                 .IsRequired();
         }
     }

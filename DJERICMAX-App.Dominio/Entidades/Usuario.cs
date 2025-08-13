@@ -11,7 +11,7 @@ namespace DJERICMAX_App.Dominio.Entidades
         public string SobreNome { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
-        public string FotoUrl { get; set; }
+        public string NomeArquivo { get; set; }
 
         /// <summary>
         /// Um usuário pode contratar nenhum ou muitos serviços

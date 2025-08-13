@@ -26,6 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\ftsUsuarios\cristin_202584191452.jpg" />
+    <Content Remove="wwwroot\ftsUsuarios\cristin_202584191712.jpg" />
+    <Content Remove="wwwroot\ftsUsuarios\eric-qu.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\app\components\servicos\servicos.component.ts" />
   </ItemGroup>
 
@@ -41,6 +47,11 @@
     <Content Update="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\arquivos\" />
+    <Folder Include="wwwroot\ftsUsuarios\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

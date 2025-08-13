@@ -3,6 +3,7 @@ using DJERICMAX_App.Repositorio.Contexto;
 using DJERICMAX_App.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,7 @@ namespace DJERICMAX_App.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             var connectionString = Configuration.GetConnectionString("DJERICMAX_AppDB");
             services.AddDbContext<DJERICMAX_AppContexto>(option => 
                                                          option.UseLazyLoadingProxies()

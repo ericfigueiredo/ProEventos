@@ -108,7 +108,10 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<decimal>("Preco_Hora");
+                    b.Property<string>("NomeArquivo");
+
+                    b.Property<decimal>("Preco_Hora")
+                        .HasColumnType("decimal(19,4)");
 
                     b.HasKey("Id");
 
@@ -128,13 +131,11 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("FotoUrl")
-                        .IsRequired()
-                        .HasMaxLength(12);
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("NomeArquivo");
 
                     b.Property<string>("RG")
                         .IsRequired()
