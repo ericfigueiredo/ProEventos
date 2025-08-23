@@ -2,6 +2,64 @@
   padding-bottom: 1em;
 }
 
+.contai {
+  margin: 0em 0 0 -1em;
+  min-height: 100%;
+}
+
+@media screen and (max-width: 575px) {
+  .tabela-scroll-wrapper {
+    height: 780px;
+    min-height: 100% !important;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .tabela-scroll-wrapper {
+    height: 700px;
+    min-height: 100% !important;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-height: 600px) {
+  .tabela-scroll-wrapper {
+    height: 300px;
+    min-height: 100% !important;
+  }
+}
+
+@media screen and (width: 1280px) and (height: 720px) {
+  .tabela-scroll-wrapper {
+    height: 422px;
+    min-height: 100% !important;
+  }
+}
+
+//monitor do notebook
+@media screen and (min-width: 1024px) and (max-height: 768px) {
+  .tabela-scroll-wrapper {
+    height: 470px;
+    min-height: 100% !important;
+  }
+}
+
+// monitor vertical
+@media screen and (width: 1080px) and (max-height: 1920px) {
+  .tabela-scroll-wrapper {
+    height: 1625px;
+    min-height: 100% !important;
+  }
+}
+
+//monitor horizontal grande
+@media screen and (min-width: 1920px) {
+  .tabela-scroll-wrapper {
+    height: 780px;
+    min-height: 100% !important;
+  }
+}
+
+
 .botao {
   background-color: green;
   color: white;
@@ -39,15 +97,22 @@
 }
 
 .tabela-scroll-wrapper {
-  max-height: 470px;
+  // height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   border: #95cbf9 1px solid;
   border-radius: 0.5em;
   background-color: #fff;
 
-/* padding-right: 2em !important; */
+  /* padding-right: 2em !important; */
   box-sizing: content-box;
+}
+
+/* Garante layout de tabela fixa para alinhar colunas */
+.tabela-scroll {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
 /* Para evitar que conteúdo ultrapasse os cantos arredondados */
@@ -65,12 +130,6 @@
   border-radius: 12px;
 }
 
-/* Garante layout de tabela fixa para alinhar colunas */
-.tabela-scroll {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
 
 /* Cabeçalho fixo */
 .tabela-scroll thead th {
@@ -98,7 +157,7 @@
 }
 
 .edit {
-  font-size: 1.8em;
+  font-size: 1.4em;
   margin-left: -11px !important;
   width: 24px;
   text-align: left;
@@ -108,17 +167,13 @@
 }
 
 .del {
-  font-size: 1.8em;
+  font-size: 1.4em;
   margin-left: -11px !important;
   width: 24px;
   text-align: left;
   vertical-align: middle;
   padding: 0;
   color: #a10202;
-}
-
-table  {
-  font-size: 11px;
 }
 
 table td  {

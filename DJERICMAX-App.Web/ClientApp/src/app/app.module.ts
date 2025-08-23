@@ -40,10 +40,18 @@ import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { TruncateModule } from 'ng2-truncate';
 import { AnnualChartComponent } from './components/dashboard/annual-chart/annual-chart.component';
+import { LojaDetalheServicoComponent } from './external/loja-detalhe-servico/loja-detalhe-servico.component';
+import { LojaEfetivarCompraComponent } from './external/loja-efetivar-compra/loja-efetivar-compra.component';
+import { LojaCarrinhoComprasComponent } from './external/loja-carrinho-compras/loja-carrinho-compras.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { ExcluirServicoComponent } from './components/layout/confirms/excluir-servico/excluir-servico.component';
+import { LimparCarrinhoComponent } from './components/layout/confirms/limpar-carrinho/limpar-carrinho.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
+
   declarations: [
     AppComponent,
     NavMenuComponent,
@@ -68,7 +76,13 @@ registerLocaleData(localePt, 'pt-BR');
     ContaContratosComponent,
     ContaEventosComponent,
     AnnualChartComponent,
+    LojaDetalheServicoComponent,
+    LojaEfetivarCompraComponent,
+    LojaCarrinhoComprasComponent,
+    ExcluirServicoComponent,
+    LimparCarrinhoComponent,
   ],
+
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     CurrencyPipe,
@@ -76,17 +90,27 @@ registerLocaleData(localePt, 'pt-BR');
     UsuarioService,
     ServicoService
   ],
+
+  entryComponents: [ExcluirServicoComponent], // obrigatório no Angular < 9
+
   bootstrap: [AppComponent],
 
   imports: [
     ChartsModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,  // Necessário para Material
+    MatDialogModule,
+    MatButtonModule,
     HttpClientModule,
     FormsModule,
     TruncateModule,
     MatIconModule,
+
     RouterModule.forRoot([
       { path: '', component: LojaPesquisaComponent, pathMatch: 'full'},
+      { path: 'detalhe-servico', component: LojaDetalheServicoComponent, data: { title: 'Detalhes de Serviços' }, canActivate:[GuardaRotas]},
+      { path: 'efetivar-compra', component: LojaEfetivarCompraComponent, data: { title: 'Carrinho de Serviços' }, canActivate:[GuardaRotas]},
+
       { path: 'entrar', component: LoginComponent, pathMatch: 'full'},
       { path: 'novo-usuario', component: CadastroUsuarioComponent},
 

@@ -19,7 +19,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     // Detecta resolução 1080x1920 e inicia fechada
-    if (window.innerWidth === 1080 && window.innerHeight <= 1920) {
+    if (window.innerWidth <= 767 && window.innerHeight <= 866) {
+      this.isCollapsed = true;
+    } else if (window.innerWidth === 1080 && window.innerHeight <= 1920) {
       this.isCollapsed = true;
     } else {
        this.isCollapsed = false;

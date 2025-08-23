@@ -1,0 +1,70 @@
+<div class="container corpo">
+  <div class="row">
+    <div class="col-md-6">
+      <img class="img" src="../../../../../arquivos/{{ servico.nomeArquivo }}" alt="" />
+    </div>
+    <div class="col-md-6">
+      <div class="row h4 mb4">{{ servico.nome }}</div>
+      <div class="row h6 mb4 textoForm" [innerHTML]="textoFormatado">
+        {{ textoFormatado }}
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <span class="row mb1" style="font-size: 14px">Por hora de Evento</span>
+          <div class="row h2 mb4" style="padding: 0 0 0.5em 0">
+            {{ servico.preco_Hora | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR" }}
+          </div>
+          <span class="row mb1" style="font-size: 14px"> Horas de festa</span>
+          <div class="row h5 mb4">
+            <input
+              class="qtde"
+              type="number" [(ngModel)]="quantidade"
+              (input)="calcularPreco()" min="1" max="20"
+              title="Digite a quantidade de horas de festa desejada"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6 bar">
+          <span class="row mb1" style="font-size: 14px;"> Total do Evento</span>
+          <div class="row valor"
+            [ngClass]="{ unidade: precoTotal < 10, dezena: precoTotal >= 10 && precoTotal < 100, centena: precoTotal >= 100 && precoTotal < 1000, milhar: precoTotal >= 1000 }"
+          >
+            {{ precoTotal | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR" }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4 d-flex justify-content-end" style="margin-right: 0.5em; margin-bottom: -1em;">
+        <button *ngIf="clique == 'efetivar'"
+          class="btn btn-success btn-lg"
+          (click)="contratarServico()"
+          style="vertical-align: middle !important;">Salvar
+          <i class="material-icons">browser_updated</i>
+        </button>
+
+        <a [routerLink]="['/efetivar-compra']" *ngIf="clique == 'efetivar'"
+          class="btn btn-secondary btn-lg"
+          style="margin-left: 0.5em;">Cancelar
+        <i class="material-icons">file_download_off</i>
+        </a>
+
+        <button *ngIf="clique == 'pesquisa'"
+          class="btn btn-warning btn-lg"
+          (click)="contratarServico()"
+          style="vertical-align: middle !important;
+            margin-left: 0.5em;">Contratar
+          <i class="material-icons">system_update_alt</i>
+        </button>
+
+        <a [routerLink]="['/']" *ngIf="clique == 'pesquisa'"
+          class="btn btn-secondary btn-lg"
+          style="margin-left: 0.5em;">Cancelar
+        <i class="material-icons">file_download_off</i>
+       </a>
+
+      </div>
+    </div>
+  </div>
+</div>

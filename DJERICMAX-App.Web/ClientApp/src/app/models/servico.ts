@@ -4,4 +4,6 @@ export class Servico{
   descricao: string;
   preco_Hora: number;
   nomeArquivo: string;
+  quantidade: number;
+  precoTotal: number;
 }

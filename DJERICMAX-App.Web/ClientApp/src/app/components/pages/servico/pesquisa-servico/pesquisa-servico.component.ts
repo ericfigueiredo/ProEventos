@@ -7,7 +7,7 @@ import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-pesquisa-servico',
   templateUrl: './pesquisa-servico.component.html',
-  styleUrls: ['./pesquisa-servico.component.css']
+  styleUrls: ['./pesquisa-servico.component.scss']
 })
 export class PesquisaServicoComponent implements OnInit {
 
