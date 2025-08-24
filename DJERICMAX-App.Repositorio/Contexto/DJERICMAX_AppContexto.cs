@@ -11,8 +11,10 @@ namespace DJERICMAX_App.Repositorio.Contexto
     public class DJERICMAX_AppContexto : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
         public DbSet<ItemPedido> ItemPedidos { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
 
@@ -24,8 +26,10 @@ namespace DJERICMAX_App.Repositorio.Contexto
         {
             /// classes de mapeamento aqui...
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
             modelBuilder.ApplyConfiguration(new ServicoConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoConfiguration());
+            modelBuilder.ApplyConfiguration(new EventoConfiguration());
             modelBuilder.ApplyConfiguration(new ItemPedidoConfiguration());
             modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());
 
