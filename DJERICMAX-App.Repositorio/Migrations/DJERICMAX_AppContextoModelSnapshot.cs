@@ -74,38 +74,60 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Bairro_Evento");
+                    b.Property<string>("BairroEvento")
+                        .HasMaxLength(30);
 
-                    b.Property<string>("CEP_Evento")
-                        .HasMaxLength(10);
+                    b.Property<string>("CepEvento")
+                        .HasMaxLength(5);
 
-                    b.Property<string>("Cidade_Evento")
-                        .HasMaxLength(50);
+                    b.Property<string>("CidadeEvento")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
                     b.Property<int>("ClienteId");
 
-                    b.Property<DateTime>("Data_Cadastro");
+                    b.Property<int>("Convidados")
+                        .HasMaxLength(3);
 
-                    b.Property<DateTime>("Data_Contrato");
+                    b.Property<DateTime>("DataCadastro");
 
-                    b.Property<DateTime>("Data_Evento");
+                    b.Property<DateTime>("DataContrato");
+
+                    b.Property<DateTime>("DataEvento");
 
                     b.Property<int>("FormaPagamentoId");
 
-                    b.Property<string>("Logradouro_Evento")
+                    b.Property<DateTime>("HoraFinal");
+
+                    b.Property<DateTime>("HoraInicio");
+
+                    b.Property<string>("LogradouroEvento")
                         .HasMaxLength(50);
 
-                    b.Property<int>("NumeroLogradouro_Evento")
+                    b.Property<string>("NomeEvento")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NumLogradouroEvento")
                         .HasMaxLength(5);
+
+                    b.Property<string>("Observacoes")
+                        .HasMaxLength(600);
+
+                    b.Property<string>("Pacote")
+                        .HasMaxLength(35);
 
                     b.Property<bool>("Parcelado");
 
-                    b.Property<int>("Qtde_Parcelas");
-
-                    b.Property<string>("UF_Evento")
+                    b.Property<int>("QtdeParcelas")
                         .HasMaxLength(2);
 
-                    b.Property<int>("Valor_Parcelas");
+                    b.Property<string>("UfEvento")
+                        .IsRequired()
+                        .HasMaxLength(2);
+
+                    b.Property<int>("ValorParcelas")
+                        .HasMaxLength(5);
 
                     b.HasKey("Id");
 

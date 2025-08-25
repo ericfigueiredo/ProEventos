@@ -8,22 +8,28 @@ namespace DJERICMAX_App.Dominio.Entidades
     public class Evento : Entidade
     {
         public int Id { get; set; }
-        public DateTime Data_Cadastro { get; set; }
-        public DateTime Data_Contrato { get; set; }
-        public DateTime Data_Evento { get; set; }
-        public bool Parcelado { get; set; }
-        public int Qtde_Parcelas { get; set; }
-        public int Valor_Parcelas { get; set; }
+        public string NomeEvento { get; set; }
+        public DateTime HoraInicio { get; set; }
+        public DateTime HoraFinal { get; set; }
+        public DateTime DataCadastro { get; set; }
+        public DateTime DataContrato { get; set; }
+        public DateTime DataEvento { get; set; }
+        public int Convidados { get; set; }
+        public string Pacote { get; set; }
+        public string Observacoes { get; set; }
+        public bool Parcelado{ get; set; }
+        public int QtdeParcelas { get; set; }
+        public int ValorParcelas { get; set; }
 
         public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
 
-        public string Logradouro_Evento { get; set; }
-        public int NumeroLogradouro_Evento { get; set; }
-        public string Bairro_Evento { get; set; }
-        public string Cidade_Evento { get; set; }
-        public string UF_Evento { get; set; }
-        public string CEP_Evento { get; set; }
+        public string LogradouroEvento { get; set; }
+        public string NumLogradouroEvento { get; set; }
+        public string BairroEvento { get; set; }
+        public string CidadeEvento { get; set; }
+        public string UfEvento { get; set; }
+        public string CepEvento { get; set; }
 
         public int FormaPagamentoId { get; set; }
         public virtual FormaPagamento FormaPagamento { get; set; }
@@ -39,8 +45,14 @@ namespace DJERICMAX_App.Dominio.Entidades
             LimparMensagensValidacao();
             if (!ItensPedido.Any())
                 AdicionarCritica("Aviso: Eventos não podem ser cadastrados sem itens de serviços.");
-            if (string.IsNullOrEmpty(CEP_Evento))
-                AdicionarCritica("Aviso: CEP do local do evento deve ser preenchido.");
+            if (string.IsNullOrEmpty(NomeEvento))
+                AdicionarCritica("Aviso: Nome do Evento deve ser preenchido.");
+            if (string.IsNullOrEmpty(DataEvento.ToString()))
+                AdicionarCritica("Aviso: Data do Evento deve ser preenchido.");
+            if (string.IsNullOrEmpty(CidadeEvento))
+                AdicionarCritica("Aviso: Cidade do Evento deve ser preenchido.");
+            if (string.IsNullOrEmpty(UfEvento))
+                AdicionarCritica("Aviso: UF do Evento deve ser preenchido.");
             if (FormaPagamentoId == 0)
                 AdicionarCritica("Aviso: Não foi identificada forma de pagamento.");
         }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DJERICMAX_App.Repositorio.Migrations
 {
     [DbContext(typeof(DJERICMAX_AppContexto))]
-    [Migration("20250626211922_SegundaVersaoBase")]
-    partial class SegundaVersaoBase
+    [Migration("20250824231909_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,10 +19,133 @@ namespace DJERICMAX_App.Repositorio.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Cliente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Bairro")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("CEP")
+                        .HasMaxLength(9);
+
+                    b.Property<string>("CPF")
+                        .HasMaxLength(14);
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("Data_Cadastro");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Logradouro")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Num_Logradouro")
+                        .HasMaxLength(5);
+
+                    b.Property<string>("RG")
+                        .HasMaxLength(12);
+
+                    b.Property<string>("SobreNome")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasMaxLength(13);
+
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasMaxLength(2);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Evento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BairroEvento")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("CepEvento")
+                        .HasMaxLength(5);
+
+                    b.Property<string>("CidadeEvento")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.Property<int>("ClienteId");
+
+                    b.Property<int>("Convidados")
+                        .HasMaxLength(3);
+
+                    b.Property<DateTime>("DataCadastro");
+
+                    b.Property<DateTime>("DataContrato");
+
+                    b.Property<DateTime>("DataEvento");
+
+                    b.Property<int>("FormaPagamentoId");
+
+                    b.Property<DateTime>("HoraFinal");
+
+                    b.Property<DateTime>("HoraInicio");
+
+                    b.Property<string>("LogradouroEvento")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NomeEvento")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NumLogradouroEvento")
+                        .HasMaxLength(5);
+
+                    b.Property<string>("Observacoes")
+                        .HasMaxLength(600);
+
+                    b.Property<string>("Pacote")
+                        .HasMaxLength(35);
+
+                    b.Property<bool>("Parcelado");
+
+                    b.Property<int>("QtdeParcelas")
+                        .HasMaxLength(2);
+
+                    b.Property<string>("UfEvento")
+                        .IsRequired()
+                        .HasMaxLength(2);
+
+                    b.Property<int>("ValorParcelas")
+                        .HasMaxLength(5);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("FormaPagamentoId");
+
+                    b.ToTable("Eventos");
+                });
+
             modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.ItemPedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("EventoId");
 
                     b.Property<int?>("PedidoId");
 
@@ -33,6 +156,8 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .HasMaxLength(9);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventoId");
 
                     b.HasIndex("PedidoId");
 
@@ -110,7 +235,10 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<decimal>("Preco_Hora");
+                    b.Property<string>("NomeArquivo");
+
+                    b.Property<decimal>("Preco_Hora")
+                        .HasColumnType("decimal(19,4)");
 
                     b.HasKey("Id");
 
@@ -133,6 +261,8 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("NomeArquivo");
 
                     b.Property<string>("RG")
                         .IsRequired()
@@ -165,10 +295,53 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FormaPagamento");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descricao = "Forma de pagamento é Boleto",
+                            Nome = "Boleto"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Descricao = "Forma de pagamento é Cartão de Crédito",
+                            Nome = "Cartão de Crédito"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Descricao = "Forma de pagamento é Depósito",
+                            Nome = "Depósito"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Descricao = "Forma de pagamento é Pix",
+                            Nome = "Pix"
+                        });
+                });
+
+            modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Evento", b =>
+                {
+                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Cliente", "Cliente")
+                        .WithMany("Eventos")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DJERICMAX_App.Dominio.ObjetoDeValor.FormaPagamento", "FormaPagamento")
+                        .WithMany()
+                        .HasForeignKey("FormaPagamentoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.ItemPedido", b =>
                 {
+                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Evento")
+                        .WithMany("ItensPedido")
+                        .HasForeignKey("EventoId");
+
                     b.HasOne("DJERICMAX_App.Dominio.Entidades.Pedido")
                         .WithMany("ItensPedido")
                         .HasForeignKey("PedidoId");
