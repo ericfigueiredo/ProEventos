@@ -15,6 +15,7 @@ namespace DJERICMAX_App.Web.Controllers
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         private IHttpContextAccessor _httpContextAccessor;
         private IHostingEnvironment _hostingEnvironment;
+
         public UsuarioController(
                                 IUsuarioRepositorio usuarioRepositorio,
                                 IHttpContextAccessor httpContextAccessor,
