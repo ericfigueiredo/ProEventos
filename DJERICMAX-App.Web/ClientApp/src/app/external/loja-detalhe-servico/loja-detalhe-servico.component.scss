@@ -6,6 +6,7 @@
   align-items: end;
   justify-content:last baseline;
   width: 100%;
+  margin-top: -0.3em;
 }
 
 .valor.unidade   { font-size: 4em; }
@@ -14,12 +15,13 @@
 .valor.milhar    { font-size: 2em; }
 
 .corpo {
-  width: 120%;
-    margin: -1em auto auto auto;
-    padding: 1.5em !important;
-    border: #95cbf9 1px solid;
-    border-radius: 0.5em;
-    background-color: #fff;
+  width: 98% !important;
+  // height: 90%;
+  margin: -1em auto auto auto;
+  padding: 1.5em !important;
+  border: #95cbf9 1px solid;
+  border-radius: 0.5em;
+  background-color: #fff;
 }
 
 .img {
@@ -39,7 +41,7 @@
 
 .bar {
   border-left: #95cbf9 1px solid;
-  margin-left: -3em;
+  margin-left: 0;
   padding-left: 2em;
   padding-top: -1em;
 }

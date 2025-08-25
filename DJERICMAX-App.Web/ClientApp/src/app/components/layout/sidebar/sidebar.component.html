@@ -3,62 +3,14 @@
   <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
 
   <ul>
-    <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-      <a class="nav-link" [routerLink]="['/dashboard']">
-        <i class="material-icons">home_app_logo</i>
-        <!-- <i class="fa fa-home"></i> -->
-        <span *ngIf="!isCollapsed">Home</span>
+    <li *ngFor="let menu of menuSideBar" class="nav-item">
+      <a class="nav-link"
+         [routerLink]="[menu.route]"
+         routerLinkActive="link-active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <i class="material-icons">{{menu.icon}}</i>
+        <span *ngIf="!isCollapsed">{{menu.name}}</span>
       </a>
     </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/prospeccao']">
-        <i class="material-icons">person_search</i>
-        <!-- <i class="fa fa-image"></i> -->
-        <span *ngIf="!isCollapsed">Prospecção</span>
-      </a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/Pesquisar-servico']">
-        <i class="material-icons">manage_history</i>
-        <!-- <i class="fa fa-cogs"></i> -->
-        <span *ngIf="!isCollapsed">Serviços</span>
-      </a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/contrato']">
-        <i class="material-icons">article</i>
-        <!-- <i class="fa fa-cogs"></i> -->
-        <span *ngIf="!isCollapsed">Contratos</span>
-      </a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/evento']">
-        <i class="material-icons">party_mode</i>
-        <!-- <i class="fa fa-briefcase"></i> -->
-        <span *ngIf="!isCollapsed">Eventos</span>
-      </a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/pos-evento']">
-        <i class="material-icons">event_available</i>
-        <!-- <i class="fa fa-question-circle"></i> -->
-        <span *ngIf="!isCollapsed">Pós-Eventos</span>
-      </a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/relatorio']">
-        <i class="material-icons">task</i>
-        <!-- <i class="fa fa-envelope"></i> -->
-        <span *ngIf="!isCollapsed">Relatórios</span>
-      </a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link" [routerLink]="['/efetivar-compra']">
-        <i class="material-icons">shopping_cart</i>
-        <!-- <i class="fa fa-envelope"></i> -->
-        <span *ngIf="!isCollapsed">Carrinho</span>
-      </a>
-    </li>
-
   </ul>
 </div>

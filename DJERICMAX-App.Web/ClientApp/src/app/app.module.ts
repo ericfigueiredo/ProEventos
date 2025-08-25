@@ -19,9 +19,7 @@ import { CadastroUsuarioComponent } from './components/auth/cadastro-usuario/cad
 
 import { UsuarioService } from './services/usuario.service';
 import { ServicoService } from './services/servico.service';
-import { ProspeccaoService } from './services/prospeccao.service';
 
-import { ProspeccaoComponent } from './components/pages/prospeccao/prospeccao.component';
 import { PageTitleComponent } from './components/layout/page-title/page-title.component';
 import { MeusDadosComponent } from './components/auth/meus-dados/meus-dados.component';
 import { AjudaUsuarioComponent } from './components/auth/ajuda-usuario/ajuda-usuario.component';
@@ -47,6 +45,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatDialogModule } from '@angular/material';
 import { ExcluirServicoComponent } from './components/layout/confirms/excluir-servico/excluir-servico.component';
 import { LimparCarrinhoComponent } from './components/layout/confirms/limpar-carrinho/limpar-carrinho.component';
+import { ClienteService } from './services/cliente.service';
+import { EventoService } from './services/evento.service';
+import { CadastrarProspeccaoComponent } from './components/pages/prospeccao/cadastrar-prospeccao/cadastrar-prospeccao.component';
+import { PesquisarProspeccaoComponent } from './components/pages/prospeccao/pesquisar-prospeccao/pesquisar-prospeccao.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -63,7 +65,6 @@ registerLocaleData(localePt, 'pt-BR');
     CadastroUsuarioComponent,
     CadastroServicoComponent,
     ContratoComponent,
-    ProspeccaoComponent,
     EventoComponent,
     PosEventoComponent,
     RelatorioComponent,
@@ -81,14 +82,17 @@ registerLocaleData(localePt, 'pt-BR');
     LojaCarrinhoComprasComponent,
     ExcluirServicoComponent,
     LimparCarrinhoComponent,
+    CadastrarProspeccaoComponent,
+    PesquisarProspeccaoComponent,
   ],
 
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     CurrencyPipe,
-    ProspeccaoService,
+    ClienteService,
     UsuarioService,
-    ServicoService
+    ServicoService,
+    EventoService
   ],
 
   entryComponents: [ExcluirServicoComponent], // obrigatório no Angular < 9
@@ -107,18 +111,18 @@ registerLocaleData(localePt, 'pt-BR');
     MatIconModule,
 
     RouterModule.forRoot([
-      { path: '', component: LojaPesquisaComponent, pathMatch: 'full'},
+      { path: '', component: LoginComponent, pathMatch: 'full'},
+      { path: 'novo-usuario', component: CadastroUsuarioComponent},
+
+      { path: 'vincular-servico', component: LojaPesquisaComponent, data: { title: 'Pacotes de Serviços' }, canActivate:[GuardaRotas]},
       { path: 'detalhe-servico', component: LojaDetalheServicoComponent, data: { title: 'Detalhes de Serviços' }, canActivate:[GuardaRotas]},
       { path: 'efetivar-compra', component: LojaEfetivarCompraComponent, data: { title: 'Carrinho de Serviços' }, canActivate:[GuardaRotas]},
-
-      { path: 'entrar', component: LoginComponent, pathMatch: 'full'},
-      { path: 'novo-usuario', component: CadastroUsuarioComponent},
 
       // { path: 'home', component: HomeComponent, data: { title: 'Dashboard de Eventos' }, canActivate:[GuardaRotas]},
       // { path: 'servico', component: ServicoComponent, canActivate:[GuardaRotas]},
 
       { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard de Eventos' }, canActivate:[GuardaRotas]},
-      { path: 'prospeccao', component: ProspeccaoComponent, data: { title: 'Prospecção de Clientes' }, canActivate:[GuardaRotas]},
+      { path: 'prospeccao', component: CadastrarProspeccaoComponent, data: { title: 'Prospecção de Clientes' }, canActivate:[GuardaRotas]},
       { path: 'cadastrar-servico', component: CadastroServicoComponent, data: { title: 'Cadastrar Serviço' }},
       { path: 'Pesquisar-servico', component: PesquisaServicoComponent, data: { title: 'Pesquisar Serviços' }, canActivate:[GuardaRotas]},
       { path: 'contrato', component: ContratoComponent, data: { title: 'Contratos Fechados' }, canActivate:[GuardaRotas]},

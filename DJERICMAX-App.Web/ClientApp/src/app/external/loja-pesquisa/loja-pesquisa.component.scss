@@ -48,23 +48,31 @@
   .contai {
     margin-left: -1em !important;
     width: calc(
-      87% + (30 * ((100vw - 768px) / (1024 - 768)))
+      91% + (35 * ((100vw - 768px) / (1024 - 768)))
     );
-    height: 544px;
+    height: calc(
+      85% + (30 * ((100vw - 768px) / (1024 - 768)))
+    );
   }
 }
 
 //monitor horizontal grande
 @media screen and (min-width: 1920px) {
   .contai {
-    height: 856px !important;
+    // height: 856px !important;
+    height: calc(
+      83% + (30 * ((100vw - 768px) / (1024 - 768)))
+    );
   }
 }
 
 // monitor vertical
 @media screen and (width: 1080px) and (max-height: 1920px) {
   .contai {
-    width: 95% !important;
+    // width: 95% !important;
+    width: calc(
+      83% + (35 * ((100vw - 768px) / (1024 - 768)))
+    );
     // height: 1696px;
     height: calc(
       92% + (100 * ((100vw - 768px) / (1024 - 768)))

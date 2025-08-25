@@ -9,10 +9,20 @@
         {{ textoFormatado }}
       </div>
 
-      <div class="row">
-        <div class="col-md-6">
+      <div class="row"
+        style="
+          border: blue 1px solid;
+          margin-top: -1em !important;
+          "
+          >
+        <div class="col-md-5" style="border: green 1px solid;">
           <span class="row mb1" style="font-size: 14px">Por hora de Evento</span>
-          <div class="row h2 mb4" style="padding: 0 0 0.5em 0">
+          <div class="row h2 mb4" 
+            style="
+            padding: 0 0 -1em 0;
+
+            border: red 1px solid;
+            ">
             {{ servico.preco_Hora | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR" }}
           </div>
           <span class="row mb1" style="font-size: 14px"> Horas de festa</span>
@@ -26,8 +36,9 @@
           </div>
         </div>
 
-        <div class="col-md-6 bar">
-          <span class="row mb1" style="font-size: 14px;"> Total do Evento</span>
+        <div class="col-md-7 bar">
+          <span class="row mb1" 
+            style="font-size: 14px;"> Total do Evento</span>
           <div class="row valor"
             [ngClass]="{ unidade: precoTotal < 10, dezena: precoTotal >= 10 && precoTotal < 100, centena: precoTotal >= 100 && precoTotal < 1000, milhar: precoTotal >= 1000 }"
           >
@@ -58,7 +69,7 @@
           <i class="material-icons">system_update_alt</i>
         </button>
 
-        <a [routerLink]="['/']" *ngIf="clique == 'pesquisa'"
+        <a [routerLink]="['/vincular-servico']" *ngIf="clique == 'pesquisa'"
           class="btn btn-secondary btn-lg"
           style="margin-left: 0.5em;">Cancelar
         <i class="material-icons">file_download_off</i>

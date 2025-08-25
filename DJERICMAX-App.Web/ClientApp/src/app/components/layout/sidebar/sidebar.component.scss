@@ -13,22 +13,22 @@
   top: 0;
   left: 0;
   height: 100%;
-  background-color: #1e1e1e;
+  background-color: #181818;
   color: white;
   overflow-x: hidden;
   transition: width 0.3s ease;
-  padding: 1rem 0.5rem;
+  padding: 0;
   z-index: 1000;
 }
 
 .sidebar.collapsed {
-  width: 60px; /* largura quando fechada */
+  width: 50px; /* largura quando fechada */
 }
 
 .sidebar .toggle-btn {
   background-color: transparent;
   color: white;
-  margin-left: 1rem;
+  margin-left: 0.6rem;
   margin-bottom: 0.5em;
   background: none;
   border: none;
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #333;
+  color: #181818;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -85,7 +85,7 @@
 
 .nav-link:hover {
   width: 100%;
-  background-color: #032230;
+  background-color: #2f2f2f;
 }
 
 .material-icons {
@@ -96,3 +96,8 @@
   padding: 0;
 }
 
+.nav-link.link-active {
+  font-weight: bold;
+  background-color: #2f2f2f;
+  width: 100%;
+}

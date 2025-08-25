@@ -1,0 +1,193 @@
+<div class="bodys">
+  <form action="" class="form-signin">
+    <!-- <h1 class="h4 mb-2 login">Prospecção de Clientes</h1> -->
+
+    <div class="form-row">
+      <!-- Nome -->
+      <div class="col-md-6 mb-2">
+        <label for="inputNomeCliente" class="sr-only"
+          >Nome do Possível Cliente</label>
+        <input type="text" id="inputNomeCliente"
+          name="nome" placeholder="Nome do Possível Cliente"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+            'is-valid': nome.valid && (nome.dirty || nome.touched)
+          }"
+          [(ngModel)]="cliente.nome"
+          #nome="ngModel"
+          required />
+
+        <div class="invalid-feedback mb-2 respError" role="alert"
+          *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+          <div *ngIf="nome.errors.required">
+            Nome do possível cliente é obrigatório!
+          </div>
+        </div>
+      </div>
+
+      <!-- Sobrenome -->
+      <div class="col-md-6 mb-2">
+        <label for="inputSobrenomeCliente" class="sr-only"
+          >Sobrenome do Possível Cliente</label
+        >
+        <input type="text" id="inputSobrenomeCliente"
+        name="sobrenome" placeholder="Sobrenome do Possível Cliente"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid':
+              sobreNome.invalid && (sobreNome.dirty || sobreNome.touched),
+            'is-valid':
+              sobreNome.valid && (sobreNome.dirty || sobreNome.touched)
+          }"
+          [(ngModel)]="cliente.sobreNome"
+          #sobreNome="ngModel"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Telefone -->
+      <div class="col-md-4 mb-2">
+        <label for="inputTelefone" class="sr-only">Data do Evento</label>
+        <input
+          type="text"
+          id="inputTelefone"
+          name="telefone"
+          placeholder="Fone/Whatsapp"
+          mat-raised-button
+          matTooltip="Info about the action"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid':
+              telefone.invalid && (telefone.dirty || telefone.touched),
+            'is-valid': telefone.valid && (telefone.dirty || telefone.touched)
+          }"
+          [(ngModel)]="cliente.telefone"
+          #telefone="ngModel"
+          required
+        />
+
+        <div
+          class="invalid-feedback mb-2 respError"
+          role="alert"
+          *ngIf="telefone.invalid && (telefone.dirty || telefone.touched)"
+        >
+          <div *ngIf="telefone.errors.required">
+            Fone/Whatsapp é obrigatório!
+          </div>
+        </div>
+      </div>
+      <!-- E-mail -->
+      <div class="col-md-8 mb-2">
+        <label for="inputEmail" class="sr-only">E-mail</label>
+        <input type="email" id="inputEmail" name="email"
+          placeholder="E-mail" class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': email.invalid && (email.dirty || email.touched),
+            'is-valid': email.valid && (email.dirty || email.touched)
+          }"
+          [(ngModel)]="cliente.email"
+          #email="ngModel"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-5 mb-2">
+        <label for="inputBairro" class="sr-only">Bairro</label>
+        <input type="text" id="inputBairro"
+          name="bairro" placeholder="Bairro"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': bairro.invalid && (bairro.dirty || bairro.touched),
+            'is-valid': bairro.valid && (bairro.dirty || bairro.touched)
+          }"
+          [(ngModel)]="cliente.bairro"
+          #bairro="ngModel"
+        />
+      </div>
+
+      <div class="col-md-5 mb-2">
+        <label for="inputCidade" class="sr-only">Cidade</label>
+        <input type="text" id="inputCidade"
+          name="cidade" placeholder="Cidade"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': cidade.invalid && (cidade.dirty || cidade.touched),
+            'is-valid': cidade.valid && (cidade.dirty || cidade.touched)
+          }"
+          [(ngModel)]="cliente.cidade"
+          #cidade="ngModel"
+          required
+        />
+
+        <div
+          class="invalid-feedback mb-2 respError"
+          role="alert"
+          *ngIf="cidade.invalid && (cidade.dirty || cidade.touched)"
+        >
+          <div *ngIf="cidade.errors.required">Cidade é obrigatória!</div>
+        </div>
+      </div>
+
+      <div class="col-md-2 mb-2">
+        <label for="inputUf" class="sr-only">UF</label>
+        <select
+          id="inputUf"
+          name="uf"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': uf.invalid && (uf.dirty || uf.touched),
+            'is-valid': uf.valid && (uf.dirty || uf.touched)
+          }"
+          [(ngModel)]="cliente.uf"
+          #uf="ngModel"
+          required >
+
+          <option [ngValue]="undefined" disabled hidden>UF</option>
+          <ng-container *ngFor="let uf of ufss">
+            <!-- <optgroup [label]="uf"> -->
+              <option *ngFor="let item of Ufs(uf)" [ngValue]="item.uf">
+                {{ item.uf }}
+              </option>
+            <!-- </optgroup> -->
+          </ng-container>
+        </select>
+
+        <div
+          class="invalid-feedback mb-2 respError"
+          role="alert"
+          *ngIf="uf.invalid && (uf.dirty || uf.touched)"
+        >
+          <div *ngIf="uf.errors.required">uf de Serviços é obrigatório!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-12 d-flex justify-content-end mb-2">
+        <button
+          class="btn btn-success botao"
+          type="submit"
+          (click)="cadastrarCliente()"
+          [disabled]="ativar_spinner"
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            *ngIf="ativar_spinner"
+          ></span>
+          Salvar
+        </button>
+        <a [routerLink]="['/']" class="btn btn-secondary botao"> Cancelar </a>
+      </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="mensagem">
+      {{ mensagem }}
+    </div>
+  </form>
+</div>

@@ -37,9 +37,21 @@ export class SidebarComponent implements OnInit {
     return this.usuarioService.usuario_autenticado();
   }
 
-  sair(){
-    this.usuarioService.limpar_sessao();
-    this.router.navigate(['/']);
-  }
+
+
+
+
+public menuSideBar = [
+  {id: 1, name: 'Dashboard', route: '/dashboard', icon: 'home_app_logo'},
+  {id: 2, name: 'Prospecção', route: '/prospeccao', icon: 'person_search'},
+  {id: 3, name: 'Serviços', route: '/Pesquisar-servico', icon: 'manage_history'},
+  {id: 4, name: 'Contratos', route: '/contrato', icon: 'article'},
+  {id: 5, name: 'Eventos', route: '/evento', icon: 'party_mode'},
+  {id: 6, name: 'Pós-Eventos', route: '/pos-evento', icon: 'event_available'},
+  {id: 7, name: 'Relatórios', route: '/relatorio', icon: 'task'},
+  {id: 8, name: 'Carrinho', route: '/efetivar-compra', icon: 'shopping_cart'},
+  {id: 9, name: 'Vincular Serviço', route: '/vincular-servico', icon: 'shopping_cart'}
+]
+
 
 }

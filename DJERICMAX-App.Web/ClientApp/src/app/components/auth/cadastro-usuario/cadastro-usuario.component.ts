@@ -18,6 +18,10 @@ export class CadastroUsuarioComponent implements OnInit {
 
   }
 
+  ngOnInit() {
+    this.usuario = new Usuario();
+  }
+
   public inputChange(files: FileList){
     this.arquivoSelecionado = files.item(0);
     this.ativar_spinner = true;
@@ -36,9 +40,6 @@ export class CadastroUsuarioComponent implements OnInit {
     ;
   }
 
-  ngOnInit() {
-    this.usuario = new Usuario();
-  }
 
   public cadastrar(){
     this.ativar_spinner = true;
@@ -56,5 +57,6 @@ export class CadastroUsuarioComponent implements OnInit {
       }
     );
   }
+  
 
 }
