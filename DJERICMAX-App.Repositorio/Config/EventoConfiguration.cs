@@ -16,7 +16,7 @@ namespace DJERICMAX_App.Repositorio.Config
             builder.Property(e => e.DataContrato);
             builder.Property(e => e.DataEvento).IsRequired();
             builder.Property(e => e.Convidados).HasMaxLength(3);
-            builder.Property(e => e.Pacote).HasMaxLength(35);
+            builder.Property(e => e.Pacote).HasMaxLength(50);
             builder.Property(e => e.Observacoes).HasMaxLength(600);
             builder.Property(e => e.Parcelado);
             builder.Property(e => e.QtdeParcelas).HasMaxLength(2);

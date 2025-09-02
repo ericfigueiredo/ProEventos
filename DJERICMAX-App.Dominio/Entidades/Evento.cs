@@ -24,6 +24,9 @@ namespace DJERICMAX_App.Dominio.Entidades
         public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
 
+        public int ServicoId { get; set; }
+        public virtual Servico Servico { get; set; }
+
         public string LogradouroEvento { get; set; }
         public string NumLogradouroEvento { get; set; }
         public string BairroEvento { get; set; }

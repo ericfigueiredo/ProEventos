@@ -11,9 +11,9 @@ namespace DJERICMAX_App.Repositorio.Repositorios
         {
         }
 
-        public Cliente Obter(string nome, string sobrenome)
+        public Cliente Obter(string nome, string telefone)
         {
-            return DJERICMAX_AppContexto.Clientes.FirstOrDefault(c => c.Nome == nome && c.SobreNome == sobrenome);
+            return DJERICMAX_AppContexto.Clientes.FirstOrDefault(c => c.Nome == nome && c.Telefone == telefone);
         }
 
         public Cliente Obter(string nome)

@@ -35,6 +35,7 @@ namespace DJERICMAX_App.Web
                                                          .MigrationsAssembly("DJERICMAX-App.Repositorio")));
             services.AddScoped<IServicoRepositorio, ServicoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

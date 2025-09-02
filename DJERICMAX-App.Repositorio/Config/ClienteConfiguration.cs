@@ -52,6 +52,9 @@ namespace DJERICMAX_App.Repositorio.Config
             builder
                 .Property(c => c.Data_Cadastro)
                 .IsRequired();
+            builder
+                .Property(c => c.EhCliente)
+                .IsRequired();
 
             builder
                 .HasMany(c => c.Eventos)

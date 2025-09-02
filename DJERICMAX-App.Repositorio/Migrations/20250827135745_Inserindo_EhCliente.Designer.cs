@@ -3,14 +3,16 @@ using System;
 using DJERICMAX_App.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DJERICMAX_App.Repositorio.Migrations
 {
     [DbContext(typeof(DJERICMAX_AppContexto))]
-    partial class DJERICMAX_AppContextoModelSnapshot : ModelSnapshot
+    [Migration("20250827135745_Inserindo_EhCliente")]
+    partial class Inserindo_EhCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,14 +119,12 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .HasMaxLength(600);
 
                     b.Property<string>("Pacote")
-                        .HasMaxLength(50);
+                        .HasMaxLength(35);
 
                     b.Property<bool>("Parcelado");
 
                     b.Property<int>("QtdeParcelas")
                         .HasMaxLength(2);
-
-                    b.Property<int>("ServicoId");
 
                     b.Property<string>("UfEvento")
                         .IsRequired()
@@ -138,8 +138,6 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("FormaPagamentoId");
-
-                    b.HasIndex("ServicoId");
 
                     b.ToTable("Eventos");
                 });
@@ -337,11 +335,6 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.HasOne("DJERICMAX_App.Dominio.ObjetoDeValor.FormaPagamento", "FormaPagamento")
                         .WithMany()
                         .HasForeignKey("FormaPagamentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Servico", "Servico")
-                        .WithMany()
-                        .HasForeignKey("ServicoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

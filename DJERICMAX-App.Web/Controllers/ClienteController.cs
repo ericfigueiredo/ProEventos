@@ -27,11 +27,12 @@ namespace DJERICMAX_App.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public IActionResult Get()
         {
             try
             {
-                return Ok();
+                return Json(_clienteRepositorio.ObterTodos());
+
             }
             catch (Exception ex)
             {
@@ -46,12 +47,20 @@ namespace DJERICMAX_App.Web.Controllers
         {
             try
             {
-                var clienteCadastrado = _clienteRepositorio.Obter(cliente.Nome, cliente.Telefone);
-                if (clienteCadastrado != null)
-                    return BadRequest("Cliente já cadastrado no sistema");
-
-                _clienteRepositorio.Adicionar(cliente);
-                return Ok();
+                cliente.Validate();
+                if (!cliente.EhValido)
+                {
+                    return BadRequest(cliente.ObterMensagensValidacao());
+                }
+                if (cliente.Id > 0)
+                {
+                    _clienteRepositorio.Atualizar(cliente);
+                }
+                else
+                {
+                    _clienteRepositorio.Adicionar(cliente);
+                }
+                return Created("api/cliente", cliente);
             }
             catch (Exception ex)
             {

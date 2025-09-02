@@ -19,6 +19,7 @@ namespace DJERICMAX_App.Dominio.Entidades
         public string UF { get; set; }
         public string CEP { get; set; }
         public DateTime Data_Cadastro { get; set; }
+        public int EhCliente { get; set; }
 
         /// <summary>
         /// Um usuário pode contratar nenhum ou muitos serviços
