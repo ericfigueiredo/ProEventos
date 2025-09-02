@@ -34,7 +34,7 @@ export class LojaPesquisaComponent implements OnInit {
   }
 
   public detalheServico(servico: Servico, clique: string){
-    localStorage.setItem('clique', JSON.stringify(clique));
+    sessionStorage.setItem('clique', JSON.stringify(clique));
     sessionStorage.setItem('servicoDetalhe', JSON.stringify(servico));
     this.router.navigate(['/detalhe-servico']);
   }

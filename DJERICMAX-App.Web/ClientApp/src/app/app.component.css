@@ -13,6 +13,7 @@
   height: 100vh;
   overflow: hidden;
   background-color: azure;
+  margin-bottom: -30px;
 }
 
 /* NAV-MENU fixo no topo */
@@ -21,7 +22,7 @@ app-nav-menu {
   top: 0;
   width: 100%;
   z-index: 1000;
-  height: 56px;
+  height: 49px;
 }
 
 /* FOOTER fixo no rodapé */
@@ -39,8 +40,8 @@ app-footer {
   flex-direction: row;
   height: calc(100vh - 100px); /* ajusta conforme a altura do header+footer */
   flex: 1;
-  margin-top: 56px;
-  margin-bottom: 40px;
+  margin-top: 49px;
+  margin-bottom: 39px;
   /* overflow: hidden; */
 }
 

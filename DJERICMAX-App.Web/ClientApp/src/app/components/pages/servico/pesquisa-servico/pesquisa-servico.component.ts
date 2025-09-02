@@ -10,12 +10,13 @@ import { CurrencyPipe } from '@angular/common';
   styleUrls: ['./pesquisa-servico.component.scss']
 })
 export class PesquisaServicoComponent implements OnInit {
-
   public servicos: Servico[];
 
-  constructor(private servicoService: ServicoService,
-              private router: Router,
-            private currencyPipe: CurrencyPipe  ) {
+  constructor(
+    private servicoService: ServicoService,
+    private router: Router,
+    private currencyPipe: CurrencyPipe
+  ) {
     this.servicoService.obterTodosServico()
     .subscribe(
       servicos => {

@@ -22,12 +22,40 @@ html {
 }
 
 .logo img {
-  height: 40px;
+  height: 20px;
 }
 
 .acoes {
   display: flex;
   align-items: center;
+}
+
+.usuario-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.usuario-dados-nome {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: bold;
+}
+.usuario-dados {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+}
+
+.usuario-foto {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: #333 solid 1px;
+  object-fit: cover;
 }
 
 .usuario-dropdown {
@@ -37,15 +65,13 @@ html {
   cursor: pointer;
 }
 
-.usuario-dropdown .foto {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-left: 0.5em;
+.usuario-dropdown:hover .dropdown-content {
+  /* background-color: #202020; */
+  display: block;
 }
 
-.usuario-dropdown:hover .dropdown-content {
-  display: block;
+.dropdown-content span{
+  color: #333 !important;
 }
 
 .dropdown-content {
@@ -64,31 +90,11 @@ html {
   display: block;
   padding: 10px;
   text-decoration: none;
-  color: #333;
 }
 
 .dropdown-content a:hover {
-  background-color: #f0f0f0;
-}
-
-.usuario-container {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  font-size: 11px;
-}
-
-.usuario-dados {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-}
-
-.usuario-foto {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
+  background-color: #EDF2FA;
+  font-weight: 500;
 }
 
 .material-icons {

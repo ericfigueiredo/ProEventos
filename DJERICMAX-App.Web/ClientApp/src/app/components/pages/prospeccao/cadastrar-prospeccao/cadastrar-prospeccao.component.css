@@ -1,4 +1,15 @@
-
+.headiers {
+  background-color: #181818 !important;
+  color: #fff;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+.bodies {
+  background-color: azure !important;
+}
+.footies {
+  background-color: #fff !important;
+}
 .form-signin {
   width: 100%;
   max-width: 756px;

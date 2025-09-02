@@ -43,14 +43,15 @@ export class SidebarComponent implements OnInit {
 
 public menuSideBar = [
   {id: 1, name: 'Dashboard', route: '/dashboard', icon: 'home_app_logo'},
-  {id: 2, name: 'Prospecção', route: '/prospeccao', icon: 'person_search'},
-  {id: 3, name: 'Serviços', route: '/Pesquisar-servico', icon: 'manage_history'},
-  {id: 4, name: 'Contratos', route: '/contrato', icon: 'article'},
-  {id: 5, name: 'Eventos', route: '/evento', icon: 'party_mode'},
+  {id: 2, name: 'Prospecção', route: '/pesquisar-prospeccao', icon: 'person_search'},
+  {id: 3, name: 'Clientes', route: '/pesquisar-cliente', icon: 'groups_3'},
+  {id: 4, name: 'Contratos', route: '/contrato', icon: 'clear_all'},
+  {id: 5, name: 'Eventos', route: '/evento', icon: 'nightlife'},
   {id: 6, name: 'Pós-Eventos', route: '/pos-evento', icon: 'event_available'},
   {id: 7, name: 'Relatórios', route: '/relatorio', icon: 'task'},
-  {id: 8, name: 'Carrinho', route: '/efetivar-compra', icon: 'shopping_cart'},
-  {id: 9, name: 'Vincular Serviço', route: '/vincular-servico', icon: 'shopping_cart'}
+  {id: 8, name: 'Serviços', route: '/pesquisar-servico', icon: 'manage_search'},
+  {id: 9, name: 'Carrinho', route: '/efetivar-compra', icon: 'shopping_cart'},
+  {id: 10, name: 'Vincular Serviço', route: '/vincular-servico', icon: 'shopping_cart'}
 ]
 
 

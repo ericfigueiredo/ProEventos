@@ -51,7 +51,7 @@ export class CadastroServicoComponent implements OnInit {
           console.log(servicoJson);
           this.mensagem = "";
           this.desativarEspera()
-          this.router.navigate(['/Pesquisar-servico']);
+          this.router.navigate(['/pesquisar-servico']);
           sessionStorage.removeItem('servicoSession');
         },
         e => {
@@ -65,7 +65,7 @@ export class CadastroServicoComponent implements OnInit {
 
   public cancelar(){
     sessionStorage.removeItem('servicoSession');
-    this.router.navigate(['/Pesquisar-servico']);
+    this.router.navigate(['/pesquisar-servico']);
   }
 
   public ativarEspera(){

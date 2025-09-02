@@ -21,8 +21,8 @@ export class LojaDetalheServicoComponent implements OnInit {
   }
 
   private carregarServico() {
-    this.clique = JSON.parse(localStorage.getItem("clique"));
-
+    this.clique = JSON.parse(sessionStorage.getItem("clique"));
+    sessionStorage.removeItem('clique');
     if (this.clique === "pesquisa") {
       this.carregarServicoPesquisa();
     } else if (this.clique === "efetivar") {
@@ -80,7 +80,7 @@ export class LojaDetalheServicoComponent implements OnInit {
     precoTotal: this.precoTotal
   };
   let listaServicos = JSON.parse(localStorage.getItem("servicosContratados")) || [];
-  this.clique = JSON.parse(localStorage.getItem('clique'));
+  this.clique = JSON.parse(sessionStorage.getItem('clique'));
   const indexStr = localStorage.getItem('servicoIndex');
 
   if (this.clique === 'efetivar' && indexStr !== null) {

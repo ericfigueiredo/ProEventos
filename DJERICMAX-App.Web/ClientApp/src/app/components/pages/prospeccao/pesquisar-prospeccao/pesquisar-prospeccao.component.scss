@@ -157,7 +157,7 @@
 }
 
 .edit {
-  font-size: 1.4em;
+  font-size: 1.2em;
   margin-left: -11px !important;
   width: 24px;
   text-align: left;
@@ -167,13 +167,23 @@
 }
 
 .del {
-  font-size: 1.4em;
+  font-size: 1.2em;
   margin-left: -11px !important;
   width: 24px;
   text-align: left;
   vertical-align: middle;
   padding: 0;
   color: #a10202;
+}
+
+.convert {
+  font-size: 1.2em;
+  margin-left: -11px !important;
+  width: 24px;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0;
+  color: orangered;
 }
 
 table td  {

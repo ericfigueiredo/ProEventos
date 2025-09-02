@@ -44,7 +44,7 @@ export class LojaEfetivarCompraComponent implements OnInit {
   }
 
   public editarServico(servico: Servico, clique: string, index: number) {
-    localStorage.setItem('clique', JSON.stringify(clique));
+    sessionStorage.setItem('clique', JSON.stringify(clique));
     localStorage.setItem('servicoIndex', index.toString());
     this.router.navigate(['/detalhe-servico']);
   }

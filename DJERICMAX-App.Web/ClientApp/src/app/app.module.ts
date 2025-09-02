@@ -49,6 +49,8 @@ import { ClienteService } from './services/cliente.service';
 import { EventoService } from './services/evento.service';
 import { CadastrarProspeccaoComponent } from './components/pages/prospeccao/cadastrar-prospeccao/cadastrar-prospeccao.component';
 import { PesquisarProspeccaoComponent } from './components/pages/prospeccao/pesquisar-prospeccao/pesquisar-prospeccao.component';
+import { ClientesComponent } from './components/pages/clientes/clientes.component';
+import { AboutComponent } from './components/auth/about/about.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -84,6 +86,8 @@ registerLocaleData(localePt, 'pt-BR');
     LimparCarrinhoComponent,
     CadastrarProspeccaoComponent,
     PesquisarProspeccaoComponent,
+    ClientesComponent,
+    AboutComponent,
   ],
 
   providers: [
@@ -95,7 +99,11 @@ registerLocaleData(localePt, 'pt-BR');
     EventoService
   ],
 
-  entryComponents: [ExcluirServicoComponent], // obrigatório no Angular < 9
+  entryComponents: [
+    ExcluirServicoComponent,
+    AboutComponent,
+    MeusDadosComponent
+  ], // obrigatório no Angular < 9
 
   bootstrap: [AppComponent],
 
@@ -113,24 +121,31 @@ registerLocaleData(localePt, 'pt-BR');
     RouterModule.forRoot([
       { path: '', component: LoginComponent, pathMatch: 'full'},
       { path: 'novo-usuario', component: CadastroUsuarioComponent},
+      // { path: 'meus-dados', component: MeusDadosComponent, data: { title: 'Meus dados' }, canActivate:[GuardaRotas]},
+      // { path: 'about', component: AboutComponent, data: { title: 'Sobre o Sistema EventPro' }, canActivate:[GuardaRotas]},
+      { path: 'ajuda-usuario', component: AjudaUsuarioComponent, data: { title: 'Ajuda' }, canActivate:[GuardaRotas]},
 
-      { path: 'vincular-servico', component: LojaPesquisaComponent, data: { title: 'Pacotes de Serviços' }, canActivate:[GuardaRotas]},
+      { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard de Eventos' }, canActivate:[GuardaRotas]},
+
+      { path: 'cadastrar-servico', component: CadastroServicoComponent, data: { title: 'Cadastrar Serviço' }, canActivate:[GuardaRotas]},
+      { path: 'pesquisar-servico', component: PesquisaServicoComponent, data: { title: 'Pesquisar Serviços' }, canActivate:[GuardaRotas]},
+
       { path: 'detalhe-servico', component: LojaDetalheServicoComponent, data: { title: 'Detalhes de Serviços' }, canActivate:[GuardaRotas]},
-      { path: 'efetivar-compra', component: LojaEfetivarCompraComponent, data: { title: 'Carrinho de Serviços' }, canActivate:[GuardaRotas]},
+      { path: 'vincular-servico', component: LojaPesquisaComponent, data: { title: 'Pacotes de Serviços' }, canActivate:[GuardaRotas]},
+      { path: 'contratar-serviço', component: LojaEfetivarCompraComponent, data: { title: 'Carrinho de Serviços' }, canActivate:[GuardaRotas]},
+
+      { path: 'cadastrar-prospeccao', component: CadastrarProspeccaoComponent, data: { title: 'Cadastro/Edição de Clientes' }, canActivate:[GuardaRotas]},
+      { path: 'pesquisar-prospeccao', component: PesquisarProspeccaoComponent, data: { title: 'Possíveis Clientes' }, canActivate:[GuardaRotas]},
+      { path: 'pesquisar-cliente', component: ClientesComponent, data: { title: 'Clientes' }, canActivate:[GuardaRotas]},
 
       // { path: 'home', component: HomeComponent, data: { title: 'Dashboard de Eventos' }, canActivate:[GuardaRotas]},
       // { path: 'servico', component: ServicoComponent, canActivate:[GuardaRotas]},
 
-      { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard de Eventos' }, canActivate:[GuardaRotas]},
-      { path: 'prospeccao', component: CadastrarProspeccaoComponent, data: { title: 'Prospecção de Clientes' }, canActivate:[GuardaRotas]},
-      { path: 'cadastrar-servico', component: CadastroServicoComponent, data: { title: 'Cadastrar Serviço' }},
-      { path: 'Pesquisar-servico', component: PesquisaServicoComponent, data: { title: 'Pesquisar Serviços' }, canActivate:[GuardaRotas]},
       { path: 'contrato', component: ContratoComponent, data: { title: 'Contratos Fechados' }, canActivate:[GuardaRotas]},
       { path: 'evento', component: EventoComponent, data: { title: 'Eventos Agendados' }, canActivate:[GuardaRotas]},
       { path: 'pos-evento', component: PosEventoComponent, data: { title: 'Pós-Eventos' }, canActivate:[GuardaRotas]},
       { path: 'relatorio', component: RelatorioComponent, data: { title: 'Relatórios' }, canActivate:[GuardaRotas]},
-      { path: 'meus-dados', component: MeusDadosComponent, data: { title: 'Meus dados' }, canActivate:[GuardaRotas]},
-      { path: 'ajuda-usuario', component: AjudaUsuarioComponent, data: { title: 'Ajuda' }, canActivate:[GuardaRotas]}
+
     ])
   ]
 

@@ -1,3 +1,25 @@
+<div class="modal-backdrop fade show" (click)="fechar()"></div>
+
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header headiers">
+        <h5 class="modal-title"> {{ info }} </h5>
+        <button type="button" class="close" (click)="fechar()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bodies">
+        <div class="container-fluid">
+
+<!-- ------------------------------------------------------------------------------ -->
+
+
+
+
+
+
+
 <div class="bodys">
   <form action="" class="form-signin">
     <!-- <h1 class="h4 mb-2 login">Prospecção de Clientes</h1> -->
@@ -5,8 +27,8 @@
     <div class="form-row">
       <!-- Nome -->
       <div class="col-md-6 mb-2">
-        <label for="inputNomeCliente" class="sr-only"
-          >Nome do Possível Cliente</label>
+        <label for="inputNomeCliente" class="sr-only">
+          Nome do Possível Cliente</label>
         <input type="text" id="inputNomeCliente"
           name="nome" placeholder="Nome do Possível Cliente"
           class="form-control mb-2"
@@ -25,12 +47,10 @@
           </div>
         </div>
       </div>
-
       <!-- Sobrenome -->
       <div class="col-md-6 mb-2">
         <label for="inputSobrenomeCliente" class="sr-only"
-          >Sobrenome do Possível Cliente</label
-        >
+          >Sobrenome do Possível Cliente</label>
         <input type="text" id="inputSobrenomeCliente"
         name="sobrenome" placeholder="Sobrenome do Possível Cliente"
           class="form-control mb-2"
@@ -43,6 +63,41 @@
           [(ngModel)]="cliente.sobreNome"
           #sobreNome="ngModel"
         />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- CPF -->
+      <!-- <div class="col-md-6 mb-2" *ngIf="cliente.ehCliente == 1"> -->
+      <div class="col-md-6 mb-2" *ngIf="clique == 'cliente'">
+        <label for="inputCpf" class="sr-only">
+          CPF do Possível Cliente</label>
+        <input type="text" id="inputCpf"
+          name="cpf" placeholder="CPF do Cliente"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': cpf.invalid && (cpf.dirty || cpf.touched),
+            'is-valid': cpf.valid && (cpf.dirty || cpf.touched)
+          }"
+          [(ngModel)]="cliente.cpf"
+          #cpf="ngModel"/>
+      </div>
+      <!-- RG -->
+      <!-- <div class="col-md-6 mb-2" *ngIf="cliente.ehCliente == 1"> -->
+      <div class="col-md-6 mb-2" *ngIf="clique == 'cliente'">
+        <label for="inputRg" class="sr-only"
+          >RG do Possível Cliente</label>
+        <input type="text" id="inputRg"
+        name="rg" placeholder="RG do Cliente"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid':
+              rg.invalid && (rg.dirty || rg.touched),
+            'is-valid':
+              rg.valid && (rg.dirty || rg.touched)
+          }"
+          [(ngModel)]="cliente.rg"
+          #rg="ngModel"/>
       </div>
     </div>
 
@@ -95,6 +150,61 @@
     </div>
 
     <div class="form-row">
+      <!-- Logradouro -->
+      <!-- <div class="col-md-6 mb-2" *ngIf="cliente.ehCliente == 1"> -->
+      <div class="col-md-6 mb-2" *ngIf="clique == 'cliente'">
+        <label for="inputLogradouro" class="sr-only">
+          Logradouro do Possível Cliente</label>
+        <input type="text" id="inputLogradouro"
+          name="logradouro" placeholder="Logradouro"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid': logradouro.invalid && (logradouro.dirty || logradouro.touched),
+            'is-valid': logradouro.valid && (logradouro.dirty || logradouro.touched)
+          }"
+          [(ngModel)]="cliente.logradouro"
+          #logradouro="ngModel"/>
+      </div>
+      <!-- Num_Logradouro -->
+      <!-- <div class="col-md-2 mb-2" *ngIf="cliente.ehCliente == 1"> -->
+      <div class="col-md-2 mb-2" *ngIf="clique == 'cliente'">
+        <label for="inputNum_Logradouro" class="sr-only"
+          >Nº</label>
+        <input type="text" id="inputNum_Logradouro"
+        name="num_Logradouro" placeholder="Nº"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid':
+              num_Logradouro.invalid && (num_Logradouro.dirty || num_Logradouro.touched),
+            'is-valid':
+              num_Logradouro.valid && (num_Logradouro.dirty || num_Logradouro.touched)
+          }"
+          [(ngModel)]="cliente.num_Logradouro"
+          #num_Logradouro="ngModel"
+        />
+      </div>
+      <!-- CEP -->
+      <!-- <div class="col-md-4 mb-2" *ngIf="cliente.ehCliente == 1"> -->
+      <div class="col-md-4 mb-2" *ngIf="clique == 'cliente'">
+        <label for="inputCep" class="sr-only"
+          >CEP</label>
+        <input type="text" id="inputCep"
+        name="cep" placeholder="CEP"
+          class="form-control mb-2"
+          [ngClass]="{
+            'is-invalid':
+              cep.invalid && (cep.dirty || cep.touched),
+            'is-valid':
+              cep.valid && (cep.dirty || cep.touched)
+          }"
+          [(ngModel)]="cliente.cep"
+          #cep="ngModel"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Bairro -->
       <div class="col-md-5 mb-2">
         <label for="inputBairro" class="sr-only">Bairro</label>
         <input type="text" id="inputBairro"
@@ -108,7 +218,7 @@
           #bairro="ngModel"
         />
       </div>
-
+      <!-- Cidade -->
       <div class="col-md-5 mb-2">
         <label for="inputCidade" class="sr-only">Cidade</label>
         <input type="text" id="inputCidade"
@@ -131,7 +241,7 @@
           <div *ngIf="cidade.errors.required">Cidade é obrigatória!</div>
         </div>
       </div>
-
+      <!-- UF -->
       <div class="col-md-2 mb-2">
         <label for="inputUf" class="sr-only">UF</label>
         <select
@@ -148,11 +258,9 @@
 
           <option [ngValue]="undefined" disabled hidden>UF</option>
           <ng-container *ngFor="let uf of ufss">
-            <!-- <optgroup [label]="uf"> -->
               <option *ngFor="let item of Ufs(uf)" [ngValue]="item.uf">
                 {{ item.uf }}
               </option>
-            <!-- </optgroup> -->
           </ng-container>
         </select>
 
@@ -164,25 +272,11 @@
           <div *ngIf="uf.errors.required">uf de Serviços é obrigatório!</div>
         </div>
       </div>
-    </div>
 
-    <div class="form-row">
-      <div class="col-12 d-flex justify-content-end mb-2">
-        <button
-          class="btn btn-success botao"
-          type="submit"
-          (click)="cadastrarCliente()"
-          [disabled]="ativar_spinner"
-        >
-          <span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-            *ngIf="ativar_spinner"
-          ></span>
-          Salvar
-        </button>
-        <a [routerLink]="['/']" class="btn btn-secondary botao"> Cancelar </a>
+      <!-- ehCliente -->
+      <div class="col-md-5 mb-2" style="display: none;" *ngIf="clique == 'cliente'">
+        <input type="hidden" id="inputEhCliente" name="ehCliente"
+          [(ngModel)]="cliente.ehCliente" [value]="1" #ehCliente="ngModel" />
       </div>
     </div>
 
@@ -191,3 +285,49 @@
     </div>
   </form>
 </div>
+
+<!-- ------------------------------------------------------------------------------ -->
+
+        </div>
+      </div>
+      <div class="modal-footer footies">
+        <button class="btn btn-success botao" type="submit"
+          (click)="cadastrarCliente()"
+          [disabled]="ativar_spinner">
+          <span *ngIf="ativar_spinner" role="status" aria-hidden="true"
+            class="spinner-border spinner-border-sm"></span>
+          Salvar
+        </button>
+        <button class="btn btn-secondary botao" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+<!-- MODAL DE APRESENTAÇÃO DA TELA SOBRE O SISTEMA -->
+<div class="modal fade bd-example-modal-lg modal-backdrop show"
+ *ngIf="true" (click)="fechar()"></div>
+
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header headiers">
+        <h5 class="modal-title">
+          <img src="../../../../assets/images/logoEventPro-icon-mini.png"
+            alt="" height="25px"> Sobre o sistema EventPro</h5>
+        <button type="button" class="close" (click)="fechar()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body bodies">
+        <div >
+          <div class="form-signin row">
+            <div>
+              <img src="../../../../assets/images/logoEventPro-login.jpg"
+                   class="logoTitle"/>
+            </div>
+
+            <div style="text-align: justify;">
+              <p>{{ info }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer footies">
+        <button type="button" class="btn btn-secondary btn-lg" (click)="fechar()">
+          Fechar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
