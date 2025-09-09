@@ -26,11 +26,24 @@ namespace DJERICMAX_App.Repositorio.Config
             builder.Property(e => e.BairroEvento).HasMaxLength(30);
             builder.Property(e => e.CidadeEvento).HasMaxLength(30).IsRequired();
             builder.Property(e => e.UfEvento).HasMaxLength(2).IsRequired();
-            builder.Property(e => e.CepEvento).HasMaxLength(5);
+            builder.Property(e => e.CepEvento).HasMaxLength(9);
+            builder.Property(e => e.Proposta);
+            builder.Property(e => e.Fechado);
+            builder.Property(e => e.Realizado);
 
-            //builder.HasOne(e => e.Cliente);
+            // CONFIGURAR RELAÇÕES CORRETAMENTE
+            builder.HasOne(e => e.Cliente)
+                   .WithMany(c => c.Eventos)
+                   .HasForeignKey(e => e.ClienteId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(e => e.FormaPagamento);
+            builder.HasOne(e => e.FormaPagamento)
+                   .WithMany()
+                   .HasForeignKey(e => e.FormaPagamentoId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            // REMOVER a relação com Servico (se existir na model)
+            // builder.Ignore(e => e.ServicoId); // Se a propriedade ainda existir na model
         }
     }
 }

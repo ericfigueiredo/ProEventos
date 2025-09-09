@@ -25,23 +25,37 @@ namespace DJERICMAX_App.Web.Controllers
             _httpContextAccessor = httpContextAccessor;
             _hostingEnvironment = hostingEnvironment;
         }
-
+        //---------------------------------------------------------------------------
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                return Json(_clienteRepositorio.ObterTodos());
-
+                // Usar o novo método com eager loading
+                return Ok(_clienteRepositorio.ObterTodosComEventos());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
-
         //---------------------------------------------------------------------------
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var cliente = _clienteRepositorio.ObterClienteComEventos(id);
+                if (cliente == null) return NotFound();
 
+                return Ok(cliente);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        //---------------------------------------------------------------------------
         [HttpPost]
         public ActionResult Post([FromBody] Cliente cliente )
         {
@@ -67,9 +81,21 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-
         //---------------------------------------------------------------------------
-
+        [HttpPost("Deletar")]
+        public IActionResult Deletar([FromBody] Cliente cliente)
+        {
+            try
+            {
+                _clienteRepositorio.Remover(cliente);
+                return Json(_clienteRepositorio.ObterTodos());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        //---------------------------------------------------------------------------
 
     }
 }

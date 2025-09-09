@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DJERICMAX_App.Repositorio.Migrations
 {
     [DbContext(typeof(DJERICMAX_AppContexto))]
-    [Migration("20250902182047_Ajustes_Eventos_Pacotes")]
-    partial class Ajustes_Eventos_Pacotes
+    [Migration("20250909224907_Ajustando_Relacionamentos_de_Tabela")]
+    partial class Ajustando_Relacionamentos_de_Tabela
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,7 +82,7 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .HasMaxLength(30);
 
                     b.Property<string>("CepEvento")
-                        .HasMaxLength(5);
+                        .HasMaxLength(9);
 
                     b.Property<string>("CidadeEvento")
                         .IsRequired()
@@ -98,6 +98,8 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.Property<DateTime>("DataContrato");
 
                     b.Property<DateTime>("DataEvento");
+
+                    b.Property<bool>("Fechado");
 
                     b.Property<int>("FormaPagamentoId");
 
@@ -123,10 +125,12 @@ namespace DJERICMAX_App.Repositorio.Migrations
 
                     b.Property<bool>("Parcelado");
 
+                    b.Property<bool>("Proposta");
+
                     b.Property<int>("QtdeParcelas")
                         .HasMaxLength(2);
 
-                    b.Property<int>("ServicoId");
+                    b.Property<bool>("Realizado");
 
                     b.Property<string>("UfEvento")
                         .IsRequired()
@@ -141,8 +145,6 @@ namespace DJERICMAX_App.Repositorio.Migrations
 
                     b.HasIndex("FormaPagamentoId");
 
-                    b.HasIndex("ServicoId");
-
                     b.ToTable("Eventos");
                 });
 
@@ -151,21 +153,24 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("EventoId");
+                    b.Property<int>("EventoId");
 
                     b.Property<int?>("PedidoId");
 
-                    b.Property<int>("Quantidade_Horas")
-                        .HasMaxLength(2);
+                    b.Property<decimal>("PrecoUnitario")
+                        .HasColumnType("decimal(19,4)");
 
-                    b.Property<int>("ServicoId")
-                        .HasMaxLength(9);
+                    b.Property<int>("Quantidade_Horas");
+
+                    b.Property<int>("ServicoId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EventoId");
 
                     b.HasIndex("PedidoId");
+
+                    b.HasIndex("ServicoId");
 
                     b.ToTable("ItemPedidos");
                 });
@@ -175,51 +180,17 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CEP_Evento")
-                        .HasMaxLength(10);
+                    b.Property<int>("ClienteId");
 
-                    b.Property<string>("CEP_Usuario")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("Cidade_Evento")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Cidade_Usuario")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("Data_Cadastro");
-
-                    b.Property<DateTime>("Data_Contrato");
-
-                    b.Property<DateTime>("Data_Evento");
+                    b.Property<DateTime>("DataPedido");
 
                     b.Property<int>("FormaPagamentoId");
 
-                    b.Property<string>("Logradouro_Evento")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Logradouro_Usuario")
-                        .HasMaxLength(200);
-
-                    b.Property<int>("NumeroLogradouro_Evento")
-                        .HasMaxLength(10);
-
-                    b.Property<int>("NumeroLogradouro_Usuario")
-                        .HasMaxLength(10);
-
-                    b.Property<bool>("Parcelado");
-
-                    b.Property<int>("Qtde_Parcelas");
-
-                    b.Property<string>("UF_Evento")
-                        .HasMaxLength(2);
-
-                    b.Property<string>("UF_Usuario")
-                        .HasMaxLength(2);
-
-                    b.Property<int>("UsuarioId");
+                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
 
                     b.HasIndex("FormaPagamentoId");
 
@@ -241,7 +212,8 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("NomeArquivo");
+                    b.Property<string>("NomeArquivo")
+                        .HasMaxLength(255);
 
                     b.Property<decimal>("Preco_Hora")
                         .HasColumnType("decimal(19,4)");
@@ -259,6 +231,8 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasMaxLength(14);
+
+                    b.Property<bool>("EhAdministrador");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -339,36 +313,41 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.HasOne("DJERICMAX_App.Dominio.ObjetoDeValor.FormaPagamento", "FormaPagamento")
                         .WithMany()
                         .HasForeignKey("FormaPagamentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Servico", "Servico")
-                        .WithMany()
-                        .HasForeignKey("ServicoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.ItemPedido", b =>
                 {
-                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Evento")
+                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Evento", "Evento")
                         .WithMany("ItensPedido")
-                        .HasForeignKey("EventoId");
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DJERICMAX_App.Dominio.Entidades.Pedido")
                         .WithMany("ItensPedido")
                         .HasForeignKey("PedidoId");
+
+                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Servico", "Servico")
+                        .WithMany("ItensPedido")
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Pedido", b =>
                 {
+                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("DJERICMAX_App.Dominio.ObjetoDeValor.FormaPagamento", "FormaPagamento")
                         .WithMany()
                         .HasForeignKey("FormaPagamentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Usuario", "Usuario")
+                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Usuario")
                         .WithMany("Pedidos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UsuarioId");
                 });
 #pragma warning restore 612, 618
         }

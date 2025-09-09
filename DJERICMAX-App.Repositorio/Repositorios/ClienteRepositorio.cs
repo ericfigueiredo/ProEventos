@@ -1,6 +1,8 @@
 ﻿using DJERICMAX_App.Dominio.Contratos;
 using DJERICMAX_App.Dominio.Entidades;
 using DJERICMAX_App.Repositorio.Contexto;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DJERICMAX_App.Repositorio.Repositorios
@@ -20,6 +22,30 @@ namespace DJERICMAX_App.Repositorio.Repositorios
         {
             return DJERICMAX_AppContexto.Clientes.FirstOrDefault(c => c.Nome == nome);
         }
+
+        // NOVO: Obter cliente com eventos e serviços
+        public Cliente ObterClienteComEventos(int id)
+        {
+            return DJERICMAX_AppContexto.Clientes
+                .Include(c => c.Eventos)
+                    .ThenInclude(e => e.ItensPedido)
+                        .ThenInclude(ip => ip.Servico)
+                .Include(c => c.Eventos)
+                    .ThenInclude(e => e.FormaPagamento)
+                .FirstOrDefault(c => c.Id == id);
+        }
+
+        // NOVO: Obter todos clientes com eventos
+        public IEnumerable<Cliente> ObterTodosComEventos()
+        {
+            return DJERICMAX_AppContexto.Clientes
+                .Include(c => c.Eventos)
+                    .ThenInclude(e => e.ItensPedido)
+                        .ThenInclude(ip => ip.Servico)
+                .Include(c => c.Eventos)
+                    .ThenInclude(e => e.FormaPagamento)
+                .AsNoTracking()
+                .ToList();
+        }
     }
-    
 }

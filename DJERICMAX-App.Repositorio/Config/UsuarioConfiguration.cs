@@ -35,9 +35,9 @@ namespace DJERICMAX_App.Repositorio.Config
                 .IsRequired()
                 .HasMaxLength(12);
 
-            builder
-                .HasMany(u => u.Pedidos)
-                .WithOne(p => p.Usuario);
+           // builder
+             //   .HasMany(u => u.Pedidos)
+               // .WithOne(p => p.Usuario);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using DJERICMAX_App.Dominio.Contratos;
 using DJERICMAX_App.Dominio.Entidades;
-using DJERICMAX_App.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,33 +15,48 @@ namespace DJERICMAX_App.Web.Controllers
         private readonly IServicoRepositorio _servicoRepositorio;
         private IHttpContextAccessor _httpContextAccessor;
         private IHostingEnvironment _hostingEnvironment;
+
         public ServicoController(IServicoRepositorio servicoRepositorio,
-                                    IHttpContextAccessor httpContextAccessor,
-                                    IHostingEnvironment hostingEnvironment)
+                                IHttpContextAccessor httpContextAccessor,
+                                IHostingEnvironment hostingEnvironment)
         {
             _servicoRepositorio = servicoRepositorio;
             _httpContextAccessor = httpContextAccessor;
             _hostingEnvironment = hostingEnvironment;
         }
 
-//---------------------------------------------------------------------------
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                return Json(_servicoRepositorio.ObterTodos());
-                
-            }catch (Exception ex)
+                // Usar o novo método com eager loading
+                return Ok(_servicoRepositorio.ObterTodosComItensPedido());
+            }
+            catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
 
-//---------------------------------------------------------------------------
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var servico = _servicoRepositorio.ObterServicoComItensPedido(id);
+                if (servico == null) return NotFound();
+
+                return Ok(servico);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Servico servico)
+        public IActionResult Post([FromBody] Servico servico)
         {
             try
             {
@@ -51,39 +65,55 @@ namespace DJERICMAX_App.Web.Controllers
                 {
                     return BadRequest(servico.ObterMensagensValidacao());
                 }
+
                 if (servico.Id > 0)
                 {
                     _servicoRepositorio.Atualizar(servico);
                 }
                 else
                 {
-                _servicoRepositorio.Adicionar(servico);
+                    _servicoRepositorio.Adicionar(servico);
                 }
-                return Created("api/servico", servico);
-            }catch (Exception ex)
+
+                return Ok(servico);
+            }
+            catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
 
-//---------------------------------------------------------------------------
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var servico = _servicoRepositorio.ObterPorId(id);
+                if (servico == null) return NotFound();
 
+                _servicoRepositorio.Remover(servico);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // MANTER os métodos de upload de arquivo
         [HttpPost("Deletar")]
         public IActionResult Deletar([FromBody] Servico servico)
         {
             try
             {
-                // serviço recebido no FromBody deve ter a propriedade Id > 0
                 _servicoRepositorio.Remover(servico);
-                return Json(_servicoRepositorio.ObterTodos());
+                return Ok(_servicoRepositorio.ObterTodos());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
-
-//---------------------------------------------------------------------------
 
         [HttpPost("EnviarArquivo")]
         public IActionResult EnviarArquivo()
@@ -91,23 +121,29 @@ namespace DJERICMAX_App.Web.Controllers
             try
             {
                 var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["arquivoEnviado"];
+                if (formFile == null || formFile.Length == 0)
+                    return BadRequest("Arquivo não enviado");
+
                 var nomeArquivo = formFile.FileName;
-                var extensao = nomeArquivo.Split(".").Last();
+                var extensao = nomeArquivo.Split('.').Last();
                 string novoNomeArquivo = GerarNovoNomeArquivo(nomeArquivo, extensao);
 
                 var pastaArquivos = _hostingEnvironment.WebRootPath + "\\arquivos\\";
-                var nomeCompleto = pastaArquivos + novoNomeArquivo;
+                if (!Directory.Exists(pastaArquivos))
+                    Directory.CreateDirectory(pastaArquivos);
+
+                var nomeCompleto = Path.Combine(pastaArquivos, novoNomeArquivo);
 
                 using (var streamArquivo = new FileStream(nomeCompleto, FileMode.Create))
                 {
                     formFile.CopyTo(streamArquivo);
                 }
 
-                return Json(novoNomeArquivo);
+                return Ok(novoNomeArquivo);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
 
@@ -115,7 +151,7 @@ namespace DJERICMAX_App.Web.Controllers
         {
             var arrayNomeCompacto = Path.GetFileNameWithoutExtension(nomeArquivo).Take(10).ToArray();
             var novoNomeArquivo = new string(arrayNomeCompacto).Replace(" ", "-");
-            novoNomeArquivo = $"{novoNomeArquivo}_{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}.{extensao}";
+            novoNomeArquivo = $"{novoNomeArquivo}_{DateTime.Now:yyyyMMddHHmmss}.{extensao}";
             return novoNomeArquivo;
         }
     }

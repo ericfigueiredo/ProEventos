@@ -17,15 +17,9 @@ namespace DJERICMAX_App.Dominio.Entidades
         public int Convidados { get; set; }
         public string Pacote { get; set; }
         public string Observacoes { get; set; }
-        public bool Parcelado{ get; set; }
+        public bool Parcelado { get; set; }
         public int QtdeParcelas { get; set; }
         public int ValorParcelas { get; set; }
-
-        public int ClienteId { get; set; }
-        public virtual Cliente Cliente { get; set; }
-
-        public int ServicoId { get; set; }
-        public virtual Servico Servico { get; set; }
 
         public string LogradouroEvento { get; set; }
         public string NumLogradouroEvento { get; set; }
@@ -34,14 +28,27 @@ namespace DJERICMAX_App.Dominio.Entidades
         public string UfEvento { get; set; }
         public string CepEvento { get; set; }
 
+        public bool Proposta { get; set; }
+        public bool Fechado { get; set; }
+        public bool Realizado { get; set; }
+
+        // Relação com Cliente
+        public int ClienteId { get; set; }
+        public virtual Cliente Cliente { get; set; }
+
+        // Relação com FormaPagamento
         public int FormaPagamentoId { get; set; }
         public virtual FormaPagamento FormaPagamento { get; set; }
 
-        /// <summary>
-        /// Pedido deve ter pelo menos um item de pedido
-        /// ou muitos itens de pedidos
-        /// </summary>
+        // REMOVER esta relação direta com Servico
+        // public int ServicoId { get; set; }
+        // public virtual Servico Servico { get; set; }
+
+        // MANTER esta coleção de ItensPedido (que representam os serviços do evento)
         public virtual ICollection<ItemPedido> ItensPedido { get; set; }
+
+        // Adicionar propriedade calculada para valor total do evento
+        public decimal ValorTotal => ItensPedido?.Sum(ip => ip.ValorTotal) ?? 0;
 
         public override void Validate()
         {
@@ -50,7 +57,7 @@ namespace DJERICMAX_App.Dominio.Entidades
                 AdicionarCritica("Aviso: Eventos não podem ser cadastrados sem itens de serviços.");
             if (string.IsNullOrEmpty(NomeEvento))
                 AdicionarCritica("Aviso: Nome do Evento deve ser preenchido.");
-            if (string.IsNullOrEmpty(DataEvento.ToString()))
+            if (DataEvento == DateTime.MinValue)
                 AdicionarCritica("Aviso: Data do Evento deve ser preenchido.");
             if (string.IsNullOrEmpty(CidadeEvento))
                 AdicionarCritica("Aviso: Cidade do Evento deve ser preenchido.");

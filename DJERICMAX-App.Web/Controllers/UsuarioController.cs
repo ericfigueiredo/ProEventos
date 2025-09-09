@@ -68,6 +68,7 @@ namespace DJERICMAX_App.Web.Controllers
             try
             {
                 var usuarioCadastrado = _usuarioRepositorio.Obter(usuario.Email);
+                
                 if (usuarioCadastrado != null)
                     return BadRequest("Usuário já cadastrado no sistema");
 
