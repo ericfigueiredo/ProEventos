@@ -51,5 +51,32 @@ namespace DJERICMAX_App.Repositorio.Repositorios
                 .AsNoTracking()
                 .ToList();
         }
+
+        public void Adicionar(Evento evento)
+        {
+            evento.GerarParcelas();
+            DJERICMAX_AppContexto.Eventos.Add(evento);
+            DJERICMAX_AppContexto.SaveChanges();
+        }
+
+        public void Atualizar(Evento evento)
+        {
+            // Desanexa entidades existentes para evitar conflitos
+            var entidadesLocais = DJERICMAX_AppContexto.ChangeTracker.Entries()
+                .Where(e => e.Entity is Evento || e.Entity is ItemPedido || e.Entity is Parcela)
+                .ToList();
+
+            foreach (var entrada in entidadesLocais)
+            {
+                entrada.State = EntityState.Detached;
+            }
+
+            // Agora pode fazer o update normalmente
+            evento.GerarParcelas();
+            DJERICMAX_AppContexto.Eventos.Update(evento);
+            DJERICMAX_AppContexto.SaveChanges();
+        }
+
+
     }
 }

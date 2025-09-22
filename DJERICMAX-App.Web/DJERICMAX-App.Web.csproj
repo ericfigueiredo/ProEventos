@@ -32,15 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\components\servicos\servicos.component.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DJERICMAX-App.Repositorio\DJERICMAX-App.Repositorio.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\components\servicos\servicos.component.ts" />
   </ItemGroup>
 
   <ItemGroup>

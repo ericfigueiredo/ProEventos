@@ -15,6 +15,23 @@ namespace DJERICMAX_App.Web.Controllers
             _pedidoRepositorio = pedidoRepositorio;
         }
 
+        //---------------------------------------------------------------------------
+        // GET: api/pedido - Todos os pedidos SEM eventos (usa o método base)
+        /*  [HttpGet]
+          public IActionResult Get()
+          {
+              try
+              {
+                  var pedidos = _pedidoRepositorio.ObterTodos(); // Método da interface base
+                  return Ok(pedidos); // Use Ok() em vez de Json()
+              }
+              catch (Exception ex)
+              {
+                  return BadRequest(ex.Message);
+              }
+          } */
+
+        //---------------------------------------------------------------------------
         [HttpGet]
         public IActionResult Get()
         {
@@ -28,7 +45,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpGet("basico")]
         public IActionResult GetBasico()
         {
@@ -42,7 +59,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -58,7 +75,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpGet("{id}/basico")]
         public IActionResult GetBasico(int id)
         {
@@ -74,7 +91,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpPost]
         public IActionResult Post([FromBody] Pedido pedido)
         {
@@ -102,7 +119,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

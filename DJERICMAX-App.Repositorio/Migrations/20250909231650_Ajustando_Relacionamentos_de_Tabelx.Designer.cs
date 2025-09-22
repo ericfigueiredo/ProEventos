@@ -3,14 +3,16 @@ using System;
 using DJERICMAX_App.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DJERICMAX_App.Repositorio.Migrations
 {
     [DbContext(typeof(DJERICMAX_AppContexto))]
-    partial class DJERICMAX_AppContextoModelSnapshot : ModelSnapshot
+    [Migration("20250909231650_Ajustando_Relacionamentos_de_Tabelx")]
+    partial class Ajustando_Relacionamentos_de_Tabelx
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,28 +175,6 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.ToTable("ItemPedidos");
                 });
 
-            modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Parcela", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DataVencimento");
-
-                    b.Property<int>("EventoId");
-
-                    b.Property<int>("Numero");
-
-                    b.Property<bool>("Pago");
-
-                    b.Property<decimal>("Valor");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventoId");
-
-                    b.ToTable("Parcela");
-                });
-
             modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Pedido", b =>
                 {
                     b.Property<int>("Id")
@@ -351,14 +331,6 @@ namespace DJERICMAX_App.Repositorio.Migrations
                         .WithMany("ItensPedido")
                         .HasForeignKey("ServicoId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Parcela", b =>
-                {
-                    b.HasOne("DJERICMAX_App.Dominio.Entidades.Evento", "Evento")
-                        .WithMany("Parcelas")
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DJERICMAX_App.Dominio.Entidades.Pedido", b =>

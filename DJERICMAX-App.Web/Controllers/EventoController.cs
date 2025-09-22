@@ -2,6 +2,7 @@
 using DJERICMAX_App.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace DJERICMAX_App.Web.Controllers
 {
@@ -15,19 +16,22 @@ namespace DJERICMAX_App.Web.Controllers
             _eventoRepositorio = eventoRepositorio;
         }
 
+        //---------------------------------------------------------------------------
+        // GET: api/evento - Todos os eventos SEM clientes (usa o método base)
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                return Ok(_eventoRepositorio.ObterTodosCompletos());
+                var eventos = _eventoRepositorio.ObterTodos(); // Método da interface base
+                return Ok(eventos); // Use Ok() em vez de Json()
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -43,8 +47,8 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpPost]
+        //---------------------------------------------------------------------------
+        [HttpPost("cadastrar")]
         public IActionResult Post([FromBody] Evento evento)
         {
             try
@@ -55,12 +59,40 @@ namespace DJERICMAX_App.Web.Controllers
                     return BadRequest(evento.ObterMensagensValidacao());
                 }
 
-                if (evento.Id > 0)
+                // Obter evento existente do banco para evitar conflitos
+                var eventoExistente = _eventoRepositorio.ObterEventoCompleto(evento.Id);
+
+                if (eventoExistente != null)
                 {
-                    _eventoRepositorio.Atualizar(evento);
+                    // Atualizar propriedades do evento existente
+                    eventoExistente.NomeEvento = evento.NomeEvento;
+                    eventoExistente.HoraInicio = evento.HoraInicio;
+                    eventoExistente.HoraFinal = evento.HoraFinal;
+                    eventoExistente.DataCadastro = evento.DataCadastro;
+                    eventoExistente.DataContrato = evento.DataContrato;
+                    eventoExistente.DataEvento = evento.DataEvento;
+                    eventoExistente.Convidados = evento.Convidados;
+                    eventoExistente.Pacote = evento.Pacote;
+                    eventoExistente.Observacoes = evento.Observacoes;
+                    eventoExistente.Parcelado = evento.Parcelado;
+                    eventoExistente.QtdeParcelas = evento.QtdeParcelas;
+                    eventoExistente.ValorParcelas = evento.ValorParcelas;
+                    eventoExistente.LogradouroEvento = evento.LogradouroEvento;
+                    eventoExistente.NumLogradouroEvento = evento.NumLogradouroEvento;
+                    eventoExistente.BairroEvento = evento.BairroEvento;
+                    eventoExistente.CidadeEvento = evento.CidadeEvento;
+                    eventoExistente.UfEvento = evento.UfEvento;
+                    eventoExistente.CepEvento = evento.CepEvento;
+                    eventoExistente.Proposta = evento.Proposta;
+                    eventoExistente.Fechado = evento.Fechado;
+                    eventoExistente.Realizado = evento.Realizado;
+                    
+                    eventoExistente.GerarParcelas();
+                    _eventoRepositorio.Atualizar(eventoExistente);
                 }
                 else
                 {
+                    evento.GerarParcelas();
                     _eventoRepositorio.Adicionar(evento);
                 }
 
@@ -72,6 +104,8 @@ namespace DJERICMAX_App.Web.Controllers
             }
         }
 
+
+        //---------------------------------------------------------------------------
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -88,5 +122,47 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //---------------------------------------------------------------------------
+        [HttpPut("{eventoId}/parcelas/{parcelaId}/pagar")]
+        public IActionResult MarcarParcelaComoPaga(int eventoId, int parcelaId)
+        {
+            try
+            {
+                var evento = _eventoRepositorio.ObterEventoCompleto(eventoId);
+                if (evento == null) return NotFound("Evento não encontrado.");
+
+                var parcela = evento.Parcelas.FirstOrDefault(p => p.Id == parcelaId);
+                if (parcela == null) return NotFound("Parcela não encontrada.");
+
+                if (!parcela.Pago)
+                {
+                    parcela.Pago = true;
+                    _eventoRepositorio.Atualizar(evento);
+                }
+                return Ok(parcela);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //---------------------------------------------------------------------------
+        // Alterar data de vencimento
+        [HttpPut("{eventoId}/parcelas/{parcelaId}/data")]
+        public IActionResult AlterarDataVencimento(int eventoId, int parcelaId, [FromBody] DateTime novaData)
+        {
+            return Ok();
+        }
+        //---------------------------------------------------------------------------
+        // Alterar valor de parcela (redistribui o restante automaticamente)
+        [HttpPut("{eventoId}/parcelas/{parcelaId}/valor")]
+        public IActionResult AlterarValorParcela(int eventoId, int parcelaId, [FromBody] decimal novoValor)
+        {
+            return Ok();
+        }
+
+
     }
 }

@@ -17,6 +17,7 @@ namespace DJERICMAX_App.Repositorio.Contexto
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<ItemPedido> ItemPedidos { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
+        public object ItensPedido { get; internal set; }
 
         public DJERICMAX_AppContexto(DbContextOptions options) : base(options)
         {

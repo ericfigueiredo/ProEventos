@@ -1,5 +1,4 @@
 ﻿using DJERICMAX_App.Dominio.Entidades;
-using System.Collections.Generic;
 
 namespace DJERICMAX_App.Dominio.Contratos
 {
@@ -7,7 +6,7 @@ namespace DJERICMAX_App.Dominio.Contratos
     {
         Cliente Obter(string nome, string telefone);
         Cliente Obter(string nome);
-        Cliente ObterClienteComEventos(int id);
-        IEnumerable<Cliente> ObterTodosComEventos();
+        object ObterTodosComEventos();
+        object ObterClienteComEventos(int id);
     }
 }

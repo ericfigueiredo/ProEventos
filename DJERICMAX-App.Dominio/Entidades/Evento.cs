@@ -32,23 +32,156 @@ namespace DJERICMAX_App.Dominio.Entidades
         public bool Fechado { get; set; }
         public bool Realizado { get; set; }
 
-        // Relação com Cliente
+        // Relações
         public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
 
-        // Relação com FormaPagamento
         public int FormaPagamentoId { get; set; }
         public virtual FormaPagamento FormaPagamento { get; set; }
 
-        // REMOVER esta relação direta com Servico
-        // public int ServicoId { get; set; }
-        // public virtual Servico Servico { get; set; }
-
-        // MANTER esta coleção de ItensPedido (que representam os serviços do evento)
         public virtual ICollection<ItemPedido> ItensPedido { get; set; }
+        public virtual ICollection<Parcela> Parcelas { get; set; } = new List<Parcela>();
 
-        // Adicionar propriedade calculada para valor total do evento
+        // Propriedade calculada para valor total
         public decimal ValorTotal => ItensPedido?.Sum(ip => ip.ValorTotal) ?? 0;
+
+        public void GerarParcelas()
+        {
+             if (Parcelas.Any())
+            {
+                foreach (var parcela in Parcelas)
+                {
+                    if (parcela.Pago)
+                    {
+                        parcela.Pago = parcela.Pago;
+                        //parcela.DataVencimento = parcela.DataVencimento.Date; // exemplo
+                    }
+                }
+            }
+            else
+            {
+                Parcelas.Clear();
+                // ========================
+                // NÃO DEFINIDO
+                // ========================
+                if (FormaPagamentoId == 0)
+                    return;
+
+                // ========================
+                // BOLETO OU DEPÓSITO
+                // ========================
+                if (FormaPagamentoId == 1 || FormaPagamentoId == 3)
+                {
+                    Parcelas.Add(new Parcela
+                    {
+                        Numero = 1,
+                        Valor = ValorTotal,
+                        DataVencimento = DataContrato, // ou outro campo, se preferir
+                        Pago = false
+                    });
+
+                    QtdeParcelas = 1;
+                    ValorParcelas = (int)ValorTotal;
+                    return;
+                }
+
+                // ========================
+                // CARTÃO DE CRÉDITO
+                // ========================
+                if (FormaPagamentoId == 2)
+                {
+                    if (QtdeParcelas < 1) QtdeParcelas = 1;
+
+                    decimal valorParcela = Math.Round(ValorTotal / QtdeParcelas, 2);
+
+                    for (int i = 0; i < QtdeParcelas; i++)
+                    {
+                        DateTime vencimento = DataContrato.AddMonths(i); // mensal
+                        Parcelas.Add(new Parcela
+                        {
+                            Numero = i + 1,
+                            Valor = valorParcela,
+                            DataVencimento = vencimento,
+                            Pago = false
+                        });
+                    }
+
+                    ValorParcelas = (int)valorParcela;
+                    return;
+                }
+
+                // ========================
+                // PAGAMENTO COM ENTRADA (ID = 4) - PIX
+                // ========================
+                if (FormaPagamentoId == 4)
+                {
+                    // Entrada (30%)
+                    decimal entrada = Math.Round(ValorTotal * 0.30m, 2);
+                    Parcelas.Add(new Parcela
+                    {
+                        Numero = 1,
+                        Valor = entrada,
+                        DataVencimento = DataContrato,
+                        Pago = true
+                    });
+
+                    // Restante do valor
+                    decimal restante = ValorTotal - entrada;
+
+                    // Garantir que há pelo menos 1 parcela para o restante
+                    if (QtdeParcelas < 1) QtdeParcelas = 1;
+
+                    // Calcular valor da parcela
+                    decimal valorParcela = Math.Round(restante / QtdeParcelas, 2);
+
+                    // Ajustar possíveis diferenças de centavos na última parcela
+                    decimal somaParcelas = valorParcela * (QtdeParcelas - 1);
+                    decimal ultimaParcela = restante - somaParcelas;
+
+                    // Data limite: 5 dias antes do evento
+                    DateTime dataLimite = DataEvento.AddDays(-5);
+
+                    for (int i = 0; i < QtdeParcelas; i++)
+                    {
+                        DateTime dataVencimento;
+
+                        // Calcular a data base (30 dias após a parcela anterior)
+                        DateTime dataBase = DataContrato.AddMonths(i + 1);
+
+                        if (i == QtdeParcelas - 1)
+                        {
+                            // Última parcela: usar a menor data entre (30 dias após anterior) e (5 dias antes do evento)
+                            dataVencimento = dataBase < dataLimite ? dataBase : dataLimite;
+                        }
+                        else
+                        {
+                            // Parcelas normais: 30 dias após a anterior
+                            dataVencimento = dataBase;
+
+                            // Verificar se não ultrapassa o limite (caso de muitas parcelas)
+                            if (dataVencimento > dataLimite)
+                                dataVencimento = dataLimite;
+                        }
+
+                        // Valor da parcela (ajustar última parcela para evitar diferenças de centavos)
+                        decimal valor = (i == QtdeParcelas - 1) ? ultimaParcela : valorParcela;
+
+                        Parcelas.Add(new Parcela
+                        {
+                            Numero = i + 2, // +2 porque a entrada é a parcela 1
+                            Valor = Math.Round(valor, 2),
+                            DataVencimento = dataVencimento,
+                            Pago = false
+                        });
+                    }
+
+                    ValorParcelas = (int)valorParcela;
+                    return;
+                }
+            }
+        }
+
+
 
         public override void Validate()
         {

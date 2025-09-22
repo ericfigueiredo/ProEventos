@@ -24,14 +24,15 @@ namespace DJERICMAX_App.Web.Controllers
             _httpContextAccessor = httpContextAccessor;
             _hostingEnvironment = hostingEnvironment;
         }
-
+        //---------------------------------------------------------------------------
+        // GET: api/servico - Todos os servicos SEM eventos (usa o método base)
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                // Usar o novo método com eager loading
-                return Ok(_servicoRepositorio.ObterTodosComItensPedido());
+                var servicos = _servicoRepositorio.ObterTodos(); // Método da interface base
+                return Ok(servicos); // Use Ok() em vez de Json()
             }
             catch (Exception ex)
             {
@@ -39,6 +40,21 @@ namespace DJERICMAX_App.Web.Controllers
             }
         }
 
+        /*
+                [HttpGet]
+                public IActionResult Get()
+                {
+                    try
+                    {
+                        // Usar o novo método com eager loading
+                        return Ok(_servicoRepositorio.ObterTodosComItensPedido());
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex.Message);
+                    }
+                } */
+        //---------------------------------------------------------------------------
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -54,7 +70,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpPost]
         public IActionResult Post([FromBody] Servico servico)
         {
@@ -82,7 +98,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -99,7 +115,7 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         // MANTER os métodos de upload de arquivo
         [HttpPost("Deletar")]
         public IActionResult Deletar([FromBody] Servico servico)
@@ -111,10 +127,10 @@ namespace DJERICMAX_App.Web.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ex.ToString());
             }
         }
-
+        //---------------------------------------------------------------------------
         [HttpPost("EnviarArquivo")]
         public IActionResult EnviarArquivo()
         {
@@ -139,14 +155,14 @@ namespace DJERICMAX_App.Web.Controllers
                     formFile.CopyTo(streamArquivo);
                 }
 
-                return Ok(novoNomeArquivo);
+                return Ok(new { nomeArquivo = novoNomeArquivo });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
+        //---------------------------------------------------------------------------
         private static string GerarNovoNomeArquivo(string nomeArquivo, string extensao)
         {
             var arrayNomeCompacto = Path.GetFileNameWithoutExtension(nomeArquivo).Take(10).ToArray();

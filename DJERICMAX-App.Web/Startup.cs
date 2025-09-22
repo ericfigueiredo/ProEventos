@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace DJERICMAX_App.Web
 {
@@ -33,9 +34,16 @@ namespace DJERICMAX_App.Web
                                                          option.UseLazyLoadingProxies()
                                                          .UseMySql(connectionString, m => m
                                                          .MigrationsAssembly("DJERICMAX-App.Repositorio")));
+            services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+            services.AddScoped<IEventoRepositorio, EventoRepositorio>();
+            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
             services.AddScoped<IServicoRepositorio, ServicoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-            services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

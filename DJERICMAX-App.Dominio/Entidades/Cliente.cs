@@ -26,6 +26,8 @@ namespace DJERICMAX_App.Dominio.Entidades
         /// </summary>
         public virtual ICollection<Evento> Eventos { get; set; }
 
+
+
         public override void Validate()
         {
             if (string.IsNullOrEmpty(Nome))
