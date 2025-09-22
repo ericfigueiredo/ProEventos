@@ -1,0 +1,129 @@
+//monitor do notebook
+@media screen and (min-width: 1024px) and (max-height: 768px) {
+  .contaiDiv{
+    height: 330px !important;
+    margin: 0.5em 0 -0.5em 0;
+  }
+  .botoes{
+  width: 77%;
+  position: absolute;
+  bottom: 2em;
+  right: 2.5em;
+}
+}
+
+// monitor vertical
+@media screen and (width: 1080px) and (max-height: 1920px) {
+  .contaiDiv{
+      height: 1465px !important;
+      margin: 0.5em 0 -0.5em 0;
+    }
+  .botoes{
+  width: 77%;
+  position: absolute;
+  bottom: 3em;
+  padding: 0 0.8em 1em 0;
+  right: 2.5em;
+}
+}
+
+//monitor horizontal grande
+@media screen and (min-width: 1920px) {
+  .contaiDiv{
+    height: 635px !important;
+    margin: 0.5em 0 -0.5em 0;
+  }
+  .botoes{
+  width: 77%;
+  position: absolute;
+  bottom: 2.5em;
+  padding: 0 0.5em 0.5em 0;
+  right: 2.8em;
+}
+}
+
+.card-header{
+  font-size: 12px;
+  font-weight: bold;
+  vertical-align: middle !important;
+  text-align: center !important;
+  padding: 1em 0 0 2.5em;
+  margin: 0 0 -1.5em 0 !important;
+}
+
+.card-body{
+  padding: 2em 1em 1em 1em;
+}
+
+.dados{
+  width: 34%;
+  max-height: 100%;
+  margin: auto 0 auto 1em;
+}
+.local{
+  width: 61%;
+  max-height: 100%;
+  margin: 0 0.5em 0 0.5em;
+}
+
+.botoes{
+  align-items: baseline !important;
+  width: 77%;
+  position: absolute;
+  bottom: 2.7em;
+  right: 2.5em;
+}
+
+.contaiDiv{
+  overflow-y: auto !important;
+  // border: #95cbf9 1px solid;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: -1em;
+}
+
+.respError{
+  font-size: 11px;
+  margin-top: -8px;
+}
+
+.botao {
+  margin: 1em 0 0 1em;
+  width: 9em;
+}
+
+.nav-tabs{
+  // position: fixed;
+}
+
+.nav-item{
+  width: 25%;
+  text-align: center !important;
+  color: #555 !important;
+  background-color: #fff3e6;
+  border-bottom: 2px solid orangered;
+  cursor: pointer;
+}
+
+/* tabs.component.scss */
+:host ::ng-deep .nav-tabs .nav-link.active,
+:host ::ng-deep .nav-item.active .nav-link {
+  font-weight: 700;
+  color: orangered !important;
+  background-color: #fff3e6;
+  border-bottom: 2px solid orangered;
+}
+
+.tableHead{
+  width: 97% !important;
+  font-size: 13px !important;
+  text-align: left !important;
+  text-shadow: none !important;
+  margin: 1em;
+}
+.tableHead tr:hover {
+  background-color: transparent !important;
+  cursor: default !important;
+}

@@ -1,62 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Usuario } from "src/app/models/usuario";
+import { UsuarioService } from "src/app/services/usuario.service";
 
 @Component({
-  selector: 'app-cadastro-usuario',
-  templateUrl: './cadastro-usuario.component.html',
-  styleUrls: ['./cadastro-usuario.component.css']
+  selector: "app-cadastro-usuario",
+  templateUrl: "./cadastro-usuario.component.html",
+  styleUrls: ["./cadastro-usuario.component.css"],
 })
 export class CadastroUsuarioComponent implements OnInit {
+  @Input() info: string;
+  @Input() user: Usuario;
+  @Output() fecharModal = new EventEmitter<void>();
+
   public usuario: Usuario;
   public ativar_spinner: boolean;
-  public mensagem:string;
+  public mensagem: string;
   public usuarioCadastrado: boolean;
   public arquivoSelecionado: File;
 
-  constructor(private usuarioService: UsuarioService) {
-
-  }
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit() {
     this.usuario = new Usuario();
   }
 
-  public inputChange(files: FileList){
+  public inputChange(files: FileList) {
     this.arquivoSelecionado = files.item(0);
     this.ativar_spinner = true;
-    this.usuarioService.enviarArquivo(this.arquivoSelecionado)
-    .subscribe(
-      nomeArquivo => {
+    this.usuarioService.enviarArquivo(this.arquivoSelecionado).subscribe(
+      (nomeArquivo) => {
         this.usuario.nomeArquivo = nomeArquivo;
-        alert(this.usuario.nomeArquivo);
-        console.log(nomeArquivo);
         this.ativar_spinner = false;
       },
-      e => {
+      (e) => {
         console.log(e);
-        this.ativar_spinner = false;
-    })
-    ;
-  }
-
-
-  public cadastrar(){
-    this.ativar_spinner = true;
-
-    this.usuarioService.cadastrarUsuario(this.usuario)
-    .subscribe(
-      usuarioJson => {
-        this.usuarioCadastrado = true;
-        this.mensagem = "";
-        this.ativar_spinner = false;
-      },
-      e => {
-        this.mensagem = e.error;
         this.ativar_spinner = false;
       }
     );
   }
-  
 
+  public cadastrar() {
+    this.ativar_spinner = true;
+    this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
+      (usuarioJson) => {
+        this.usuarioCadastrado = true;
+        this.mensagem = "";
+        this.ativar_spinner = false;
+      },
+      (e) => {
+        this.mensagem = e.error;
+        this.ativar_spinner = false;
+      }
+    );
+    // this.fechar();
+  }
+
+  fechar() {
+    this.fecharModal.emit();
+  }
 }

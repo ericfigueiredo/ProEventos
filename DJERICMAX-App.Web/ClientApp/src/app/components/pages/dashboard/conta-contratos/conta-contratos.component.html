@@ -1,0 +1,17 @@
+<div *ngIf="!eventos || eventos.length === 0">
+  <app-loader></app-loader>
+</div>
+<div class="row-card" *ngIf="eventos && eventos.length > 0">
+  <div class="stat-card bg-gradient text-white">
+    <div class="stat-card-icon">
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="74" height="74" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5.5h-18v13h18zm-18 10h18m-7 3V15l2 1.5h-8l2-1.5v-1.5m2 3v3m-11 2h9m4 0h9m-11-2l-2 2l2 2l2-2z" stroke-width="1"/></svg>
+
+    </div>
+    <div class="stat-card-text">
+      <h6 class="title-card mb-2">Eventos à realizar</h6>
+      <h5 class="mb-2">Próximos: {{totalAtual}}</h5>
+      <h6 class="font-weight-bold mb-2">Total eventos: {{totalGeral}}</h6>
+    </div>
+  </div>
+</div>

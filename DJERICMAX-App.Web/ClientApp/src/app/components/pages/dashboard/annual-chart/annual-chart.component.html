@@ -1,0 +1,50 @@
+<div *ngIf="!clientes || clientes.length === 0
+&& !eventos || eventos.length === 0">
+  <app-loader></app-loader>
+</div>
+
+<div class="chart-container" *ngIf="
+  clientes && clientes.length > 0 && 
+  eventos && eventos.length > 0">
+  <div class="chart-card">
+    <div class="chart-header">
+      <h2>Desempenho Anual</h2>
+      <div class="chart-actions">
+        <button mat-icon-button>
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>filter_list</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [colors]="barChartColors"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+    </div>
+
+    <div class="chart-footer">
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-value">{{totalAtualClientes}}</span>
+          <span class="stat-label">Clientes Novos</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{totalAtualEventos}}</span>
+          <span class="stat-label">Eventos Agendados</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{totalAtualRealizados}}</span>
+          <span class="stat-label">Eventos Realizados</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

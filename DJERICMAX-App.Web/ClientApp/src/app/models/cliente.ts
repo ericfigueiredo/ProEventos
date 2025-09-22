@@ -12,6 +12,6 @@ export class Cliente{
   cidade: string;
   uf: string;
   cep: string;
-  dataCadastro: Date;
+  data_Cadastro: Date;
   ehCliente: number;
 }

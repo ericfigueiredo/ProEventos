@@ -1,0 +1,30 @@
+
+.leia{
+  font-size: 12px !important;
+}
+
+.msg{
+  width: 100%;
+  text-align: center;
+}
+
+.msgText{
+  display: flex; padding-top: 0.7em;
+  width: 90%; min-height: 120%;
+  align-items: initial !important;
+  text-align: left !important;
+}
+
+.icone{
+  width: 10%;
+}
+
+
+
+
+
+
+
+
+
+

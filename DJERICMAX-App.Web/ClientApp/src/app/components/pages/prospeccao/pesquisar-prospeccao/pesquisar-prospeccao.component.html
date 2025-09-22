@@ -1,147 +1,154 @@
-<p *ngIf="!clientes">Carregando Prospecção de Clientes</p>
+<div class="contaiTable">
+   <div *ngIf="!clientes">
+    <app-loader></app-loader>
+  </div>
 
-<div *ngIf="clientes">
-  <div class="row align-items-center titulo" style="margin-top: -5em">
-    <div class="col"></div>
-    <div class="col-auto">
-      <a class="btn add"
-        title="Adicionar prospecção de novo Cliente"
-        (click)="abrirModal(c, 'add', 'prospeccao')">
-        <svg xmlns="http://www.w3.org/2000/svg"
-          class="add" width="55" height="55" viewBox="0 0 24 24">
-          <path fill="currentColor" fill-rule="evenodd" d="M7.345 4.017a42.3 42.3 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.7 40.7 0 0 1 0 9.446c-.201 1.719-1.583 3.068-3.296 3.26a42.3 42.3 0 0 1-9.31 0c-1.713-.192-3.095-1.541-3.296-3.26a40.7 40.7 0 0 1 0-9.445a3.734 3.734 0 0 1 3.295-3.26M12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75" clip-rule="evenodd"/>
-        </svg>
-      </a>
+  <div *ngIf="clientes">
+    <!-- Container da tabela -->
+    <div class="tabela-scroll-wrapper table-responsive glass-containerTable">
+      <table class="table table-hover tabela-scroll">
+        <thead>
+          <tr style="font-size: 11px;">
+            <th style="width: 24%; text-align: justify">Nome completo</th>
+            <th style="width: 14%; text-align: justify">Fone/Whatsapp</th>
+            <th style="width: 19%; text-align: justify">E-mail</th>
+            <th style="width: 13%">Bairro</th>
+            <th style="width: 13%">Cidade</th>
+            <th style="width: 5%">UF</th>
+
+            <th style="width: 12%" colspan="4">
+              <a class="btn add"
+                title="Adicionar prospecção de novo Cliente"
+                (click)="abrirModal(c, 'add', 'prospeccao')">
+                <svg class="add" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 20 20"><path fill="currentColor" d="M15.8 4.2c3.2 3.21 3.2 8.39 0 11.6a8.21 8.21 0 0 1-11.6 0a8.21 8.21 0 0 1 0-11.6C7.41 1 12.59 1 15.8 4.2m-4.3 11.3v-4h4v-3h-4v-4h-3v4h-4v3h4v4z"/></svg>
+              </a>
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let c of clientesFiltrados; let i = index">
+            <tr style="font-size: 11px;">
+              <td style="text-align: justify">{{ c.nome }} {{ c.sobreNome }}</td>
+              <td style="text-align: justify">{{ c.telefone }}</td>
+              <td style="text-align: justify">{{ c.email }}</td>
+              <td style="text-align: center">{{ c.bairro }}</td>
+              <td style="text-align: center">{{ c.cidade }}</td>
+              <td style="text-align: center">{{ c.uf }}</td>
+
+              <td>
+                <a class="btn convert" title="Eventos"
+                  (click)="gerarProposta(c)">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" viewBox="0 0 24 24">
+                    <path fill="purple" d="M15 4H9v7h6zm5 0h-3v7h3zm-5.625 9H8v6h6.6l5-4.125q-.2-.2-.45-.3t-.525-.15q-.425-.075-.825.025t-.75.375L14.35 17H10v-2h3.65l1.1-.9q.125-.075.188-.2t.062-.275q0-.25-.187-.437T14.375 13M6 13H4v7h2zm1 0V2h15v11zm.725 9H2V11h12.375q2.125 0 4.1.725t3.175 2.45l.675 1.025l-6.95 5.8h-7.65z"/>
+                  </svg>
+                </a>
+              </td>
+
+              <td>
+                <a class="btn convert" title="Converter para Cliente"
+                  (click)="abrirModal(c, 'convert', 'cliente', i)">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" viewBox="0 0 24 24">
+                    <path fill="orangered" d="m12 0l-.66.03l3.81 3.81L16.5 2.5c3.25 1.57 5.59 4.74 5.95 8.5h1.5C23.44 4.84 18.29 0 12 0m0 4c-1.93 0-3.5 1.57-3.5 3.5S10.07 11 12 11s3.5-1.57 3.5-3.5S13.93 4 12 4m0 2c.83 0 1.5.67 1.5 1.5S12.83 9 12 9s-1.5-.67-1.5-1.5S11.17 6 12 6M.05 13C.56 19.16 5.71 24 12 24l.66-.03l-3.81-3.81L7.5 21.5c-3.25-1.56-5.59-4.74-5.95-8.5zM12 13c-3.87 0-7 1.57-7 3.5V18h14v-1.5c0-1.93-3.13-3.5-7-3.5m0 2c2.11 0 3.61.53 4.39 1H7.61c.78-.47 2.28-1 4.39-1"/>
+                  </svg>
+                </a>
+              </td>
+
+              <td>
+                <a class="btn edit" title="Editar Prospecção"
+                  (click)="abrirModal(c, 'edit', 'prospeccao', i)">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" viewBox="0 0 25 25">
+                    <g fill="none" stroke="blue" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                      <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
+                    </g>
+                  </svg>
+                </a>
+              </td>
+              <td>
+                <a class="btn del" data-toggle="modal" data-target="#modalExcluirCliente"
+                  (click)="abrirModal(c,'excluirCliente', 'cliente', i)" title="Excluir  Prospecção">
+                <!-- <a class="btn del" title="Excluir" (click)="deletarCliente(c)"> -->
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    width="28" height="20" viewBox="0 0 24 24">
+                    <path fill="red" d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"/>
+                  </svg>
+                </a>
+              </td>
+            </tr>
+
+            <!-- TABELA DE EVENTOS VINCULADOS AO CLIENTE -->
+            <tr *ngIf="expandedClienteId === c.id">
+              <td colspan="10">
+                <table class="subtab">
+                  <tr style="height: 12px !important; font-weight: bold;">
+                    <td>Tipo do Evento</td>
+                    <td>Data</td>
+                    <td>Início às</td>
+                    <td>Término às</td>
+                    <td>Cidade</td>
+                    <td>UF</td>
+                    <td>Convidados</td>
+                    <td>Pacote</td>
+                    <td style="width: 3%;"></td>
+                    <td style="width: 3%;"></td>
+                    <td style="width: 3%;">
+                      <a class="btn addEvent" title="Adicionar Evento"
+                        (click)="abrirModal(c, 'addEvent', 'evento')">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                          class="add" width="30" height="30" viewBox="0 0 24 24">
+                          <path fill="currentColor" fill-rule="evenodd" d="M7.345 4.017a42.3 42.3 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.7 40.7 0 0 1 0 9.446c-.201 1.719-1.583 3.068-3.296 3.26a42.3 42.3 0 0 1-9.31 0c-1.713-.192-3.095-1.541-3.296-3.26a40.7 40.7 0 0 1 0-9.445a3.734 3.734 0 0 1 3.295-3.26M12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75" clip-rule="evenodd"/>
+                        </svg>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </ng-container>
+        </tbody>
+      </table>
     </div>
   </div>
-
-  <!-- Container da tabela -->
-  <div class="tabela-scroll-wrapper table-responsive contai">
-    <table class="table table-hover tabela-scroll">
-      <thead>
-        <tr>
-          <th style="width: 24%; text-align: justify">Nome completo</th>
-          <th style="width: 14%; text-align: justify">Fone/Whatsapp</th>
-          <th style="width: 19%; text-align: justify">E-mail</th>
-          <th style="width: 13%">Bairro</th>
-          <th style="width: 13%">Cidade</th>
-          <th style="width: 5%">UF</th>
-          <th style="width: 3%"></th>
-          <th style="width: 3%"></th>
-          <th style="width: 3%"></th>
-          <th style="width: 3%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let c of clientesFiltrados">
-          <tr>
-            <td style="text-align: justify">{{ c.nome }} {{ c.sobreNome }}</td>
-            <td style="text-align: justify">{{ c.telefone }}</td>
-            <td style="text-align: justify">{{ c.email }}</td>
-            <td style="text-align: center">{{ c.bairro }}</td>
-            <td style="text-align: center">{{ c.cidade }}</td>
-            <td style="text-align: center">{{ c.uf }}</td>
-
-            <td>
-              <a class="btn convert" title="Eventos"
-                (click)="gerarProposta(c)">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                  width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="purple" d="M15 4H9v7h6zm5 0h-3v7h3zm-5.625 9H8v6h6.6l5-4.125q-.2-.2-.45-.3t-.525-.15q-.425-.075-.825.025t-.75.375L14.35 17H10v-2h3.65l1.1-.9q.125-.075.188-.2t.062-.275q0-.25-.187-.437T14.375 13M6 13H4v7h2zm1 0V2h15v11zm.725 9H2V11h12.375q2.125 0 4.1.725t3.175 2.45l.675 1.025l-6.95 5.8h-7.65z"/>
-                </svg>
-              </a>
-            </td>
-            <td>
-              <a class="btn convert" title="Converter para Cliente"
-                (click)="abrirModal(c, 'convert', 'cliente')">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                  width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="orangered" d="m12 0l-.66.03l3.81 3.81L16.5 2.5c3.25 1.57 5.59 4.74 5.95 8.5h1.5C23.44 4.84 18.29 0 12 0m0 4c-1.93 0-3.5 1.57-3.5 3.5S10.07 11 12 11s3.5-1.57 3.5-3.5S13.93 4 12 4m0 2c.83 0 1.5.67 1.5 1.5S12.83 9 12 9s-1.5-.67-1.5-1.5S11.17 6 12 6M.05 13C.56 19.16 5.71 24 12 24l.66-.03l-3.81-3.81L7.5 21.5c-3.25-1.56-5.59-4.74-5.95-8.5zM12 13c-3.87 0-7 1.57-7 3.5V18h14v-1.5c0-1.93-3.13-3.5-7-3.5m0 2c2.11 0 3.61.53 4.39 1H7.61c.78-.47 2.28-1 4.39-1"/>
-                </svg>
-              </a>
-            </td>
-            <td>
-              <a class="btn edit" title="Editar"
-                (click)="abrirModal(c, 'edit', 'prospeccao')">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                  width="20" height="20" viewBox="0 0 25 25">
-                  <g fill="none" stroke="blue" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                    <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
-                  </g>
-                </svg>
-              </a>
-            </td>
-            <td>
-              <a class="btn del" title="Excluir" (click)="deletarCliente(c)">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                  width="28" height="20" viewBox="0 0 24 24">
-                  <path fill="red" d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"/>
-                </svg>
-              </a>
-            </td>
-          </tr>
-
-          <!-- TABELA DE EVENTOS VINCULADOS AO CLIENTE -->
-          <tr *ngIf="expandedClienteId === c.id">
-            <td colspan="10">
-              <table style="width: 100%; font-size: 11px;">
-                <tr>
-                  <th>Tipo do Evento</th>
-                  <th>Data</th>
-                  <th>Início às</th>
-                  <th>Término às</th>
-                  <th>Cidade</th>
-                  <th>UF</th>
-                  <th>Convidados</th>
-                  <th>Pacote</th>
-                  <th style="width: 3%;"></th>
-                  <th style="width: 3%;"></th>
-                  <th style="width: 3%;">
-                    <a class="btn addEvent" title="Adicionar Evento"
-                      (click)="abrirModal(c, 'addEvent', 'evento')">
-                      <svg xmlns="http://www.w3.org/2000/svg"
-                        class="add" width="22" height="22" viewBox="0 0 24 24">
-                        <path fill="currentColor" fill-rule="evenodd" d="M7.345 4.017a42.3 42.3 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.7 40.7 0 0 1 0 9.446c-.201 1.719-1.583 3.068-3.296 3.26a42.3 42.3 0 0 1-9.31 0c-1.713-.192-3.095-1.541-3.296-3.26a40.7 40.7 0 0 1 0-9.445a3.734 3.734 0 0 1 3.295-3.26M12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75" clip-rule="evenodd"/>
-                      </svg>
-                    </a>
-                  </th>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-        </ng-container>
-      </tbody>
-    </table>
-  </div>
 </div>
+
 
 <!-- MODAIS  -->
 <app-cadastrar-prospeccao
   *ngIf="modalAberta === 'prospeccao'"
   [info]="info"
-  [client]="cliente"
+  [tipo]="tipo"
   (fecharModal)="fecharModal()"
 >
 </app-cadastrar-prospeccao>
 <app-cadastrar-prospeccao
   *ngIf="modalAberta === 'cliente'"
   [info]="info"
-  [client]="cliente"
-  (fecharModal)="fecharModal()"
->
+  [tipo]="tipo"
+  (fecharModal)="fecharModal()">
 </app-cadastrar-prospeccao>
+
+<app-modalExcluir
+  *ngIf="modalAberta === 'excluirCliente'"
+  [info]="info"
+  [msg]="msg"
+  (confirmar)="excluirCliente(clienteParaExcluir)"
+  (cancelar)="fecharModal()">
+</app-modalExcluir>

@@ -6,18 +6,23 @@ import { ClienteService } from "src/app/services/cliente.service";
 @Component({
   selector: "app-cadastrar-prospeccao",
   templateUrl: "./cadastrar-prospeccao.component.html",
-  styleUrls: ["./cadastrar-prospeccao.component.css"],
+  styleUrls: ["./cadastrar-prospeccao.component.scss"],
 })
 export class CadastrarProspeccaoComponent implements OnInit {
-  @Input() info: string;
-  @Input() client: Cliente;
-  @Output() fecharModal = new EventEmitter<void>();
+  // @Input() client: Cliente;
   public cliente: Cliente;
+  public clientes: Cliente[];
   public ativar_spinner: boolean;
   public mensagem: string;
   public clique;
+  @Output() fecharModal = new EventEmitter<void>();
+  @Input() info: string;
+  @Input() tipo: string;
 
-  constructor(private clienteService: ClienteService, private router: Router) {}
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.clique = JSON.parse(sessionStorage.getItem("clique"));
@@ -36,14 +41,16 @@ export class CadastrarProspeccaoComponent implements OnInit {
 
   public cadastrarCliente() {
     this.ativarEspera();
-    this.cliente.dataCadastro = new Date();
+    if (this.tipo == "convert" || this.info == 'Cadastrar Cliente') {
+        this.cliente.ehCliente = 1;
+    }
+    this.cliente.data_Cadastro = new Date();
     this.clienteService.cadastrarCliente(this.cliente).subscribe(
       (clienteJson) => {
         console.log(clienteJson);
         this.mensagem = "";
         this.desativarEspera();
         this.fechar();
-        // this.router.navigate(["/pesquisar-prospeccao"]);
         sessionStorage.removeItem("clienteSession");
       },
       (e) => {
@@ -57,7 +64,6 @@ export class CadastrarProspeccaoComponent implements OnInit {
   public cancelar() {
     sessionStorage.removeItem("clienteSession");
     this.fechar();
-    // this.router.navigate(["/pesquisar-prospeccao"]);
   }
 
   public ativarEspera() {

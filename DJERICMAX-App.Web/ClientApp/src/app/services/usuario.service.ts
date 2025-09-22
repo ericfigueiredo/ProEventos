@@ -46,9 +46,12 @@ export class UsuarioService {
   public usuario_autenticado(): boolean {
     const u = this._usuarioSubject.value;
     return u != null && u.email !== "" && u.senha !== "";
-
     // return  this._usuario != null && this._usuario.email != "" &&
     //         this._usuario.senha != "";
+  }
+
+  public usuario_administrador(): boolean {
+    return this.usuario_autenticado() && this.usuario.ehAdministrador;
   }
 
   public limpar_sessao(){

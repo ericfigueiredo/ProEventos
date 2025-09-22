@@ -6,6 +6,7 @@
 }
 
 
+
 /* Layout de página com nav no topo e footer no fim */
 .layout {
   display: flex;
@@ -40,15 +41,25 @@ app-footer {
   flex-direction: row;
   height: calc(100vh - 100px); /* ajusta conforme a altura do header+footer */
   flex: 1;
-  margin-top: 49px;
+  margin-top: 1em;
   margin-bottom: 39px;
   /* overflow: hidden; */
 }
 
+
 /* Área do conteúdo */
 .content-area {
+  max-width: 100%;
   flex: 1;
-  padding: 2em;
-/*  overflow-y: auto; */
-  transition: all 0.3s ease;
+  display: flex;
+  min-height: 100%; /* antes estava 100vh */
+  background: url('../assets/images/backgroundX7.jpg') no-repeat center center;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  margin-top: -1em ;
+}
+
+.content-area.login-page {
+  background: none;   /* remove o branco */
 }

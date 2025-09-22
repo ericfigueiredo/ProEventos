@@ -1,15 +1,14 @@
 <div class="layout">
 
-  <app-nav-menu></app-nav-menu>
+  <app-nav-menu  *ngIf="usuarioLogado()"></app-nav-menu>
 
   <div class="main-area" [class.sidebar-collapsed]="isSidebarCollapsed">
 
     <app-sidebar *ngIf="usuarioLogado()" (sidebarToggled)="isSidebarCollapsed = $event"></app-sidebar>
 
-    <div class="content-area">
+    <div class="content-area"  [class.login-page]="!usuarioLogado()">
       <app-page-title *ngIf="usuarioLogado()"></app-page-title>
-
-      <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
     </div>
   </div>
 

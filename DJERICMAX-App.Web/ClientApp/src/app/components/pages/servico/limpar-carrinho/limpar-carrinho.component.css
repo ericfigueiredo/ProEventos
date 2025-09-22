@@ -1,0 +1,18 @@
+.headiers {
+  background-color: #181818 !important;
+  color: #fff;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+.bodies {
+  font-size: 20px;
+  background-color: azure !important;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.footies {
+  background-color: #fff !important;
+}
+
+.confirma {
+  margin: auto;
+}

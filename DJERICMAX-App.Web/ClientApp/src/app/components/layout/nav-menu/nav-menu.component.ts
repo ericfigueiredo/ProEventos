@@ -15,12 +15,8 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   // Textos para as modais
-  public infoAbout: string = "O EventPro é um sistema completo de gestão para produtoras musicais, DJs e bandas, oferecendo controle integrado de prospecção de clientes, serviços de entretenimento, equipamentos, propostas comerciais, contratos e financeiro. Desenvolvido para simplificar a organização de eventos desde o primeiro contato até o pós-evento, com relatórios detalhados e controle de pagamentos.";
-
-  public infoDados: string = "Meus Dados";
-
-  // Controle de modais
-  public modalAberta: string = ''; // 'about', 'dados' ou vazio
+  public info: string;
+  public modalAberta: string = '';
 
   constructor(
     private usuarioService: UsuarioService,
@@ -45,12 +41,25 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     return this.usuarioService.usuario_autenticado();
   }
 
+  public usuario_administrador(): boolean{
+    return this.usuarioService.usuario_administrador();
+  }
+
   sair() {
     this.usuarioService.limpar_sessao();
-    this.router.navigate(['/']);
+    this.router.navigate(['/entrar']);
   }
 
   abrirModal(tipo: string) {
+    if (tipo == 'about') {
+      this.info = 'Sobre o sistema';
+    }
+    if (tipo == 'dados') {
+      this.info = 'Meu Perfil';
+    }
+    if (tipo == 'novoUsuario') {
+      this.info = 'Cadastrar Novo Usuário';
+    }
     this.modalAberta = tipo;
   }
 

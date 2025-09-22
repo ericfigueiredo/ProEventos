@@ -1,116 +1,545 @@
-<p *ngIf="!clientes">Carregando Clientes</p>
-
-<div *ngIf="clientes">
-  <div class="row align-items-center titulo" style="margin-top: -5em">
-    <div class="col">
-    </div>
-    <div class="col-auto">
-      <a class="btn add" title="Adicionar novo Cliente" (click)="abrirModal(c,'add','cliente')">
-          <svg xmlns="http://www.w3.org/2000/svg" class="add"
-            width="55"
-            height="55"
-            viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M7.345 4.017a42.3 42.3 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.7 40.7 0 0 1 0 9.446c-.201 1.719-1.583 3.068-3.296 3.26a42.3 42.3 0 0 1-9.31 0c-1.713-.192-3.095-1.541-3.296-3.26a40.7 40.7 0 0 1 0-9.445a3.734 3.734 0 0 1 3.295-3.26M12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75"
-            clip-rule="evenodd"/>
-          </svg>
-      </a>
-    </div>
+<div class="contaiTable">
+  <div *ngIf="!clientes || clientes.length === 0">
+    <app-loader></app-loader>
   </div>
 
-  <!-- Container da tabela -->
-  <div class="tabela-scroll-wrapper table-responsive contai">
-    <table class="table table-hover tabela-scroll">
-      <thead>
-        <tr style="font-size: 11px;">
-          <th style="width: 13%; text-align: justify;">Nome completo</th>
-          <th style="width: 9%">CPF</th>
-          <th style="width: 9%">RG</th>
-          <th style="width: 9%; text-align: justify;">Fone/Whatsapp</th>
-          <th style="width: 12%; text-align: justify;">E-mail</th>
-          <th style="width: 11%">Logadouro</th>
-          <th style="width: 2%">Nº</th>
-          <th style="width: 8%">Bairro</th>
-          <th style="width: 8%">Cidade</th>
-          <th style="width: 7%">CEP</th>
-          <th style="width: 3%">UF</th>
-          <th style="width: 2%"></th>
-          <th style="width: 2%"></th>
-          <th style="width: 2%"></th>
-          <th style="width: 3%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let c of clientesFiltrados" style="font-size: 11px;">
-          <td style="text-align: justify;">{{ c.nome }} {{ c.sobreNome }}</td>
-          <td style="text-align: center;">{{ c.cpf }}</td>
-          <td style="text-align: center;">{{ c.rg }}</td>
-          <td style="text-align: justify;">{{ c.telefone }}</td>
-          <td style="text-align: justify;">{{ c.email }}</td>
-          <td style="text-align: justify;">{{ c.logradouro }}</td>
-          <td style="text-align: center;">{{ c.num_Logradouro }}</td>
-          <td style="text-align: center;">{{ c.bairro }}</td>
-          <td style="text-align: center;">{{ c.cidade }}</td>
-          <td style="text-align: center;">{{ c.cep }}</td>
-          <td style="text-align: center;">{{ c.uf }}</td>
+  <div *ngIf="clientes && clientes.length > 0">
+    <div class="tabela-scroll-wrapper table-responsive glass-containerTable">
+      <table class="table table-hover tabela-scroll">
+        <thead>
+          <tr style="font-size: 11px">
+            <th style="width: 13%; text-align: justify">Nome completo</th>
+            <th style="width: 9%">CPF</th>
+            <th style="width: 9%">RG</th>
+            <th style="width: 9%; text-align: justify">Fone/Whatsapp</th>
+            <th style="width: 12%; text-align: justify">E-mail</th>
+            <th style="width: 11%">Endereço</th>
+            <th style="width: 2%">Nº</th>
+            <th style="width: 8%">Bairro</th>
+            <th style="width: 8%">Cidade</th>
+            <th style="width: 7%">CEP</th>
+            <th style="width: 3%">UF</th>
+            <th style="width: 12%" colspan="4">
+              <a
+                class="btn add"
+                title="Adicionar Cliente"
+                (click)="abrirModal(c, 'addCliente', 'cliente')"
+              >
+                <svg
+                  class="add"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="42"
+                  height="42"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M15.8 4.2c3.2 3.21 3.2 8.39 0 11.6a8.21 8.21 0 0 1-11.6 0a8.21 8.21 0 0 1 0-11.6C7.41 1 12.59 1 15.8 4.2m-4.3 11.3v-4h4v-3h-4v-4h-3v4h-4v3h4v4z"
+                  />
+                </svg>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Linha com dados do cliente -->
+          <!--NGC-1 -->
+          <ng-container *ngFor="let c of clientesFiltrados; let i = index">
+            <tr style="font-size: 11px">
+              <td style="text-align: justify">
+                {{ c.nome }} {{ c.sobreNome }}
+              </td>
+              <td style="text-align: center">{{ c.cpf }}</td>
+              <td style="text-align: center">{{ c.rg }}</td>
+              <td style="text-align: justify">{{ c.telefone }}</td>
+              <td style="text-align: justify">{{ c.email }}</td>
+              <td style="text-align: justify">{{ c.logradouro }}</td>
+              <td style="text-align: center">{{ c.num_Logradouro }}</td>
+              <td style="text-align: center">{{ c.bairro }}</td>
+              <td style="text-align: center">{{ c.cidade }}</td>
+              <td style="text-align: center">{{ c.cep }}</td>
+              <td style="text-align: center">{{ c.uf }}</td>
+              <td>
+                <a
+                  class="btn convert"
+                  title="Eventos de {{ c.nome }} {{ c.sobrenome }}"
+                  (click)="mostrarEventos(c)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="purple"
+                      d="M15 4H9v7h6zm5 0h-3v7h3zm-5.625 9H8v6h6.6l5-4.125q-.2-.2-.45-.3t-.525-.15q-.425-.075-.825.025t-.75.375L14.35 17H10v-2h3.65l1.1-.9q.125-.075.188-.2t.062-.275q0-.25-.187-.437T14.375 13M6 13H4v7h2zm1 0V2h15v11zm.725 9H2V11h12.375q2.125 0 4.1.725t3.175 2.45l.675 1.025l-6.95 5.8h-7.65z"
+                    />
+                  </svg>
+                </a>
+              </td>
+              <td>
+                <a
+                  class="btn convert"
+                  title="Contratos de {{ c.nome }} {{ c.sobrenome }}"
+                  (click)="gerarContrato(c)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill="orangered"
+                      d="M12 2H2v11h6.5l.5 1H1V1h12v7.5l-1-1z"
+                    />
+                    <path
+                      fill="orangered"
+                      d="M3 5h7.999V4H3zm0 3V7h6l-.5 1zm0 3v-1h2.5v1zm7.687 3.528l-.034.056a.2.2 0 0 1-.306 0l-.034-.056l-.069-.175l.256.101l.255-.1zm-.373-8.056a.2.2 0 0 1 .373 0l.608 1.543a3 3 0 0 0 1.69 1.69l1.369.54l.1.255l-.1.255l-1.369.54l-.143.06a3 3 0 0 0-1.547 1.63l-.54 1.369l-.255.1l-.256-.1l-.539-1.369a3 3 0 0 0-1.547-1.63l-.143-.06l-1.543-.608a.2.2 0 0 1 0-.373l.174-.07l1.369-.539a3 3 0 0 0 1.63-1.547l.06-.143zm.186 2.212A4 4 0 0 1 8.684 10.5a4 4 0 0 1 1.816 1.815a4 4 0 0 1 1.815-1.815A4 4 0 0 1 10.5 8.684m4.028 1.63a.2.2 0 0 1 0 .373l-.175.068l.101-.255l-.1-.256z"
+                    />
+                  </svg>
+                </a>
+              </td>
+              <td>
+                <a
+                  class="btn edit"
+                  title="Editar Cliente"
+                  (click)="abrirModal(c, 'edit', 'cliente')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                  >
+                    <g
+                      fill="none"
+                      stroke="blue"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                      />
+                      <path
+                        d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"
+                      />
+                    </g>
+                  </svg>
+                </a>
+              </td>
+              <td>
+                <a
+                  class="btn del"
+                  data-toggle="modal"
+                  title="Excluir Cliente"
+                  data-target="#modalExcluirCliente"
+                  (click)="abrirModal(c, 'excluirCliente', 'cliente', i)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="red"
+                      d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"
+                    />
+                  </svg>
+                </a>
+              </td>
+            </tr>
 
-          <td>
-            <a class="btn convert" title="Eventos" (click)="gerarEvento(c)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 36 36">
-              <path fill="purple" d="m16.17 25.86l-5.36-5.36a1 1 0 0 1 1.41-1.41L16.17 23l8.64-8.64a1 1 0 0 1 1.41 1.41Z" class="clr-i-outline clr-i-outline-path-1"/>
-              <path fill="purple" d="M32.25 6H29v2h3v22H4V8h3V6H3.75A1.78 1.78 0 0 0 2 7.81v22.38A1.78 1.78 0 0 0 3.75 32h28.5A1.78 1.78 0 0 0 34 30.19V7.81A1.78 1.78 0 0 0 32.25 6" class="clr-i-outline clr-i-outline-path-2"/>
-              <path fill="purple" d="M10 10a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1" class="clr-i-outline clr-i-outline-path-3"/>
-              <path fill="purple" d="M26 10a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1" class="clr-i-outline clr-i-outline-path-4"/>
-              <path fill="purple" d="M13 6h10v2H13z" class="clr-i-outline clr-i-outline-path-5"/>
-              <path fill="none" d="M0 0h36v36H0z"/>
-            </svg>
-          </a>
-        </td>
+            <!-- TABELA DE EVENTOS VINCULADOS AO CLIENTE -->
+            <!--NGC-2 -->
+            <ng-container *ngIf="expandedClienteId === c.id && c.eventos.length == 0">
+              <!-- Caso não haja eventos cadastrados -->
+              <tr>
+                <td colspan="15">
+                  <table class="subtab">
+                    <tr style="height: 12px !important; font-weight: bold">
+                      <th>Nome do Evento</th>
+                      <th>Data</th>
+                      <th>Horário</th>
+                      <th>Cidade</th>
+                      <th>UF</th>
+                      <th>Convidados</th>
+                      <th>Pacote</th>
+                      <th style="width: 3%"></th>
+                      <th style="width: 3%"></th>
+                      <th style="width: 3%">
+                        <a
+                          class="btn addEvento"
+                          title="Adicionar Evento"
+                          (click)="abrirModal(c, 'addEvento', 'evento')"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="add"
+                            width="30"
+                            height="30"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="currentColor"
+                              fill-rule="evenodd"
+                              d="M7.345 4.017a42.3 42.3 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.7 40.7 0 0 1 0 9.446c-.201 1.719-1.583 3.068-3.296 3.26a42.3 42.3 0 0 1-9.31 0c-1.713-.192-3.095-1.541-3.296-3.26a40.7 40.7 0 0 1 0-9.445a3.734 3.734 0 0 1 3.295-3.26M12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </a>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td colspan="11">Não há eventos cadastrados</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <!--NGC-2 -->
+            </ng-container>
 
-          <td><a class="btn convert" title="Gerar contrato" (click)="gerarContrato(c)">
-            <svg xmlns="http://www.w3.org/2000/svg"
-              width="20" height="20" viewBox="0 0 16 16">
-              <path fill="orangered" d="M12 2H2v11h6.5l.5 1H1V1h12v7.5l-1-1z"/>
-              <path fill="orangered" d="M3 5h7.999V4H3zm0 3V7h6l-.5 1zm0 3v-1h2.5v1zm7.687 3.528l-.034.056a.2.2 0 0 1-.306 0l-.034-.056l-.069-.175l.256.101l.255-.1zm-.373-8.056a.2.2 0 0 1 .373 0l.608 1.543a3 3 0 0 0 1.69 1.69l1.369.54l.1.255l-.1.255l-1.369.54l-.143.06a3 3 0 0 0-1.547 1.63l-.54 1.369l-.255.1l-.256-.1l-.539-1.369a3 3 0 0 0-1.547-1.63l-.143-.06l-1.543-.608a.2.2 0 0 1 0-.373l.174-.07l1.369-.539a3 3 0 0 0 1.63-1.547l.06-.143zm.186 2.212A4 4 0 0 1 8.684 10.5a4 4 0 0 1 1.816 1.815a4 4 0 0 1 1.815-1.815A4 4 0 0 1 10.5 8.684m4.028 1.63a.2.2 0 0 1 0 .373l-.175.068l.101-.255l-.1-.256z"/>
-            </svg>
-          </a></td>
-          <td>
-            <a class="btn edit" title="Editar" (click)="abrirModal(c,'edit','cliente')">
-            <svg xmlns="http://www.w3.org/2000/svg"
-              width="20" height="20" viewBox="0 0 25 25">
-              <g fill="none" stroke="blue" stroke-linecap="round" stroke-linejoin="round"stroke-width="2">
-                <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                  <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
-                </g>
-              </svg>
-            </a>
+            <!--NGC-3 -->
+            <ng-container *ngIf="expandedClienteId === c.id && c.eventos.length > 0">
+              <!-- Caso haja eventos cadastrados -->
+              <tr style="background: rgba(255, 79, 1, 0.08)">
+                <td colspan="15">
+                  <table class="subtab">
+                    <tr style="height: 12px !important; font-weight: bold">
+                      <th>Nome do Evento</th>
+                      <th>Data</th>
+                      <th>Horário</th>
+                      <th>Cidade</th>
+                      <th>UF</th>
+                      <th>Convidados</th>
+                      <th>Pacote</th>
+                      <th style="width: 3%"></th>
+                      <th style="width: 3%"></th>
+                      <th style="width: 3%">
+                        <a
+                          class="btn addEvento"
+                          title="Adicionar Evento"
+                          (click)="abrirModal(c, 'addEvento', 'evento')"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="add"
+                            width="30"
+                            height="30"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="currentColor"
+                              fill-rule="evenodd"
+                              d="M7.345 4.017a42.3 42.3 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.7 40.7 0 0 1 0 9.446c-.201 1.719-1.583 3.068-3.296 3.26a42.3 42.3 0 0 1-9.31 0c-1.713-.192-3.095-1.541-3.296-3.26a40.7 40.7 0 0 1 0-9.445a3.734 3.734 0 0 1 3.295-3.26M12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </a>
+                      </th>
+                    </tr>
+                    <!--NGC-4 -->
+                    <ng-container *ngFor="let e of c.eventos; let i = index">
+                      <tr>
+                        <td>{{ e.nomeEvento }}</td>
+                        <td>{{ e.dataEvento | date : "dd/MM/yyyy" }}</td>
+                        <td>
+                          {{ e.horaInicio | date : "HH:mm" }} às
+                          {{ e.horaFinal | date : "HH:mm" }}
+                        </td>
+                        <td>{{ e.cidadeEvento }}</td>
+                        <td>{{ e.ufEvento }}</td>
+                        <td>{{ e.Convidados }}</td>
 
+                        <td style="text-align: center">
+                          <a
+                            (click)="mostrarServicos(e)"
+                            style="cursor: pointer"
+                            title="Clique para ver os serviços contratados"
+                          >
+                            {{ e.pacote }}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                            >
+                              <path fill="currentColor" d="m12 15l5-5H7z" />
+                            </svg>
+                          </a>
+                        </td>
+                        <td>
+                          <a
+                            class="btn edit"
+                            title="Editar Evento"
+                            (click)="abrirModal(c, 'editarEvento', 'evento')"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 25 25"
+                            >
+                              <g
+                                fill="none"
+                                stroke="blue"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                              >
+                                <path
+                                  d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                                />
+                                <path
+                                  d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"
+                                />
+                              </g>
+                            </svg>
+                          </a>
+                        </td>
+                        <td>
+                          <a
+                            class="btn del"
+                            data-toggle="modal"
+                            title="Excluir Evento"
+                            data-target="#modalExcluirEvento"
+                            (click)="
+                              abrirModal(c, 'excluirEvento', 'evento', i)
+                            "
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                fill="red"
+                                d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"
+                              />
+                            </svg>
+                          </a>
+                        </td>
+                        <td></td>
+                      </tr>
 
+                      <!-- TABELA DE DADOS DOS SERVIÇOS -->
+                      <tr>
+                        <td colspan="11">
+                          <table>
+                            <tr *ngIf="expandedServicoId === e.id"
+                              style="background: rgba(9, 255, 1, 0.08)">
+                              <td colspan="15">
+                                <table class="subtab">
+                                  <tr style="
+                                    height: 12px !important;
+                                    font-weight: bold;">
+                                    <td style="width: 12%">Imagem</td>
+                                    <td style="width: 15%">Serviço</td>
+                                    <td style="width: 20%">Descrição</td>
+                                    <td style="width: 5%">Hora pacote</td>
+                                    <td style="width: 5%">Hora cobrada</td>
+                                    <td style="width: 6%">Qtde Horas</td>
+                                    <td style="width: 10%">Total</td>
+                                    <td style="width: 3%"></td>
+                                    <td style="width: 3%"></td>
+                                    <td style="width: 3%">
+                                      <a
+                                        class="btn addServico"
+                                        title="Adicionar Serviço ao Evento"
+                                        (click)="
+                                          abrirModal(c, 'addServico', 'servico')
+                                        "
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          class="add"
+                                          width="30"
+                                          height="30"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path
+                                            fill="currentColor"
+                                            fill-rule="evenodd"
+                                            d="M7.345 4.017a42.3 42.3 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.7 40.7 0 0 1 0 9.446c-.201 1.719-1.583 3.068-3.296 3.26a42.3 42.3 0 0 1-9.31 0c-1.713-.192-3.095-1.541-3.296-3.26a40.7 40.7 0 0 1 0-9.445a3.734 3.734 0 0 1 3.295-3.26M12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75"
+                                            clip-rule="evenodd"
+                                          />
+                                        </svg>
+                                      </a>
+                                    </td>
+                                  </tr>
 
-          </td>
-          <td><a class="btn del" title="Excluir" (click)="deletarCliente(c)">
-            <svg xmlns="http://www.w3.org/2000/svg"
-              width="22" height="22" viewBox="0 0 24 24">
-              <path fill="red" d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"/>
-            </svg>
-          </a></td>
+                                  <tr
+                                    *ngFor="
+                                      let s of e.itensPedido;
+                                      let i = index
+                                    "
+                                  >
+                                    <td>
+                                      <img
+                                        style="width: 100%"
+                                        src="../../../../../../../../arquivos/{{
+                                          s.servico.nomeArquivo
+                                        }}"
+                                      />
+                                    </td>
+                                    <td>{{ s.servico.nome }}</td>
+                                    <td>
+                                      {{ s.servico.descricao | truncate : 80 }}
+                                    </td>
+                                    <td>
+                                      {{
+                                        s.servico.preco_Hora
+                                          | currency
+                                            : "BRL"
+                                            : "symbol"
+                                            : "1.2-2"
+                                            : "pt-BR"
+                                      }}
+                                    </td>
+                                    <td>
+                                      {{
+                                        s.precoUnitario
+                                          | currency
+                                            : "BRL"
+                                            : "symbol"
+                                            : "1.2-2"
+                                            : "pt-BR"
+                                      }}
+                                    </td>
+                                    <td>{{ s.quantidade_Horas }}</td>
+                                    <td>
+                                      {{
+                                        s.valorTotal
+                                          | currency
+                                            : "BRL"
+                                            : "symbol"
+                                            : "1.2-2"
+                                            : "pt-BR"
+                                      }}
+                                    </td>
+                                    <td>
+                                      <a
+                                        class="btn edit"
+                                        title="Editar Serviço"
+                                        (click)="
+                                          abrirModal(
+                                            c,
+                                            'editarServico',
+                                            'servico'
+                                          )
+                                        "
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="20"
+                                          height="20"
+                                          viewBox="0 0 25 25"
+                                        >
+                                          <g
+                                            fill="none"
+                                            stroke="blue"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                          >
+                                            <path
+                                              d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                                            />
+                                            <path
+                                              d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"
+                                            />
+                                          </g>
+                                        </svg>
+                                      </a>
+                                    </td>
+                                    <td>
+                                      <a
+                                        class="btn del"
+                                        data-toggle="modal"
+                                        title="Excluir Serviço"
+                                        data-target="#modalExcluirServico"
+                                        (click)="
+                                          abrirModal(
+                                            c,
+                                            'excluirServico',
+                                            'servico',
+                                            i
+                                          )
+                                        "
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="22"
+                                          height="22"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path
+                                            fill="red"
+                                            d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"
+                                          />
+                                        </svg>
+                                      </a>
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </ng-container>
+                    <!--NGC-4 -->
+                  </table>
+                </td>
+              </tr>
+            </ng-container>
+            <!--NGC-3 -->
 
-        </tr>
-      </tbody>
-    </table>
+            <!--NGC-1 -->
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
-
-
-
-
-
-<!-- MODAIS  -->
-<app-cadastrar-prospeccao *ngIf="modalAberta === 'cliente'"
+<!-- MODALs -->
+<app-cadastrar-prospeccao
+  *ngIf="modalAberta === 'cliente'"
   [info]="info"
-  [client]="cliente"
-  (fecharModal)="fecharModal()">
+  [tipo]="tipo"
+  (fecharModal)="fecharModal()"
+>
 </app-cadastrar-prospeccao>
+<!-- [client]="cliente" -->
+
+<app-modalExcluir
+  *ngIf="modalAberta === 'excluirCliente'"
+  [info]="info"
+  [msg]="msg"
+  (confirmar)="excluirCliente(clienteParaExcluir)"
+  (cancelar)="fecharModal()"
+>
+</app-modalExcluir>
+
+<app-cadastrar-evento
+  *ngIf="modalAberta === 'evento'"
+  [tab]="'evento'"
+  [info]="info"
+  [tipo]="tipo"
+  (fecharModal)="fecharModal()"
+>
+</app-cadastrar-evento>
+<app-cadastrar-evento
+  *ngIf="modalAberta === 'servico'"
+  [tab]="'servico'"
+  [info]="info"
+  [tipo]="tipo"
+  (fecharModal)="fecharModal()"
+>
+</app-cadastrar-evento>

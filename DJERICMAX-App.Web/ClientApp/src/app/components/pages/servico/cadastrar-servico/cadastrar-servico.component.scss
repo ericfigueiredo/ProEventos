@@ -1,0 +1,59 @@
+
+//monitor do notebook
+@media screen and (min-width: 1024px) and (max-height: 768px) {
+  .botoes{
+  width: 77%;
+  position: absolute;
+  bottom: 2em;
+  right: 2.5em;
+}
+}
+
+// monitor vertical
+@media screen and (width: 1080px) and (max-height: 1920px) {
+  .botoes{
+  width: 77%;
+  position: absolute;
+  bottom: 3em;
+  padding: 0 0.8em 1em 0;
+  right: 2.5em;
+}
+}
+
+//monitor horizontal grande
+@media screen and (min-width: 1920px) {
+  .botoes{
+  width: 77%;
+  position: absolute;
+  bottom: 2.5em;
+  padding: 0 0.5em 0.5em 0;
+  right: 2.8em;
+}
+}
+
+.respError{
+  font-size: 11px;
+  margin-top: -8px;
+}
+
+.botao {
+  margin: 1em 0 0 1em;
+  width: 9em;
+}
+
+.custom-file-label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: calc(1.5em + .75rem);
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    color: #ffffff;
+    content: "Selecionar";
+    background-color: #0b7cec;
+    border-left: inherit;
+    border-radius: 0 .25rem .25rem 0;
+}

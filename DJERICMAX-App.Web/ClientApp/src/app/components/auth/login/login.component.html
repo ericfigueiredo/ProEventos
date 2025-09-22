@@ -1,74 +1,85 @@
-<div class="bodys">
-  <form action="" class="form-signin">
-    <img src="../../../../assets/images/logoEventPro-login.jpg" class="logoTitle"/>
-    <!-- <h1 class="h4 mb-2 login">Acesso de Clientes</h1> -->
+<div class="contain">
+  <div class="bodys">
+  <div class="glass-container">
+    <img src="../../../../assets/images/logoEventPro-login-Black.fw.png"
+    class="logoTitle" />
 
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" id="inputEmail" name="email" placeholder="informe o seu E-mail"
-    class="form-control mb-2" #email="ngModel" [(ngModel)]="usuario.email"
-    [ngClass]="{
-      'is-invalid': email.invalid && (email.dirty || email.touched),
-      'is-valid': email.valid && (email.dirty || email.touched)
-    }"
-    email
-    required
-    />
-
-    <div
-      class="invalid-feedback mb-2 respError" role="alert"
-      *ngIf="email.invalid && (email.dirty || email.touched)"
-    >
-      <div *ngIf="email.errors.required">O E-mail é de preenchimento obrigatório!</div>
-      <div *ngIf="email.errors.email">Formato de E-mail inválido!</div>
-    </div>
+    <form action="">
 
 
-    <label for="inputSenha" class="sr-only">Senha</label>
-    <input type="password" id="inputSenha" name="senha" placeholder="Senha"
-      class="form-control mb-2" #senha="ngModel" [(ngModel)]="usuario.senha"
-      [ngClass]="{
-        'is-invalid': senha.invalid && (senha.dirty || senha.touched),
-        'is-valid': senha.valid && (senha.dirty || senha.touched)
-      }"
-      required
-      minlength="6"
-    />
-
-    <div
-      class="invalid-feedback mb-2 respError" role="alert"
-      *ngIf="senha.invalid && (senha.dirty || senha.touched)"
-    >
-      <div *ngIf="senha.errors.required">A Senha deve informada!</div>
-      <div *ngIf="senha.errors.minlength">A Senha deve ter pelo menos 6 caracteres.</div>
-    </div>
-
-    <button
-      class="btn btn-primary btn-block mb-2"
-      type="submit"
-      (click)="entrar()"
-      [disabled]="ativar_spinner"
-    >
-    <span
-      class="spinner-border spinner-border-sm"
-      role="status"
-      aria-hidden="true"
-      *ngIf="ativar_spinner"
-      ></span>
-      Entrar
-    </button>
-
-    <div>Novo por aqui?
-      <a [routerLink]="['/novo-usuario']"
-        routerLinkActive="router-link-active">Cadastre-se</a>
+      <div class="alert alert-info" *ngIf="usuarioLogado">
+        <p>Usuário conectado:
+          <strong>{{usuarioLogado.nome}} {{usuarioLogado.sobreNome}}</strong>
+        </p>
       </div>
 
-    <div class="alert alert-danger" *ngIf="mensagem">
-      {{ mensagem }}
-    </div>
+      <div *ngIf="!usuarioLogado">
 
-    <!-- <img
-      src="../../../../assets/images/usersBottom.png"
-      class="logoBottom"
-    /> -->
-  </form>
+        <div class="input-group">
+          <label for="inputEmail" class="sr-only">Email</label>
+          <input type="email" id="inputEmail" name="email"
+            placeholder="informe o seu E-mail"
+            class="form-control mb-2" #email="ngModel"
+            [(ngModel)]="usuario.email"
+            [ngClass]="{
+              'is-invalid': email.invalid && (email.dirty || email.touched),
+              'is-valid': email.valid && (email.dirty || email.touched)
+              }" email required />
+
+            <div class="invalid-feedback mb-2 respError" role="alert"
+              *ngIf="email.invalid && (email.dirty || email.touched)" >
+              <div *ngIf="email.errors.required">O E-mail é de preenchimento obrigatório!</div>
+              <div *ngIf="email.errors.email">Formato de E-mail inválido!</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="inputSenha" class="sr-only">Senha</label>
+            <input type="password" id="inputSenha" name="senha"
+              placeholder="Digite sua Senha"
+              class="form-control mb-2" #senha="ngModel"
+              [(ngModel)]="usuario.senha"
+              [ngClass]="{
+                'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+                'is-valid': senha.valid && (senha.dirty || senha.touched)
+                }" required minlength="6" />
+                <div class="invalid-feedback mb-2 respError" role="alert"
+                  *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
+                  <div *ngIf="senha.errors.required">A Senha deve informada!</div>
+                  <div *ngIf="senha.errors.minlength">A Senha deve ter pelo menos 6 caracteres.</div>
+                </div>
+          </div>
+
+            <div class="remember-forgot">
+              <label><input type="checkbox"> Lembrar-me.</label>
+                  <a href="#"> Esqueci a senha!</a>
+            </div>
+
+          <button class="btn login-btn"
+            type="submit" (click)="entrar()" [disabled]="ativar_spinner">
+            <span class="spinner-border spinner-border-sm" role="status"
+            aria-hidden="true" *ngIf="ativar_spinner"></span>Entrar
+          </button>
+
+        <div class="" *ngIf="mensagem"
+          style="
+            margin-top: 1em;
+            color: orangered;
+            font-size: 12px;
+            align-items: center;
+            text-align: center !important;
+            overflow-y: auto;
+            ">
+          {{ mensagem }}
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  </div>
+
 </div>
+

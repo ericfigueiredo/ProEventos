@@ -1,16 +1,21 @@
 <div class="sidebar" [class.collapsed]="isCollapsed">
-
   <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
 
   <ul>
-    <li *ngFor="let menu of menuSideBar" class="nav-item"
-    style="margin-top: -0.2em;">
+    <li *ngFor="let menu of menuFiltrado"
+      class="nav-item" style="margin-top: -0.2em">
       <a class="nav-link"
-         [routerLink]="[menu.route]"
-         routerLinkActive="link-active"
-         [routerLinkActiveOptions]="{ exact: true }">
-        <i class="material-icons outline">{{menu.icon}}</i>
-        <span *ngIf="!isCollapsed">{{menu.name}}</span>
+        [routerLink]="[menu.route]"
+        routerLinkActive="link-active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <i class="material-icons outline">{{ menu.icon }}</i>
+        <span *ngIf="!isCollapsed">{{ menu.name }}</span>
+
+        <!-- Badge para mostrar quantidade -->
+        <span *ngIf="!isCollapsed && menu.badge && menu.badge() > 0"
+              class="badge">
+          {{ menu.badge() }}
+        </span>
       </a>
     </li>
   </ul>

@@ -6,13 +6,13 @@ import { UsuarioService } from '../../../services/usuario.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   public usuario;
   public returnUrl: string;
   public mensagem: string;
-  // public usuaruiAutenticado: boolean;
+  public usuarioLogado;
   public ativar_spinner: boolean;
 
   constructor(
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuarioLogado = JSON.parse(sessionStorage.getItem('usuario-autenticado'));
     this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'];
   }
 
@@ -32,23 +33,16 @@ export class LoginComponent implements OnInit {
     this.usuarioService.verificaUsuario(this.usuario)
     .subscribe(
       usuario_json => {
-        // executa sem erros
         this.usuarioService.usuario = usuario_json;
-
         if (this.returnUrl == null) {
-          this.router.navigate(['/dashboard']);
-        }
-        else{
+          this.router.navigate(['/']);
+        } else{
           this.router.navigate([this.returnUrl]);
         }
-
-      },
-      err => {
-        // console.log(err.error);
+      }, err => {
         this.mensagem = err.error;
         this.ativar_spinner = false;
-      }
-    );
-
+      });
     }
+
   }

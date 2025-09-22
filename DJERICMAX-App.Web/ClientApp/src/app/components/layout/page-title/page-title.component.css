@@ -1,10 +1,16 @@
 .page-title-bar {
-  margin: -2em -2em 2em -2em;
+  max-width: 100%;
+  height: 4em;
+  margin: 2.9em 0 0 auto !important;
   padding: 1em;
-  background-color: hsl(0, 0%, 96%);
+  background-color: #4f4f4f;
   text-transform: uppercase;
-
-  /* border-bottom: 1px solid #ddd; */
+  color: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid #777;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .page-title-bar h2 {

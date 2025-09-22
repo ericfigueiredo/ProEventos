@@ -1,0 +1,106 @@
+<div class="contaiTable">
+   <div *ngIf="!servicos || servicos.length === 0">
+    <app-loader></app-loader>
+  </div>
+
+  <div *ngIf="servicos && servicos.length > 0">
+    <!-- Container da tabela -->
+    <div class="tabela-scroll-wrapper table-responsive glass-containerTable">
+      <table class="table table-hover tabela-scroll">
+        <thead>
+          <tr style="font-size: 11px;">
+            <th style="width: 24%">Nome</th>
+            <th style="width: 45%">Descrição</th>
+            <th style="width: 9%">Preço</th>
+            <th style="width: 15%">Imagem</th>
+            <th style="width: 7%" colspan="2">
+              <a class="btn add"
+                title="Adicionar Evento de novo Cliente"
+                (click)="abrirModal(s, 'add', 'servico')">
+                <svg class="add" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 20 20">
+                  <path fill="currentColor" d="M15.8 4.2c3.2 3.21 3.2 8.39 0 11.6a8.21 8.21 0 0 1-11.6 0a8.21 8.21 0 0 1 0-11.6C7.41 1 12.59 1 15.8 4.2m-4.3 11.3v-4h4v-3h-4v-4h-3v4h-4v3h4v4z"/>
+                </svg>
+              </a>
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="font-size: 11px !important;" *ngFor="let s of servicos">
+            <td style="font-weight: bold;">{{ s.nome }}</td>
+            <td style="text-align: justify;">{{ s.descricao }}</td>
+            <td *ngIf="s.preco_Hora !== undefined">
+              {{ s.preco_Hora | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+            </td>
+            <td>
+              <img style="width: 100%"
+                src="../../../../../../../../arquivos/{{ s.nomeArquivo }}" />
+            </td>
+            <td>
+              <a class="btn edit" title="Editar Serviço"
+                  (click)="abrirModal(s, 'edit', 'servico', i)">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" viewBox="0 0 25 25">
+                    <g fill="none" stroke="blue" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                      <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
+                    </g>
+                  </svg>
+                </a>
+
+              <!-- <button class="btn edit" title="Editar" (click)="editarServico(s)">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 25 25">
+                <g fill="none" stroke="blue" stroke-linecap="round" stroke-linejoin="round"stroke-width="2">
+                  <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
+                  </g>
+                </svg>
+
+              </button> -->
+            </td>
+            <td>
+              <a class="btn del" data-toggle="modal" data-target="#modalExcluirServico"
+                  (click)="abrirModal(s,'excluirServico', 'servico', i)" title="Excluir Serviço">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    width="28" height="20" viewBox="0 0 24 24">
+                    <path fill="red" d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"/>
+                  </svg>
+                </a>
+
+
+              <!-- <button class="btn del" title="Excluir" (click)="deletarServico(s)">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  width="32" height="24" viewBox="0 0 24 24">
+                  <path fill="red" d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"/>
+                </svg>
+
+              </button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- MODAIS  -->
+<app-cadastrar-servico
+  *ngIf="modalAberta === 'servico'"
+  [tab]="'servico'"
+  [info]="info"
+  [tipo]="tipo"
+  (fecharModal)="fecharModal()"
+>
+</app-cadastrar-servico>
+
+<app-modalExcluir
+  *ngIf="modalAberta === 'excluirServico'"
+  [info]="info"
+  [msg]="msg"
+  (confirmar)="excluirServico(servicoParaExcluir)"
+  (cancelar)="fecharModal()">
+</app-modalExcluir>

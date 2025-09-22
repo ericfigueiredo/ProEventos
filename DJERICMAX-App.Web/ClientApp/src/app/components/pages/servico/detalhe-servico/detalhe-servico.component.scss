@@ -1,0 +1,47 @@
+.valor {
+  padding: -3em 0 1em 0;
+  font-weight: bolder;
+  display: flex;
+  text-align: right !important;
+  align-items: end;
+  justify-content:last baseline;
+  width: 100%;
+  margin-top: -0.3em;
+}
+
+.valor.unidade   { font-size: 4em; }
+.valor.dezena    { font-size: 3.8em; }
+.valor.centena   { font-size: 3em; }
+.valor.milhar    { font-size: 2em; }
+
+.corpo {
+  width: 98% !important;
+  // height: 90%;
+  margin: -1em auto auto auto;
+  padding: 1.5em 1.5em 0 1.5em !important;
+  border: #95cbf9 1px solid;
+  border-radius: 0.5em;
+  background-color: #fff;
+}
+
+.img {
+  width: 100%
+}
+
+.textoForm{
+  width: 100%;
+  text-align: justify;
+  padding: 1em 0 1em 0
+}
+
+.qtde {
+  width: 3em;
+  cursor: pointer
+}
+
+.bar {
+  border-left: #95cbf9 1px solid;
+  margin-left: 0;
+  padding-left: 2em;
+  padding-top: -1em;
+}

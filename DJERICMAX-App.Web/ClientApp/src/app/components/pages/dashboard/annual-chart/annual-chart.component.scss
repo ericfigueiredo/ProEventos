@@ -1,0 +1,167 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+//monitor do notebook
+@media screen and (width: 1366px) and (max-height: 768px) {
+  .chart-container {
+    margin: 0 auto 0 -0.5em !important;
+    width: 100% !important;
+    height: 24em;
+    min-height: 100% !important;
+  }
+
+  .chart-header {
+    height: 10%;
+  }
+
+  .chart-footer {
+    height: 20%;
+
+    .stat-item {
+      margin: -1.8em 0 0 0;
+    }
+  }
+}
+
+//Monitor horizontal grande
+@media screen and (width: 1920px) and (max-height: 1080px) {
+  .chart-container {
+    // margin: 0 auto 0 auto !important;
+    width: 100% !important;
+    height: 43em;
+    min-height: 100% !important;
+  }
+}
+
+//monitor vertical
+@media screen and (width: 1080px) and (max-height: 1920px) {
+  .chart-container {
+    width: 100% !important;
+    // margin: 0 auto 0 auto !important;
+    height: calc( 100% + (100% * ((100vw - 1920px) / (1920 - 866))) );
+    min-height: 100% !important;
+  }
+}
+
+.chart-container {
+  padding: 16px;
+  margin: 0 auto 0 -1em !important;
+  max-width: 103% !important;
+  display: flex;
+  justify-content: center;
+  color: #303030 !important;
+}
+
+.chart-card {
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 25px 45px rgba(0,0,0,0.4);
+
+  background: rgba(255,255,255,0.04);
+  margin: -0.9em -1em 0 -1em;
+  border-radius: 12px;
+  width: 102% !important;
+  max-width: 100% !important;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.chart-header {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  h2 {
+    margin: 0;
+    color: #3f3f3f;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+  }
+}
+
+.chart-actions {
+  button {
+    color: rgba(75, 75, 75, 0.7);
+    transition: all 0.2s;
+
+    &:hover {
+      color: #3f3f3f;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.chart-wrapper {
+  position: relative;
+  flex: 1;
+  /* Isso fará o wrapper expandir para ocupar o espaço disponível */
+  min-height: 0;
+  /* Necessário para o flex funcionar corretamente */
+  padding: 20px;
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.chart-footer {
+  padding: 16px 24px;
+  background: rgba(180, 180, 180, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.05);
+
+  .stats {
+    display: flex;
+    justify-content: space-around;
+
+    .stat-item {
+      text-align: center;
+      padding: 8px 16px;
+
+      .stat-value {
+        display: block;
+        font-size: 24px;
+        font-weight: 500;
+        color: #3f3f3f;
+        margin-bottom: 4px;
+      }
+
+      .stat-label {
+        display: block;
+        font-size: 14px;
+        color: rgba(12, 12, 12, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      &:nth-child(1) .stat-value {
+        color: #4285F4;
+      }
+
+      &:nth-child(2) .stat-value {
+        color: #FF9100;
+      }
+
+      &:nth-child(3) .stat-value {
+        color: #0F9D58;
+      }
+    }
+  }
+}
+
+/* Efeito de brilho ao passar o mouse */
+canvas:hover {
+  filter: drop-shadow(0 0 8px rgba(66, 133, 244, 0.3));
+}
+

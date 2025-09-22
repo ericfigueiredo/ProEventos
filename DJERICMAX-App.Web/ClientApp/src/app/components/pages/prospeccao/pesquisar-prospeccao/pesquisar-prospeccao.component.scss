@@ -1,11 +1,3 @@
-.titulo {
-  padding-bottom: 1em;
-}
-
-.contai {
-  margin: 0em 0 0 -1em;
-  min-height: 100%;
-}
 
 @media screen and (max-width: 575px) {
   .tabela-scroll-wrapper {
@@ -79,33 +71,9 @@
   background-color: darkgreen;
 }
 
-.custom-file-label::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  display: block;
-  height: calc(1.5em + .75rem);
-  padding: .375rem .75rem;
-  line-height: 1.5;
-  color: #ffffff;
-  content: "Selecionar";
-  background-color: #0b7cec;
-  border-left: inherit;
-  border-radius: 0 .25rem .25rem 0;
-}
-
 .tabela-scroll-wrapper {
-  // height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  border: #95cbf9 1px solid;
-  border-radius: 0.5em;
-  background-color: #fff;
-
-  /* padding-right: 2em !important; */
-  box-sizing: content-box;
 }
 
 /* Garante layout de tabela fixa para alinhar colunas */
@@ -133,23 +101,18 @@
 
 /* Cabeçalho fixo */
 .tabela-scroll thead th {
-  background-color: #fff;
+  background-color: rgba(220,220,220,0.5);
+  border-bottom: #07af07;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
-/* Imagem dentro da célula */
-.tabela-scroll td img {
-  max-width: 90%;
-  height: auto;
-}
-
 .add {
-  font-size: 1.7em;
-  margin: -0.3em 0 -10px 0 !important;
+  margin: -0.8em 0em -0.6em 0 !important;
   color: #07af07;
+  font-size: 42px;
 }
 
 .add:hover {
@@ -186,8 +149,18 @@
   color: orangered;
 }
 
-table td  {
-  vertical-align: middle;
-  align-items: center;
-  text-align: center;
+.subtab {
+  width: 100%;
+  font-size: 11px;
+  margin-top: -1.2em !important;
 }
+
+.addEvent {
+  margin: -8px 0 -12px 0 !important;
+  color: #07af07;
+}
+
+.addEvent:hover {
+  color: darkgreen;
+}
+

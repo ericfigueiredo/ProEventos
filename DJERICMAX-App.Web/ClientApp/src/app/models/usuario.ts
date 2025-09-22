@@ -7,4 +7,5 @@ export class Usuario{
   cpf: string;
   rg: string;
   nomeArquivo?: string;
+  ehAdministrador: boolean;
 }

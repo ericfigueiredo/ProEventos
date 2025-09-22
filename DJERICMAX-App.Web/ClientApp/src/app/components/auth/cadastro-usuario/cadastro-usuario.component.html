@@ -1,8 +1,21 @@
+<div class="modal-backdrop fade show" (click)="fechar()"></div>
+
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header headiers">
+        <h5 class="modal-title"> {{ info }} </h5>
+        <button type="button" class="close" (click)="fechar()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bodies">
+        <div class="container-fluid">
+
+<!-- ------------------------------------------------------------------------------ -->
+
 <div class="bodys">
   <form action="" class="form-signin">
-    <img src="../../../../assets/images/logoEventPro-login.jpg" class="logoTitle"/>
-    <!-- <h1 class="h4 mb-2 login">Cadastro de Usuários no EventPro</h1> -->
-
     <div class="form-row">
       <div class="col-md-6 mb-2">
         <label for="inputNome" class="sr-only">Nome</label>
@@ -160,9 +173,7 @@
             class="custom-file-input"
             id="inputFile"
             (change)="inputChange($event.target.files)"
-            [disabled]="ativar_spinner"
-          />
-
+            [disabled]="ativar_spinner"/>
 
           <label for="inputFile" class="custom-file-label">
             Selecione uma foto de perfil
@@ -170,33 +181,37 @@
           <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"></span>
         </div>
       </div>
-
     </div>
-
-
     <div class="form-row">
       <div class="col-12 d-flex justify-content-end mb-2">
-        <button class="btn btn-success botao" type="submit" [disabled]="ativar_spinner"
-        (click)="cadastrar()">
-        <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"
-        role="status" aria-hidden="true"></span>
-          Salvar
-        </button>
-        <a [routerLink]="['/']" class="btn btn-secondary botao" >
-          Cancelar
-        </a>
       </div>
     </div>
 
     <div class="alert alert-danger" *ngIf="mensagem">
       {{ mensagem }}
     </div>
-
     <div class="alert alert-success" *ngIf="usuarioCadastrado">
-      Usuário cadastrado com sucesso!
-      <a class="alert-link" [routerLink]="['/']">Clique aqui</a>
-      para acessar o sistema com a sua conta.
+      Usuário cadastrado com sucesso! Clique em fechar para sair.
     </div>
-
   </form>
+</div>
+
+
+<!-- ------------------------------------------------------------------------------ -->
+
+        </div>
+      </div>
+      <div class="modal-footer footies">
+        <button class="btn btn-success botao" type="submit"
+        [disabled]="ativar_spinner" (click)="cadastrar()">
+        <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"
+        role="status" aria-hidden="true"></span>
+          Salvar
+        </button>
+        <button class="btn btn-secondary botao" (click)="fechar()">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
