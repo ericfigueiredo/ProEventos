@@ -1,0 +1,31 @@
+.bodys{
+  overflow: hidden;
+}
+.bodies{
+  width: 93% !important;
+  margin: 1em 1.5em 1em 1.5em !important;
+  /* padding: 0 !important; */
+}
+
+.btn-remove {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ff4757;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+  background: orangered;
+  transform: scale(1.1);
+}

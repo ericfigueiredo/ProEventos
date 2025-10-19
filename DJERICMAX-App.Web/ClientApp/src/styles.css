@@ -5,7 +5,7 @@
     width: 100%;
     margin-top: .25rem;
     font-size: .875em;
-    color: #dc3545;
+    color: orangered;
 }
 
 .valid-feedback {
@@ -33,25 +33,30 @@
 .contaiTable {
   position: absolute;
   left: 0;
-  right: 1em;
-  top: 2.5em;
+  right: 0em;
+  top: 4.2em;
   bottom: 0;
-  margin: 5em 0em 5em 0.5em !important;
-  min-height: 99%;
+  padding: 1em !important;
+  min-height: 85%;
 }
 
 /* DIV EM GLASS */
 .glass-containerTable{
-  position: relative;
-  width: 98%;
-  padding: 0;
-  margin: 0 0.5em 0.5em 0.5em !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  right: 0.5em;
+  bottom: 1em;
+  width: 97% !important;
+  height: auto !important;
   border-radius: 10px;
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255,255,255,0.6);
   box-shadow: 0 25px 45px rgba(30,30,30,0.6);
   z-index: 10;
-  overflow: hidden;
+  text-shadow: none !important;
 }
 
 .glass-containerTable::before{
@@ -66,6 +71,17 @@
   pointer-events: none;
 }
 
+.glass-containerTable::-webkit-scrollbar {
+  width: 8px;
+}
+.glass-containerTable::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 12px;
+}
+.glass-containerTable::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background: #f1f1f1;
+}
 .glass-containerTable:hover::before{
   left: 120%;
 }
@@ -77,6 +93,14 @@
   letter-spacing: 1px;
   margin-bottom: 40px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Garante layout de table fixa para alinhar colunas */
+.table-scroll {
+  width: 100%;
+  max-height: 80% !important;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
 /* TABELAS */
@@ -99,8 +123,20 @@ table td  {
   text-align: center;
 }
 
+/* Cabeçalho fixo */
+.table-scroll thead th {
+  background-color: rgba(220,220,220,10);
+  border-bottom: #07af07;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 /* MODAL */
 .modal-content {
+  min-width: 100%;
+  background: url('/assets/images/backgroundX6.jpg') no-repeat right center;
   background-color: rgba(255, 255, 255, 0.8) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -160,17 +196,174 @@ table td  {
   box-shadow: 0 0 0 4px #fff,
   0 0 0 8px #888 !important;
 }
-
-input{
+/* --------------------------------------- */
+input, select{
+  background-color: #fff !important;
+  height: 40px !important;
+  /* margin-top: -2em !important; */
   padding: 15px !important;
-  border-radius: 8px !important;
+  border-radius: 12px !important;
+  color: #2d2d2d !important;
   box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.2) !important;
 }
 
-input:focus{
+input[type="checkbox"] {
+  box-shadow: none !important;
+}
+
+input:focus, select:focus{
   border: 2px solid #aa00ff !important;
 }
 
-input::placeholder{
+input::placeholder, select::placeholder{
   font-size: .9rem !important;
+}
+
+input::placeholder:focus, select::placeholder:focus{
+  color: transparent !important;
+  font-size: .9rem !important;
+}
+
+.floating-label {
+  color: #2d2d2d !important;
+  position: relative !important;
+  margin: 5px 0 !important;
+}
+
+.floating-label input, select {
+  width: 100% !important;
+  padding: 5px 5px 5px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  transition: border-color 0.3s !important;
+}
+
+.floating-label input:focus, select:focus {
+  border-color: #6200ea !important; /* cor quando selecionado */
+}
+
+.floating-label label {
+  position: absolute !important;
+  left: 12px !important;
+  top: 12px !important;
+  color: transparent !important;
+  font-size: 12px !important;
+  pointer-events: none !important;
+  transition: 0.2s ease all !important;
+}
+
+.floating-label input:focus ~ label,
+.floating-label input:not(:placeholder-shown) ~ label,
+.floating-label select:focus ~ label,
+.floating-label select:not(:placeholder-shown) ~ label {
+  top: -8px !important;
+  left: 2.2em !important;
+  font-size: 10px !important;
+  background: #fff !important;
+  padding: 0 4px !important;
+  color: #6200ea !important;
+}
+/* ----------------------------------- */
+
+option{
+  color: #2d2d2d !important;
+}
+
+.respError{
+  font-size: 11px !important;
+  margin-top: 5px !important;
+  margin-bottom: -16px !important;
+  color: red !important;
+}
+
+/* IMAGEM PREVIEW */
+.image-preview-elegant {
+  align-items: center;
+  position: relative;
+  display: inline-block;
+  margin-top: 0;
+}
+
+.preview-circle {
+  width: 260px;
+  height: auto;
+  max-height: 210px;
+  border-radius: 20px;
+  margin: auto !important;
+  /* margin-bottom: 1em; */
+  object-fit: cover;
+  border: 3px solid #667eea;
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.delete-preview{
+  width: 150px !important;
+  margin: -2em 0 0 -1em !important;
+}
+
+/* FILES */
+.file-input-elegant {
+  position: relative;
+  margin-bottom: 1rem;
+  margin-top: 1em !important;
+}
+
+.file-input {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+}
+
+.file-input-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+.file-input-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.file-input-text {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.file-input-browse {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.image-preview-elegant {
+  align-items: center;
+  position: relative;
+  display: inline-block;
+}
+
+.preview-circle {
+  width: 260px;
+  height: auto;
+  max-height: 210px;
+  border-radius: 20px;
+  margin: auto !important;
+  /* margin-bottom: 1em; */
+  object-fit: cover;
+  border: 3px solid #667eea;
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.2) !important;
 }

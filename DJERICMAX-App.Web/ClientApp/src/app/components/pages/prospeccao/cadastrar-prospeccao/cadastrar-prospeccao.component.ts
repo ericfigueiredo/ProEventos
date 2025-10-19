@@ -18,6 +18,7 @@ export class CadastrarProspeccaoComponent implements OnInit {
   @Output() fecharModal = new EventEmitter<void>();
   @Input() info: string;
   @Input() tipo: string;
+  alturaModal: number;
 
   constructor(
     private clienteService: ClienteService,
@@ -26,6 +27,11 @@ export class CadastrarProspeccaoComponent implements OnInit {
 
   ngOnInit() {
     this.clique = JSON.parse(sessionStorage.getItem("clique"));
+    if (this.clique === 'cliente') {
+    this.alturaModal = 342;
+    } else if (this.clique === 'prospeccao'){
+    this.alturaModal = 230;
+  }
     sessionStorage.removeItem("clique");
     var clienteSession = sessionStorage.getItem("clienteSession");
     if (clienteSession) {

@@ -11,12 +11,13 @@ import { ClienteService } from "src/app/services/cliente.service";
 export class ClientesComponent implements OnInit {
   public cliente: Cliente;
   public clientes: Cliente[];
-  public modalAberta: string = ""; // 'about', 'dados' ou vazio
+  public modalAberta: string = "";
   public info: string;
   public tipo: string;
-  public msg: string;
+  public tela: string;
   public expandedClienteId: number | null = null;
   public expandedServicoId: number | null = null;
+  public msg: string;
   clienteParaExcluir: any;
   indexParaExcluir: number;
 
@@ -75,11 +76,13 @@ export class ClientesComponent implements OnInit {
       sessionStorage.removeItem("eventoSession");
       this.info = "Cadastrar Evento";
       this.tipo = tipo;
+      this.tela = 'cliente';
       this.modalAberta = clique;
     } else if (tipo == "addServico") {
       sessionStorage.removeItem("servicoSession");
       this.info = "Vincular Serviço ao Evento";
       this.tipo = tipo;
+      this.tela = 'cliente';
       this.modalAberta = clique;
     }
     // Editar Cliente

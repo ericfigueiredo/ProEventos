@@ -104,53 +104,53 @@
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.input-group{
-  position: relative;
-  margin-bottom: 30px;
-}
+// .input-group{
+//   position: relative;
+//   margin-bottom: 30px;
+// }
 
-.input-group input{
-  width: 100%;
-  padding: 15px 20px;
-  background: rgba(255,255,255,0.2);
-  border: none;
-  outline: none;
-  border-radius: 35px;
-  font-size: 16px;
-  color: #2d2d2d;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-}
+// .input-group input{
+//   width: 100%;
+//   padding: 15px 20px;
+//   background: rgba(255,255,255,0.2);
+//   border: none;
+//   outline: none;
+//   border-radius: 35px;
+//   font-size: 16px;
+//   color: #2d2d2d;
+//   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+//   transition: all 0.3s ease;
+// }
 
-.input-group input::placeholder{
-  color: rgba(20,20,20,0.7);
-}
+// .input-group input::placeholder{
+//   color: rgba(20,20,20,0.7);
+// }
 
-.input-group input:focus{
-  background: rgba(255,255,255,0.3);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
+// .input-group input:focus{
+//   background: rgba(255,255,255,0.3);
+//   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+// }
 
-.input-group label{
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
-  color: rgba(20,20,20,0.8);
-  font-size: 16px;
-  pointer-events: none;transition: all 0.3s ease;
-}
+// .input-group label{
+//   position: absolute;
+//   top: 50%;
+//   left: 20px;
+//   transform: translateY(-50%);
+//   color: rgba(20,20,20,0.8);
+//   font-size: 16px;
+//   pointer-events: none;transition: all 0.3s ease;
+// }
 
-.input-group input:focus + label,
-.input-group input:valid + label {
-  top: 0;
-  left: 15px;
-  font-size: 12px;
-  background: rgba(255,255,255,0.2);
-  padding: 2px 8px;
-  border-radius: 10px;
-  color: #2d2d2d;
-}
+// .input-group input:focus + label,
+// .input-group input:valid + label {
+//   top: 0;
+//   left: 15px;
+//   font-size: 12px;
+//   background: rgba(255,255,255,0.2);
+//   padding: 2px 8px;
+//   border-radius: 10px;
+//   color: #2d2d2d;
+// }
 
 .remember-forgot{
   display: flex;
@@ -221,8 +221,6 @@
   text-decoration: underline;
 }
 
-.respError{
-  font-size: 11px;
-  margin-top: -8px;
-  color: orangered;
+label{
+  margin-top: 1em !important;
 }

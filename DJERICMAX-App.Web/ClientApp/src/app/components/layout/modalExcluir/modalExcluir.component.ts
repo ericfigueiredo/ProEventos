@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 export class ModalExcluirComponent implements OnInit {
   @Input() info: string;
   @Input() msg: string;
+  @Input() tela: string;
 
   @Output() confirmar = new EventEmitter<void>();
   @Output() cancelar = new EventEmitter<void>();
@@ -23,6 +24,7 @@ export class ModalExcluirComponent implements OnInit {
   onCancelar() {
     this.cancelar.emit();
   }
+
 }
 
 

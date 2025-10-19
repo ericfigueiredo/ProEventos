@@ -84,11 +84,6 @@
   margin-top: -1em;
 }
 
-.respError{
-  font-size: 11px;
-  margin-top: -8px;
-}
-
 .botao {
   margin: 1em 0 0 1em;
   width: 9em;
@@ -126,4 +121,19 @@
 .tableHead tr:hover {
   background-color: transparent !important;
   cursor: default !important;
+}
+
+.floating-label{
+  margin: -0.1em 0.5em -0.3em -0.5em !important;
+}
+
+.inputs{
+  font-weight: 600;
+  background-color: #fff;
+}
+
+.cadEvento{
+  width: 102% !important;
+  margin: 0 -0.5em 0 -0.5em !important;
+  text-shadow: none !important;
 }

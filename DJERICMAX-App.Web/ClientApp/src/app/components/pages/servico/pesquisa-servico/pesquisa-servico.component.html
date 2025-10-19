@@ -1,11 +1,13 @@
-<div class="contai">
+<div class="contaiTable">
+
   <div *ngIf="!servicos">
     <app-loader></app-loader>
 </div>
 
-<div class="tabela-scroll-wrapper table-responsive glass-containerTable"
+<div class="table-responsive glass-containerTable"
  *ngIf="servicos">
-  <div class="row">
+
+  <div class="row table table-hover table-scroll">
     <div class="col-md-4 mb-3"
      *ngFor="let s of servicos">
 

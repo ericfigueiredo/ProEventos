@@ -14,14 +14,14 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/pages/home/home.component';
 
 import { LoginComponent } from './components/auth/login/login.component';
-import { CadastroUsuarioComponent } from './components/auth/cadastro-usuario/cadastro-usuario.component';
+import { CadastroUsuarioComponent } from './components/auth/usuario/cadastro-usuario/cadastro-usuario.component';
 
 import { UsuarioService } from './services/usuario.service';
 import { ServicoService } from './services/servico.service';
 
 import { PageTitleComponent } from './components/layout/page-title/page-title.component';
-import { MeusDadosComponent } from './components/auth/meus-dados/meus-dados.component';
-import { AjudaUsuarioComponent } from './components/auth/ajuda-usuario/ajuda-usuario.component';
+import { MeusDadosComponent } from './components/auth/usuario/meus-dados/meus-dados.component';
+import { AjudaUsuarioComponent } from './components/auth/usuario/ajuda-usuario/ajuda-usuario.component';
 import { ContratoComponent } from './components/pages/contrato/contrato.component';
 import { EventoComponent } from './components/pages/evento/evento.component';
 import { RealizadoComponent } from './components/pages/realizado/realizado.component';
@@ -54,6 +54,7 @@ import { CadastrarEventoComponent } from './components/pages/evento/cadastrar-ev
 import { ListarEventoComponent } from './components/pages/evento/listar-evento/listar-evento.component';
 import { LoaderComponent } from './components/layout/loader/loader.component';
 import { ModalConfirmComponent } from './components/layout/modal-confirm/modal-confirm.component';
+import { ListarUsuariosComponent } from './components/auth/usuario/listar-usuarios/listar-usuarios.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -95,6 +96,7 @@ registerLocaleData(localePt, 'pt-BR');
     ListarEventoComponent,
     LoaderComponent,
     ModalConfirmComponent,
+    ListarUsuariosComponent,
   ],
 
   providers: [

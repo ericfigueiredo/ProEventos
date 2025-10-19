@@ -22,23 +22,21 @@
 
 //monitor horizontal grande
 @media screen and (min-width: 1920px) {
-  .botoes{
-  width: 77%;
-  position: absolute;
-  bottom: 2.5em;
-  padding: 0 0.5em 0.5em 0;
-  right: 2.8em;
+    .botoes{
+    width: 77%;
+    position: absolute;
+    bottom: 2.5em;
+    padding: 0 0.5em 0.5em 0;
+    right: 2.8em;
+  }
 }
-}
-
-.respError{
-  font-size: 11px;
-  margin-top: -8px;
-}
-
 .botao {
   margin: 1em 0 0 1em;
   width: 9em;
+}
+
+.bodys{
+  overflow: hidden;
 }
 
 .custom-file-label::after {
@@ -56,4 +54,27 @@
     background-color: #0b7cec;
     border-left: inherit;
     border-radius: 0 .25rem .25rem 0;
+}
+
+.btn-remove {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ff4757;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+  background: orangered;
+  transform: scale(1.1);
 }

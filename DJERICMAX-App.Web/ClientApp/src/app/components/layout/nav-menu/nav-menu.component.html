@@ -2,11 +2,11 @@
   <div class="container">
 
     <!-- Logotipo à esquerda -->
-    <div class="logo">
+    <!-- <div class="logo">
       <a [routerLink]="['/']" style="cursor: pointer">
         <img src="assets/images/logoEventPro-header.jpg" alt="Logo">
       </a>
-    </div>
+    </div> -->
 
     <!-- Ações à direita -->
     <div class="acoes">
@@ -63,6 +63,14 @@
 
                 <span> Criar usuário </span>
               </a>
+            <a class="nav-item nav-link text-dark" (click)="abrirModal('listarUsuarios')" *ngIf="usuario_administrador()">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                <path fill="#ff3e00" d="M152 80a8 8 0 0 1 8-8h88a8 8 0 0 1 0 16h-88a8 8 0 0 1-8-8m96 40h-88a8 8 0 0 0 0 16h88a8 8 0 0 0 0-16m0 48h-64a8 8 0 0 0 0 16h64a8 8 0 0 0 0-16m-96.25 22a8 8 0 0 1-5.76 9.74a7.6 7.6 0 0 1-2 .26a8 8 0 0 1-7.75-6c-6.16-23.94-30.34-42-56.25-42s-50.09 18.05-56.25 42a8 8 0 0 1-15.5-4c5.59-21.71 21.84-39.29 42.46-48a48 48 0 1 1 58.58 0c20.63 8.71 36.88 26.29 42.47 48M80 136a32 32 0 1 0-32-32a32 32 0 0 0 32 32"/>
+              </svg>
+
+              <span> Lista de Usuários </span>
+            </a>
               <a class="nav-item nav-link" [routerLink]="['/ajuda-usuario']">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -108,9 +116,30 @@
            [usuario]="usuario"
            (fecharModal)="fecharModal()">
 </app-meus-dados>
-<app-cadastro-usuario *ngIf="modalAberta === 'novoUsuario'"
-           [info]="info"
-           [user]="usuario"
-           (fecharModal)="fecharModal()">
+
+
+<!-- MODAL LISTAR USUÁRIOS -->
+<app-listar-usuarios *ngIf="modalAberta === 'listarUsuarios'"
+    [info]="'Usuários do Sistema'"
+    [user]="usuario"
+    (fecharModal)="fecharModal()"
+    (abrirCadastro)="abrirCadastroUsuario()"
+    (abrirEditar)="abrirEditarUsuario()"
+    >
+</app-listar-usuarios>
+
+<!-- MODAL CADASTRAR USUÁRIO (abre sobre a de listar) -->
+<app-cadastro-usuario *ngIf="cadastroAberto"
+    [info]="'Cadastrar Novo Usuário'"
+    [user]="usuario"
+    (fecharModal)="fecharCadastroUsuario()">
 </app-cadastro-usuario>
+
+<!-- MODAL EDITAR USUÁRIO (abre sobre a de listar) -->
+<app-cadastro-usuario *ngIf="editarAberto"
+    [info]="'Editar Usuário'"
+    [user]="usuario"
+    (fecharModal)="fecharCadastroUsuario()">
+</app-cadastro-usuario>
+
 

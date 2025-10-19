@@ -1,0 +1,23 @@
+.glass-containerTabela{
+   width: 100% !important;
+   margin: 0em 0em 0em 0em !important;
+   height: 380px !important;
+   text-shadow: none !important;
+   padding: 0.5em !important;
+   font-size: 11px !important;
+   position: relative !important;
+   border-radius: 10px !important;
+   backdrop-filter: blur(15px) !important;
+   border: 1px solid rgba(255,255,255,0.6) !important;
+   box-shadow: 0 25px 45px rgba(30,30,30,0.6) !important;
+   z-index: 10;
+}
+
+.add {
+  margin: -10px 0 -15px 0 !important;
+  cursor: pointer !important;
+}
+
+.add:hover {
+  color: darkgreen !important;
+}

@@ -18,6 +18,7 @@ export class ListarEventoComponent implements OnInit {
   public modalAberta: string = "";
   public info: string;
   public tipo: string;
+  public tela: string;
   public msg: string;
   eventoParaExcluir: any;
   indexParaExcluir: number;
@@ -171,6 +172,7 @@ export class ListarEventoComponent implements OnInit {
     } else if (tipo == "editarEvento") {
       sessionStorage.setItem("eventoSession", JSON.stringify(evento));
       this.info = "Editar Evento";
+      this.tela = 'evento';
       this.modalAberta = clique;
       console.log(evento);
     } else if (tipo == "verContrato") {

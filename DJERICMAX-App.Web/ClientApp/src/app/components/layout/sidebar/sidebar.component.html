@@ -1,22 +1,250 @@
 <div class="sidebar" [class.collapsed]="isCollapsed">
-  <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+  <div class="" style="margin: 2em 1em 0 0.1em">
+    <!-- Logotipo à direita -->
+      <div class="logo">
+        <a [routerLink]="['/']" style="text-decoration: none !important;">
+          <img src="assets/images/logoEventPro-icon-mini.png">
+          <span class="titEvent">Event</span>
+          <span class="titPro">Pro</span>
+        </a>
+      </div>
+
+    <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+
+  </div>
+
 
   <ul>
-    <li *ngFor="let menu of menuFiltrado"
-      class="nav-item" style="margin-top: -0.2em">
-      <a class="nav-link"
-        [routerLink]="[menu.route]"
-        routerLinkActive="link-active"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <i class="material-icons outline">{{ menu.icon }}</i>
-        <span *ngIf="!isCollapsed">{{ menu.name }}</span>
+    <div class="lista">
 
-        <!-- Badge para mostrar quantidade -->
-        <span *ngIf="!isCollapsed && menu.badge && menu.badge() > 0"
-              class="badge">
-          {{ menu.badge() }}
-        </span>
-      </a>
-    </li>
+      <li *ngFor="let menu of menuFiltrado" class="nav-item">
+
+        <a class="nav-link" [routerLink]="[menu.route]" routerLinkActive="link-active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="fa-solid fa-{{menu.icon}}" [ngStyle]="{ color: menu.color, 'font-weight': 'bold', 'font-size':'16px' }"></i>
+
+          <span *ngIf="!isCollapsed">{{ menu.name }}</span>
+
+          <!-- Badge para mostrar quantidade -->
+          <span *ngIf="!isCollapsed && menu.badge && menu.badge() > 0"
+                class="badge">
+            {{ menu.badge() }}
+          </span>
+
+        </a>
+      </li>
+    </div>
+
+
+
+    <div class="acoes">
+
+
+      <div *ngIf="usuarioLogado()" class="usuario-dropdown">
+
+
+        <img src="../../../../../../ftsUsuarios/{{usuario.nomeArquivo}}"
+        title="{{usuario.nome}} {{usuario.sobreNome}}" class="usuario-foto">
+        <div class="usuario-container">
+          <div class="usuario-dados">
+            <div class="usuario-dados-nome">{{ usuario.nome }} {{ usuario.sobreNome }}</div>
+            <div class="usuario-dados">{{ usuario.cpf }}</div>
+          </div>
+        </div>
+
+
+        <div class="dropdown-content">
+
+          <div class="nav-item text-dark"
+           style="width: 100%; min-height: 13em; max-height: 70em; height: 100%; cursor: default;"></div>
+
+
+
+          <!-- Links para abrir modais diferentes -->
+          <a class="nav-item nav-link text-dark" (click)="abrirModal('dados')">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#FFCA28" d="M13.3 12.22A4.92 4.92 0 0 0 15 8.5a5 5 0 0 0-10 0a4.92 4.92 0 0 0 1.7 3.72A8 8 0 0 0 2 19.5a1 1 0 0 0 2 0a6 6 0 0 1 12 0a1 1 0 0 0 2 0a8 8 0 0 0-4.7-7.28M10 11.5a3 3 0 1 1 3-3a3 3 0 0 1-3 3m11.71-2.37a1 1 0 0 0-1.42 0l-2 2l-.62-.63a1 1 0 0 0-1.42 0a1 1 0 0 0 0 1.41l1.34 1.34a1 1 0 0 0 1.41 0l2.67-2.67a1 1 0 0 0 .04-1.45"/>
+            </svg>
+
+            <span> Meu Perfil</span>
+          </a>
+
+
+
+
+
+          <a class="nav-item nav-link text-dark" (click)="abrirModal('senha')">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <g fill="none" stroke="#66BB6A" stroke-linejoin="round" stroke-width="1.5">
+                <path stroke-linecap="round" d="M21.5 12A9.5 9.5 0 1 1 12 2.5a9.5 9.5 0 0 1 8.71 5.7m.79-2.7l-.475 3.175L18 8"/>
+                <path d="M10 11V9.5a2 2 0 1 1 4 0V11m-2.75 5.5h1.5c1.173 0 1.76 0 2.163-.31a1.5 1.5 0 0 0 .277-.277c.31-.404.31-.99.31-2.163s0-1.76-.31-2.163a1.5 1.5 0 0 0-.277-.277c-.404-.31-.99-.31-2.163-.31h-1.5c-1.173 0-1.76 0-2.163.31a1.5 1.5 0 0 0-.277.277c-.31.404-.31.99-.31 2.163s0 1.76.31 2.163a1.5 1.5 0 0 0 .277.277c.404.31.99.31 2.163.31Z"/>
+              </g></svg>
+
+              <span> Alterar Senha</span>
+            </a>
+
+
+
+
+
+            <a class="nav-item nav-link text-dark" (click)="abrirModal('Preferencias')">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#EF5350" fill-rule="evenodd" d="M12 6.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3M12 8a3 3 0 1 0-2.905-3.75H1.75a.75.75 0 0 0 0 1.5h7.345A3 3 0 0 0 12 8m-6.5 3a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m1.405.75A3.001 3.001 0 0 1 1 11a3 3 0 0 1 5.905-.75h7.345a.75.75 0 0 1 0 1.5z" clip-rule="evenodd"/>
+              </svg>
+
+              <span> Definições</span>
+            </a>
+
+
+
+
+
+            <!-- <a class="nav-item nav-link text-dark" (click)="abrirModal('novoUsuario')" *ngIf="usuario_administrador()">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                  <path fill="green" d="M14 4c-3.854 0-7 3.146-7 7c0 2.41 1.23 4.552 3.094 5.813C6.527 18.343 4 21.88 4 26h2c0-4.43 3.57-8 8-8c1.376 0 2.654.358 3.78.97A8 8 0 0 0 16 24c0 4.406 3.594 8 8 8s8-3.594 8-8s-3.594-8-8-8a7.98 7.98 0 0 0-4.688 1.53c-.442-.277-.92-.51-1.406-.718A7.02 7.02 0 0 0 21 11c0-3.854-3.146-7-7-7m0 2c2.773 0 5 2.227 5 5s-2.227 5-5 5s-5-2.227-5-5s2.227-5 5-5m10 12c3.326 0 6 2.674 6 6s-2.674 6-6 6s-6-2.674-6-6s2.674-6 6-6m-1 2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/>
+                </svg>
+
+                <span> Criar usuário </span>
+              </a> -->
+
+
+
+
+
+            <a class="nav-item nav-link text-dark" (click)="abrirModal('listarUsuarios')" *ngIf="usuario_administrador()">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                <path fill="#ff3e00" d="M152 80a8 8 0 0 1 8-8h88a8 8 0 0 1 0 16h-88a8 8 0 0 1-8-8m96 40h-88a8 8 0 0 0 0 16h88a8 8 0 0 0 0-16m0 48h-64a8 8 0 0 0 0 16h64a8 8 0 0 0 0-16m-96.25 22a8 8 0 0 1-5.76 9.74a7.6 7.6 0 0 1-2 .26a8 8 0 0 1-7.75-6c-6.16-23.94-30.34-42-56.25-42s-50.09 18.05-56.25 42a8 8 0 0 1-15.5-4c5.59-21.71 21.84-39.29 42.46-48a48 48 0 1 1 58.58 0c20.63 8.71 36.88 26.29 42.47 48M80 136a32 32 0 1 0-32-32a32 32 0 0 0 32 32"/>
+              </svg>
+
+              <span> Lista de Usuários </span>
+            </a>
+
+
+
+
+              <a class="nav-item nav-link" [routerLink]="['/ajuda-usuario']">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#E65100" d="M12 3C6.5 3 2 6.6 2 11c0 2.2 1.1 4.2 2.8 5.5c0 .6-.4 2.2-2.8 4.5c2.4-.1 4.6-1 6.5-2.5c1.1.3 2.3.5 3.5.5c5.5 0 10-3.6 10-8s-4.5-8-10-8m0 14c-4.4 0-8-2.7-8-6s3.6-6 8-6s8 2.7 8 6s-3.6 6-8 6m.2-10.5c-.9 0-1.6.2-2.1.5c-.6.4-.9 1-.8 1.7h2q0-.45.3-.6c.2-.1.4-.2.7-.2s.6.1.8.3s.3.4.3.7s-.1.5-.2.7c-.2.2-.4.4-.6.5c-.5.3-.9.6-1.1.8c-.4.3-.5.6-.5 1.1h2c0-.3.1-.5.1-.7c.1-.2.3-.3.5-.5c.5-.2.8-.5 1.1-.9s.4-.8.4-1.2c0-.7-.3-1.3-.8-1.7c-.4-.3-1.2-.5-2.1-.5M11 13v2h2v-2z"/>
+                </svg>
+
+                <span> Suporte</span>
+              </a>
+
+
+
+
+
+          <a class="nav-item nav-link text-dark" (click)="abrirModal('about')">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+              <path fill="#2196f3" d="M37 40H11l-6 6V12c0-3.3 2.7-6 6-6h26c3.3 0 6 2.7 6 6v22c0 3.3-2.7 6-6 6"/>
+              <g fill="#fff"><path d="M22 20h4v11h-4z"/><circle cx="24" cy="15" r="2"/>
+              </g></svg>
+
+            <span> Sobre...</span>
+          </a>
+
+
+
+
+          <a class="nav-item nav-link text-dark" (click)="sair()">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="none" stroke="#E65100" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 3c-.93 0-1.395 0-1.776.102a3 3 0 0 0-2.122 2.122C3 5.605 3 6.07 3 7v10c0 .93 0 1.395.102 1.776a3 3 0 0 0 2.122 2.122C5.605 21 6.07 21 7 21m9.5-4.5S21 13.186 21 12s-4.5-4.5-4.5-4.5M20 12H8"/>
+            </svg>
+
+            <span> Sair</span>
+          </a>
+
+
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
   </ul>
+
+
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- MODAIS -->
+<app-about *ngIf="modalAberta === 'about'"
+           [info]="info"
+           (fecharModal)="fecharModal()">
+</app-about>
+<app-meus-dados *ngIf="modalAberta === 'dados'"
+           [info]="info"
+           [usuario]="usuario"
+           (fecharModal)="fecharModal()">
+</app-meus-dados>
+
+
+<!-- MODAL LISTAR USUÁRIOS -->
+<app-listar-usuarios *ngIf="modalAberta === 'listarUsuarios'"
+    [info]="'Usuários do Sistema'"
+    [user]="usuario"
+    (fecharModal)="fecharModal()"
+    (abrirCadastro)="abrirCadastroUsuario()"
+    (abrirEditar)="abrirEditarUsuario()"
+    >
+</app-listar-usuarios>
+
+<!-- MODAL CADASTRAR USUÁRIO (abre sobre a de listar) -->
+<app-cadastro-usuario *ngIf="cadastroAberto"
+    [info]="'Cadastrar Novo Usuário'"
+    [user]="usuario"
+    (fecharModal)="fecharCadastroUsuario()">
+</app-cadastro-usuario>
+
+<!-- MODAL EDITAR USUÁRIO (abre sobre a de listar) -->
+<app-cadastro-usuario *ngIf="editarAberto"
+    [info]="'Editar Usuário'"
+    [user]="usuario"
+    (fecharModal)="fecharCadastroUsuario()">
+</app-cadastro-usuario>
+

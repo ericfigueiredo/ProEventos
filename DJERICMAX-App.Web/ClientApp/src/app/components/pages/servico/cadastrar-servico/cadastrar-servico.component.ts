@@ -14,7 +14,7 @@ export class CadastrarServicoComponent implements OnInit {
   public ativar_spinner: boolean;
   public mensagem:string;
   public servicoCadastrado: boolean;
-  public usuarioCadastrado: boolean;
+  public imagemPreview: string | ArrayBuffer | null = null;
   @Output() fecharModal = new EventEmitter<void>();
   @Input() info: string;
   @Input() tipo: string;
@@ -36,17 +36,61 @@ export class CadastrarServicoComponent implements OnInit {
     this.fecharModal.emit();
   }
 
-  public inputChange(files: FileList) {
+   public inputChange(event: any) {
+    const files = event.target.files;
     this.arquivoSelecionado = files.item(0);
-    this.ativarEspera();
-    this.servicoService.enviarArquivo(this.arquivoSelecionado).subscribe(
-      res => {
-        this.servico.nomeArquivo = res.nomeArquivo;
-        console.log(res.nomeArquivo);
-        this.desativarEspera();
-      },
-      e => console.error(e)
-    );
+
+    if (this.arquivoSelecionado) {
+      // Verifica se é uma imagem
+      if (!this.arquivoSelecionado.type.match('image.*')) {
+        alert('Por favor, selecione apenas imagens!');
+        this.limparImagem();
+        return;
+      }
+      // Cria o preview da imagem
+      this.criarPreviewImagem(this.arquivoSelecionado);
+      // Faz o upload do arquivo
+      this.ativar_spinner = true;
+      this.servicoService.enviarArquivo(this.arquivoSelecionado).subscribe(
+        (nomeArquivo) => {
+          this.servico.nomeArquivo = nomeArquivo;
+          this.ativar_spinner = false;
+        },
+        (e) => {
+          console.log(e);
+          this.ativar_spinner = false;
+          this.limparImagem();
+        }
+      );
+    }
+  }
+
+  private criarPreviewImagem(arquivo: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.imagemPreview = e.target.result;
+    };
+    reader.readAsDataURL(arquivo);
+  }
+
+  public removerImagem(): void {
+    this.limparImagem();
+
+    // Limpa o nome do arquivo no usuário se existir
+    if (this.servico.nomeArquivo) {
+      this.servico.nomeArquivo = null;
+    }
+  }
+
+  private limparImagem(): void {
+    this.imagemPreview = null;
+    this.arquivoSelecionado = null;
+
+    // Limpa o input file
+    const inputFile = document.getElementById('inputFile') as HTMLInputElement;
+    if (inputFile) {
+      inputFile.value = '';
+    }
   }
 
   public cadastrarServico(){

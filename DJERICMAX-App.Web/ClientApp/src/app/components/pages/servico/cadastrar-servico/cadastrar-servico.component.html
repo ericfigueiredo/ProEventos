@@ -1,7 +1,7 @@
 <div class="modal-backdrop fade show" (click)="fechar()"></div>
 
 <div class="modal fade show d-block" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header headiers">
         <h5 class="modal-title"> {{ info }} </h5>
@@ -9,116 +9,155 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body bodies">
+       <div class="modal-body bodies glass-containerTable">
         <div class="container-fluid">
 
 
 <!-- ------------------------------------------------------------------- -->
 
-<div>
+<div class="bodys">
   <form action="">
-    <div class="form-row">
-      <div class="col-md-8 mb-2">
-        <label for="inputNomeServico" class="sr-only">Serviço</label>
-        <input type="text" id="inputNomeServico"
-          name="nome" placeholder="Nome do Pacote de Serviços"
-          class="form-control mb-2"
-          [ngClass]="{
-            'is-invalid': nome.invalid && (nome.dirty || nome.touched),
-            'is-valid': nome.valid && (nome.dirty || nome.touched)
-          }"
-          [(ngModel)]="servico.nome"
-          #nome="ngModel"
-          required />
 
-        <div
-          class="invalid-feedback mb-2 respError"
-          role="alert"
-          *ngIf="nome.invalid && (nome.dirty || nome.touched)"
-        >
-          <div *ngIf="nome.errors.required">
-            Pacote de Serviços é de preenchimento obrigatório!
+    <div class="form-row col-md-12">
+
+      <div class="col-md-4 align-items-center">
+
+        <!-- IMAGEM -->
+        <div class="col-md-12" *ngIf="servico.nomeArquivo"
+          style="padding-top: 1em; margin: -0.5em 0 0 0;">
+            <div class="image-preview-elegant">
+              <img [src]="'../ ../../../../../../arquivos/' + servico.nomeArquivo"
+                class="preview-circle align-items-center">
+              <button type="button" class="btn-remove" (click)="removerImagem()"
+                title="Remover imagem">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+        </div>
+
+    <!-- PROCURAR IMAGEM -->
+        <div class="col-md-12">
+          <div class="file-input-elegant">
+            <input type="file" id="inputFile"
+                  (change)="inputChange($event)"
+                  [disabled]="ativar_spinner"
+                  accept="image/*" class="file-input">
+            <label for="inputFile" class="file-input-label">
+              <i class="fas fa-camera me-2"></i>
+              <span class="file-input-browse">Procurar</span>
+            </label>
+
           </div>
         </div>
+
       </div>
 
-      <div class="col-md-4 mb-2">
-        <label for="inputpreco_Hora" class="sr-only">$$ Valor por Hora</label>
-        <input
-          type="text"
-          id="inputpreco_Hora"
-          name="preco_Hora"
-          placeholder="$$ Valor por Hora"
-          class="form-control mb-2"
-          [ngClass]="{
-            'is-invalid':
-              preco_Hora.invalid && (preco_Hora.dirty || preco_Hora.touched),
-            'is-valid':
-              preco_Hora.valid && (preco_Hora.dirty || preco_Hora.touched)
-          }"
-          [(ngModel)]="servico.preco_Hora"
-          #preco_Hora="ngModel"
-          required
-        />
 
-        <div
-          class="invalid-feedback mb-2 respError"
-          role="alert"
-          *ngIf="preco_Hora.invalid && (preco_Hora.dirty || preco_Hora.touched)"
-        >
-          <div *ngIf="preco_Hora.errors.required">
-            Valor por hora é obrigatório!
+      <div class="form-row col-md-8">
+
+        <div class="col-md-8">
+          <label for="inputNomeServico" class="sr-only">Serviço</label>
+          <input type="text" id="inputNomeServico"
+            name="nome" placeholder="Nome do Pacote de Serviços"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+              'is-valid': nome.valid && (nome.dirty || nome.touched)
+            }"
+            [(ngModel)]="servico.nome"
+            #nome="ngModel"
+            required />
+
+          <div
+            class="invalid-feedback respError"
+            role="alert"
+            *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+          >
+            <div *ngIf="nome.errors.required">
+              Pacote de Serviços é de preenchimento obrigatório!
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-12 mb-2">
-        <label for="inputDescricao" class="sr-only">Descrição</label>
-        <textarea
-          id="inputDescricao"
-          rows="5"
-          name="descricao"
-          placeholder="Descrição do Pacote de Serviços"
-          class="form-control mb-2"
-          [ngClass]="{
-            'is-invalid':
-              descricao.invalid && (descricao.dirty || descricao.touched),
-            'is-valid':
-              descricao.valid && (descricao.dirty || descricao.touched)
-          }"
-          [(ngModel)]="servico.descricao"
-          #descricao="ngModel"
-          required
-          minlength="50"
-        ></textarea>
+        <div class="col-md-4">
+          <label for="inputpreco_Hora" class="sr-only">$$ Valor por Hora</label>
+          <input
+            type="text"
+            id="inputpreco_Hora"
+            name="preco_Hora"
+            placeholder="$$ Valor por Hora"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                preco_Hora.invalid && (preco_Hora.dirty || preco_Hora.touched),
+              'is-valid':
+                preco_Hora.valid && (preco_Hora.dirty || preco_Hora.touched)
+            }"
+            [(ngModel)]="servico.preco_Hora"
+            #preco_Hora="ngModel"
+            required
+          />
 
-        <div
-          class="invalid-feedback mb-2 respError"
-          role="alert"
-          *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)"
-        >
-          <div *ngIf="descricao.errors.required">
-            A Descrição é de preenchimento obrigatório!
-          </div>
-          <div *ngIf="descricao.errors.minlength">
-            A Descrição deve ter o mínimo de 50 caracteres!
+          <div
+            class="invalid-feedback respError"
+            role="alert"
+            *ngIf="preco_Hora.invalid && (preco_Hora.dirty || preco_Hora.touched)"
+          >
+            <div *ngIf="preco_Hora.errors.required">
+              Valor por hora é obrigatório!
+            </div>
           </div>
         </div>
+
+        <div class="col-md-12">
+          <label for="inputDescricao" class="sr-only">Descrição</label>
+          <textarea
+            id="inputDescricao"
+            rows="5"
+            name="descricao"
+            placeholder="Descrição do Pacote de Serviços"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                descricao.invalid && (descricao.dirty || descricao.touched),
+              'is-valid':
+                descricao.valid && (descricao.dirty || descricao.touched)
+            }"
+            [(ngModel)]="servico.descricao"
+            #descricao="ngModel"
+            required
+            minlength="50"
+          ></textarea>
+
+          <div
+            class="invalid-feedback mb-2 respError"
+            role="alert"
+            *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)"
+          >
+            <div *ngIf="descricao.errors.required">
+              A Descrição é de preenchimento obrigatório!
+            </div>
+            <div *ngIf="descricao.errors.minlength">
+              A Descrição deve ter o mínimo de 50 caracteres!
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="input-group mb-2">
+
+      <!-- <div class="input-group mb-2">
         <div class="custom-file">
           <input
-            type="file"
-            class="custom-file-input"
-            id="inputFile"
+            type="file" class="custom-file-input" id="inputFile"
             (change)="inputChange($event.target.files)"
           />
           <label for="inputFile" class="custom-file-label">
             Selecione uma imagem para o Pacote de Serviços
           </label>
         </div>
-      </div>
+      </div> -->
+
     </div>
 
     <div class="alert alert-danger" *ngIf="mensagem">

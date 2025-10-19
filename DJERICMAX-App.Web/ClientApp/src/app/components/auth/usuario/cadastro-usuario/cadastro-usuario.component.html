@@ -1,0 +1,205 @@
+<div class="modal-backdrop fade show" (click)="fechar()"></div>
+
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header headiers">
+        <h5 class="modal-title"> {{ info }} </h5>
+        <button type="button" class="close" (click)="fecha()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bodies glass-containerTable">
+        <div class="container-fluid">
+
+<!-- ------------------------------------------------------------------------------ -->
+
+<div class="bodys">
+  <form action="">
+
+    <div class="form-row col-md-12">
+
+      <div class="col-md-4 align-items-center">
+
+        <!-- IMAGEM -->
+        <div class="col-md-12" *ngIf="usuario.nomeArquivo"
+          style="padding-top: 1em; margin: -0.5em 0 0 0;">
+            <div class="image-preview-elegant">
+              <img [src]="'../../../../../../ftsUsuarios/' + usuario.nomeArquivo"
+                class="preview-circle align-items-center">
+              <button type="button" class="btn-remove" (click)="removerImagem()"
+                title="Remover imagem">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+        </div>
+
+    <!-- PROCURAR IMAGEM -->
+        <div class="col-md-12">
+          <div class="file-input-elegant">
+            <input type="file" id="inputFile"
+                  (change)="inputChange($event)"
+                  [disabled]="ativar_spinner"
+                  accept="image/*" class="file-input">
+            <label for="inputFile" class="file-input-label">
+              <i class="fas fa-camera me-2"></i>
+              <span class="file-input-browse">Procurar</span>
+            </label>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row col-md-8">
+        <!-- NOME -->
+        <div class="col-md-6 floating-label" style="margin-bottom: 1em !important;">
+
+            <input type="text" id="inputNome" name="nome" placeholder="Nome"
+            class="form-control" #nome="ngModel" [(ngModel)]="usuario.nome"
+            [ngClass]="{ 'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+            'is-valid': nome.valid && (nome.dirty || nome.touched) }" required />
+
+            <label for="inputNome">Nome</label>
+
+            <div class="invalid-feedback mb-2 respError" role="alert"
+            *ngIf="nome.invalid && (nome.dirty || nome.touched)" >
+            <div *ngIf="nome.errors.required">Nome é de preenchimento obrigatório!</div>
+            </div>
+
+        </div>
+        <!-- SOBRENOME -->
+        <div class="col-md-6 floating-label" style="margin-bottom: 1em !important;">
+          <input type="text" id="inputSobreNome" name="sobreNome" placeholder="Sobrenome"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': sobreNome.invalid && (sobreNome.dirty || sobreNome.touched),
+            'is-valid': sobreNome.valid && (sobreNome.dirty || sobreNome.touched) }"
+          [(ngModel)]="usuario.sobreNome" #sobreNome="ngModel" required />
+
+          <label for="inputSobreNome">Sobrenome</label>
+
+          <div class="invalid-feedback mb-2 respError" role="alert"
+          *ngIf="sobreNome.invalid && (sobreNome.dirty || sobreNome.touched)" >
+          <div *ngIf="sobreNome.errors.required">Sobrenome é de preenchimento obrigatório!</div>
+          </div>
+        </div>
+        <!-- CPF -->
+        <div class="form-row col-md-6 floating-label" style="margin-bottom: 1em !important;">
+          <input type="text" id="inputCpf" name="cpf" placeholder="CPF"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': cpf.invalid && (cpf.dirty || cpf.touched),
+            'is-valid': cpf.valid && (cpf.dirty || cpf.touched) }"
+          [(ngModel)]="usuario.cpf" #cpf="ngModel" minlength="11" required />
+
+          <label for="inputCpf">CPF</label>
+
+          <div class="invalid-feedback mb-2 respError" role="alert"
+          *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)" >
+            <div *ngIf="cpf.errors.required">O CPF é de preenchimento obrigatório!</div>
+            <div *ngIf="cpf.errors.minlength">O CPF deve ter pelo menos 11 caracteres.</div>
+          </div>
+        </div>
+        <!-- RG -->
+        <div class="col-md-6 floating-label" style="margin-bottom: 1em !important;">
+          <input type="text" id="inputRg" name="rg" placeholder="RG"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': rg.invalid && (rg.dirty || rg.touched),
+            'is-valid': rg.valid && (rg.dirty || rg.touched) }"
+            [(ngModel)]="usuario.rg" #rg="ngModel" minlength="9" required />
+
+          <label for="inputRg">RG</label>
+
+          <div class="invalid-feedback mb-2 respError" role="alert"
+          *ngIf="rg.invalid && (rg.dirty || rg.touched)" >
+            <div *ngIf="rg.errors.required">O RG deve informado!</div>
+            <div *ngIf="rg.errors.minlength">O RG deve ter pelo menos 9 caracteres.</div>
+          </div>
+        </div>
+        <!-- EMAIL -->
+        <div class="form-row col-md-6 floating-label" style="margin-bottom: 1em !important;">
+            <input type="email" id="inputEmail" name="email" placeholder="E-mail"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': email.invalid && (email.dirty || email.touched),
+              'is-valid': email.valid && (email.dirty || email.touched) }"
+              [(ngModel)]="usuario.email" #email="ngModel" email required />
+
+            <label for="inputEmail">E-mail</label>
+
+            <div class="invalid-feedback mb-2 respError" role="alert"
+            *ngIf="email.invalid && (email.dirty || email.touched)" >
+              <div *ngIf="email.errors.required">O E-mail é de preenchimento obrigatório!</div>
+              <div *ngIf="email.errors.email">Formato de E-mail inválido!</div>
+            </div>
+        </div>
+        <!-- SENHA   -->
+        <div class="col-md-6 floating-label" style="margin-bottom: 1em !important;">
+            <input type="password" id="inputSenha" name="senha" placeholder="Senha"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+              'is-valid': senha.valid && (senha.dirty || senha.touched) }"
+              [(ngModel)]="usuario.senha" #senha="ngModel" senha minlength="6" required />
+
+            <label for="inputSenha">Senha</label>
+
+            <div class="invalid-feedback mb-2 respError" role="alert"
+            *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
+              <div *ngIf="senha.errors.required">Deve ser informada uma Senha!</div>
+              <div *ngIf="senha.errors.minlength">A Senha deve ter pelo menos 6 caracteres.</div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6" style="margin-bottom: 1em !important;">
+          <div class="form-check">
+            <input type="checkbox" id="ehAdministrador" name="ehAdministrador"
+              class="form-check-input"
+              [(ngModel)]="usuario.ehAdministrador" />
+            <label class="form-check-label" for="ehAdministrador"
+              style="
+                font-size: 12px;
+                color: #6200ea;
+                vertical-align: middle;
+                margin-top: 1em;
+                font-weight: 600;
+
+                "> Administrador?
+            </label>
+          </div>
+        </div>
+
+
+        <div class="col-md-8 alert respError" *ngIf="mensagem">
+          {{ mensagem }}
+        </div>
+        <div class="col-md-8 alert respError" *ngIf="usuarioCadastrado">
+          Informações salvas com sucesso! Clique em Cancelar para sair.
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+<!-- ------------------------------------------------------------------------------ -->
+
+        </div>
+      </div>
+      <div class="modal-footer footies">
+        <button type="button" class="btn btn-outline-success btn-lg btYes col-md-2 "
+        (click)="cadastrar()">
+        <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"></span>
+        <span>&nbsp;
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" d="m15 10l-.986-.164A1 1 0 0 0 15 11zM4 10V9a1 1 0 0 0-1 1zm16.522 2.392l.98.196zM6 21h11.36v-2H6zM18.56 9H15v2h3.56zm-2.573 1.164l.805-4.835L14.82 5l-.806 4.836zM14.82 3h-.214v2h.214zm-3.543 1.781L8.763 8.555l1.664 1.11l2.516-3.774zM7.93 9H4v2h3.93zM3 10v8h2v-8zm17.302 8.588l1.2-6l-1.96-.392l-1.2 6zM8.762 8.555A1 1 0 0 1 7.93 9v2a3 3 0 0 0 2.496-1.336zm8.03-3.226A2 2 0 0 0 14.82 3v2zM18.56 11a1 1 0 0 1 .981 1.196l1.961.392A3 3 0 0 0 18.561 9zm-1.2 10a3 3 0 0 0 2.942-2.412l-1.96-.392a1 1 0 0 1-.982.804zM14.606 3a4 4 0 0 0-3.328 1.781l1.664 1.11A2 2 0 0 1 14.606 5zM6 19a1 1 0 0 1-1-1H3a3 3 0 0 0 3 3z"/><path stroke="currentColor" stroke-width="1.1" d="M8 10v10"/></g></svg>
+        </span>
+         Salvar </button>
+
+        <button type="button" class="btn btn-outline-secondary btn-lg btNo col-md-2 "
+        (click)="onCancelar()">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" d="m15 14l-.986.164A1 1 0 0 1 15 13zM4 14v1a1 1 0 0 1-1-1zm16.522-2.392l.98-.196zM6 3h11.36v2H6zm12.56 12H15v-2h3.56zm-2.573-1.164l.805 4.835L14.82 19l-.806-4.836zM14.82 21h-.214v-2h.214zm-3.543-1.781l-2.515-3.774l1.664-1.11l2.516 3.774zM7.93 15H4v-2h3.93zM3 14V6h2v8zm17.302-8.588l1.2 6l-1.96.392l-1.2-6zM8.762 15.445A1 1 0 0 0 7.93 15v-2a3 3 0 0 1 2.496 1.336zm8.03 3.226A2 2 0 0 1 14.82 21v-2zM18.56 13a1 1 0 0 0 .981-1.196l1.961-.392A3 3 0 0 1 18.561 15zm-1.2-10a3 3 0 0 1 2.942 2.412l-1.96.392A1 1 0 0 0 17.36 5zm-2.754 18a4 4 0 0 1-3.328-1.781l1.664-1.11a2 2 0 0 0 1.664.891zM6 5a1 1 0 0 0-1 1H3a3 3 0 0 1 3-3z"/><path stroke="currentColor" stroke-width="1.1" d="M8 14V4"/></g></svg>
+        </span> Cancelar </button>
+
+      </div>
+    </div>
+  </div>
+</div>

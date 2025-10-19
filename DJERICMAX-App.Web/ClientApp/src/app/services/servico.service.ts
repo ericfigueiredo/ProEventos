@@ -52,14 +52,10 @@ export class ServicoService implements OnInit {
     return this.http.get<Servico>(`${this._baseUrl}api/servico/id`);
   }
 
- public enviarArquivo(arquivoSelecionado: File): Observable<{ nomeArquivo: string }> {
-  const formData: FormData = new FormData();
-  formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
-
-  return this.http.post<{ nomeArquivo: string }>(
-    `${this._baseUrl}api/servico/enviarArquivo`,
-    formData
-  );
+  public enviarArquivo(arquivoSelecionado: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
+    return this.http.post<string>(`${this._baseUrl}api/servico/enviarArquivo`, formData);
 }
 
 

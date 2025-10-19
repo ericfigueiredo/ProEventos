@@ -3,7 +3,7 @@ export class Servico{
   nome: string;
   descricao: string;
   preco_Hora: number;
-  nomeArquivo: string;
   quantidade: number;
   precoTotal: number;
+  nomeArquivo?: string;
 }

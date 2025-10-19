@@ -37,29 +37,31 @@ app-footer {
 
 /* Espaço entre nav e footer */
 .main-area {
+  /* border: red 5px solid; */
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 100px); /* ajusta conforme a altura do header+footer */
+  height: calc(100vh - 100px);
   flex: 1;
-  margin-top: 1em;
   margin-bottom: 39px;
-  /* overflow: hidden; */
 }
 
 
 /* Área do conteúdo */
 .content-area {
+  /* border: yellowgreen 5px solid; */
+  position: relative;
+  top: 0;
+  left: 0;
   max-width: 100%;
   flex: 1;
   display: flex;
-  min-height: 100%; /* antes estava 100vh */
+  min-height: 100%;
   background: url('../assets/images/backgroundX7.jpg') no-repeat center center;
   background-size: cover;
   overflow: hidden;
-  position: relative;
-  margin-top: -1em ;
+  padding: 0.5em 0.5em 0.5em 0.5em !important;
 }
 
 .content-area.login-page {
-  background: none;   /* remove o branco */
+  background: none;
 }

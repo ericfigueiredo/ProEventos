@@ -1,56 +1,60 @@
 
 @media screen and (max-width: 575px) {
-  .tabela-scroll-wrapper {
-    height: 780px;
-    min-height: 100% !important;
-  }
+  // .tabela-scroll-wrapper {
+  //   height: 780px;
+  //   min-height: 100% !important;
+  // }
 }
 
 @media screen and (min-width: 576px) and (max-width: 767px) {
-  .tabela-scroll-wrapper {
-    height: 700px;
-    min-height: 100% !important;
-  }
+  // .tabela-scroll-wrapper {
+  //   height: 700px;
+  //   min-height: 100% !important;
+  // }
 }
 
 @media screen and (min-width: 800px) and (max-height: 600px) {
-  .tabela-scroll-wrapper {
-    height: 300px;
-    min-height: 100% !important;
-  }
+  // .tabela-scroll-wrapper {
+  //   height: 300px;
+  //   min-height: 100% !important;
+  // }
 }
 
 @media screen and (width: 1280px) and (height: 720px) {
-  .tabela-scroll-wrapper {
-    height: 422px;
-    min-height: 100% !important;
-  }
+  // .tabela-scroll-wrapper {
+  //   height: 422px;
+  //   min-height: 100% !important;
+  // }
 }
 
 //monitor do notebook
 @media screen and (min-width: 1024px) and (max-height: 768px) {
-  .tabela-scroll-wrapper {
-    height: 470px;
-    min-height: 100% !important;
-  }
+  // .tabela-scroll-wrapper {
+  //   height: 470px;
+  //   min-height: 100% !important;
+  // }
 }
 
 // monitor vertical
 @media screen and (width: 1080px) and (max-height: 1920px) {
-  .tabela-scroll-wrapper {
-    height: 1625px;
-    min-height: 100% !important;
-  }
+  // .tabela-scroll-wrapper {
+  //   height: 1625px;
+  //   min-height: 100% !important;
+  // }
 }
 
 //monitor horizontal grande
 @media screen and (min-width: 1920px) {
-  .tabela-scroll-wrapper {
-    height: 790px;
-    min-height: 100% !important;
-  }
+  // .tabela-scroll-wrapper {
+  //   height: 790px;
+  //   min-height: 100% !important;
+  // }
 }
 
+.table-scroll-wrapper {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
 
 .botao {
   background-color: green;
@@ -69,44 +73,6 @@
 
 .botao:hover {
   background-color: darkgreen;
-}
-
-.tabela-scroll-wrapper {
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-/* Garante layout de tabela fixa para alinhar colunas */
-.tabela-scroll {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
-/* Para evitar que conteúdo ultrapasse os cantos arredondados */
-.tabela-scroll-wrapper::-webkit-scrollbar {
-  width: 8px;
-}
-
-.tabela-scroll-wrapper::-webkit-scrollbar-track {
-  border-radius: 12px;
-  background: #f1f1f1;
-}
-
-.tabela-scroll-wrapper::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 12px;
-}
-
-
-/* Cabeçalho fixo */
-.tabela-scroll thead th {
-  background-color: rgba(220,220,220,10);
-  border-bottom: #07af07;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 1;
 }
 
 .add {

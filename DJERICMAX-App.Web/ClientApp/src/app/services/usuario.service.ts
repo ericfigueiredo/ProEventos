@@ -62,8 +62,11 @@ export class UsuarioService {
     // this._usuario = null;
   }
 
+  public deletarUsuario(usuario: Usuario): Observable<Usuario> {
+      return this.http.post<Usuario>(`${this.baseUrl}api/usuario/deletar`,
+        JSON.stringify(usuario), { headers: this.headers});
+    }
 
-  // public verificaUsuario(usuario: Usuario): Observable<Usuario>{
   public verificaUsuario(usuario: Usuario): Observable<Usuario>{
     var body = {
       email: usuario.email,
@@ -83,5 +86,8 @@ export class UsuarioService {
     return this.http.post<string>(`${this.baseUrl}api/usuario/enviarArquivo`, formData);
   }
 
+  public obterTodosUsuarios(): Observable<Usuario[]> {
+      return this.http.get<Usuario[]>(`${this.baseUrl}api/usuario`);
+    }
 
 }
