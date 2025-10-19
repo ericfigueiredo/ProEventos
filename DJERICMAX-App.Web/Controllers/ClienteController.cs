@@ -98,6 +98,7 @@ namespace DJERICMAX_App.Web.Controllers
         public IActionResult Post([FromBody] Cliente cliente)
         {
             try
+            
             {
                 cliente.Validate();
                 if (!cliente.EhValido)

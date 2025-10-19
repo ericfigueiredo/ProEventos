@@ -139,23 +139,19 @@ namespace DJERICMAX_App.Web.Controllers
                 var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["arquivoEnviado"];
                 if (formFile == null || formFile.Length == 0)
                     return BadRequest("Arquivo não enviado");
-
                 var nomeArquivo = formFile.FileName;
-                var extensao = nomeArquivo.Split('.').Last();
+                var extensao = nomeArquivo.Split(".").Last();
                 string novoNomeArquivo = GerarNovoNomeArquivo(nomeArquivo, extensao);
-
                 var pastaArquivos = _hostingEnvironment.WebRootPath + "\\arquivos\\";
                 if (!Directory.Exists(pastaArquivos))
                     Directory.CreateDirectory(pastaArquivos);
-
-                var nomeCompleto = Path.Combine(pastaArquivos, novoNomeArquivo);
-
+                var nomeCompleto = pastaArquivos + novoNomeArquivo;
                 using (var streamArquivo = new FileStream(nomeCompleto, FileMode.Create))
                 {
                     formFile.CopyTo(streamArquivo);
                 }
-
-                return Ok(new { nomeArquivo = novoNomeArquivo });
+                // return Ok(new { nomeArquivo = novoNomeArquivo });
+                return Json(novoNomeArquivo);
             }
             catch (Exception ex)
             {

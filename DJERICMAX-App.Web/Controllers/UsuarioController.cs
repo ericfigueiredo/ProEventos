@@ -27,19 +27,20 @@ namespace DJERICMAX_App.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public IActionResult Get()
         {
             try
             {
-                return Ok();
+                var usuarios = _usuarioRepositorio.ObterTodos();
+                return Ok(usuarios);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return BadRequest(ex.Message);
             }
         }
 
-//---------------------------------------------------------------------------
+        //---------------------------------------------------------------------------
 
         [HttpPost("VerificarUsuario")]
         public ActionResult VerificarUsuario([FromBody] Usuario usuario)
@@ -60,20 +61,31 @@ namespace DJERICMAX_App.Web.Controllers
             }
         }
 
-//---------------------------------------------------------------------------
+        //---------------------------------------------------------------------------
 
+        // POST: api/usuario - Criar ou atualizar usuario
         [HttpPost]
-        public ActionResult Post([FromBody] Usuario usuario)
+        public IActionResult Post([FromBody] Usuario usuario)
         {
             try
-            {
-                var usuarioCadastrado = _usuarioRepositorio.Obter(usuario.Email);
-                
-                if (usuarioCadastrado != null)
-                    return BadRequest("Usuário já cadastrado no sistema");
 
-                _usuarioRepositorio.Adicionar(usuario);
-                return Ok();
+            {
+                usuario.Validate();
+                if (!usuario.EhValido)
+                {
+                    return BadRequest(usuario.ObterMensagensValidacao());
+                }
+
+                if (usuario.Id > 0)
+                {
+                    _usuarioRepositorio.Atualizar(usuario);
+                }
+                else
+                {
+                    _usuarioRepositorio.Adicionar(usuario);
+                }
+
+                return Created("api/usuario", usuario);
             }
             catch (Exception ex)
             {
@@ -81,7 +93,7 @@ namespace DJERICMAX_App.Web.Controllers
             }
         }
 
-//---------------------------------------------------------------------------
+        //---------------------------------------------------------------------------
 
         [HttpPost("EnviarArquivo")]
         public IActionResult EnviarArquivo()
@@ -116,7 +128,22 @@ namespace DJERICMAX_App.Web.Controllers
             return novoNomeArquivo;
         }
 
-//---------------------------------------------------------------------------
+        //---------------------------------------------------------------------------
+
+        // POST: api/cliente/deletar - Excluir cliente
+        [HttpPost("deletar")]
+        public IActionResult Deletar([FromBody] Usuario usuario)
+        {
+            try
+            {
+                _usuarioRepositorio.Remover(usuario);
+                return Ok(_usuarioRepositorio.ObterTodos());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
 
     }
 }
