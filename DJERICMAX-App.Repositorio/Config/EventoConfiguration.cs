@@ -30,6 +30,7 @@ namespace DJERICMAX_App.Repositorio.Config
             builder.Property(e => e.Proposta);
             builder.Property(e => e.Fechado);
             builder.Property(e => e.Realizado);
+            builder.Property(e => e.Cancelado);
 
             // CONFIGURAR RELAÇÕES CORRETAMENTE
             builder.HasOne(e => e.Cliente)

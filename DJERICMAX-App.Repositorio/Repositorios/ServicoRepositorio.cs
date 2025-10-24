@@ -17,8 +17,9 @@ namespace DJERICMAX_App.Repositorio.Repositorios
         public Servico ObterServicoComItensPedido(int id)
         {
             return DJERICMAX_AppContexto.Servicos
+                .AsNoTracking()
                 .Include(s => s.ItensPedido)
-                    .ThenInclude(ip => ip.Evento)
+                .ThenInclude(ip => ip.Evento)
                 .FirstOrDefault(s => s.Id == id);
         }
 
@@ -27,9 +28,15 @@ namespace DJERICMAX_App.Repositorio.Repositorios
         {
             return DJERICMAX_AppContexto.Servicos
                 .Include(s => s.ItensPedido)
-                    .ThenInclude(ip => ip.Evento)
+                .ThenInclude(ip => ip.Evento)
                 .AsNoTracking()
                 .ToList();
+        }
+
+        public void Detach(ItemPedido item)
+        {
+            var entry = DJERICMAX_AppContexto.Entry(item);
+            entry.State = EntityState.Detached;
         }
     }
 }

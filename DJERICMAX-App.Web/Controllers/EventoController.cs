@@ -23,8 +23,8 @@ namespace DJERICMAX_App.Web.Controllers
         {
             try
             {
-                var eventos = _eventoRepositorio.ObterTodos(); // Método da interface base
-                return Ok(eventos); // Use Ok() em vez de Json()
+                var eventos = _eventoRepositorio.ObterTodosCompletos(); // ✅ inclui Cliente, FormaPagamento e ItensPedido/Serviço
+                return Ok(eventos);
             }
             catch (Exception ex)
             {
@@ -48,6 +48,7 @@ namespace DJERICMAX_App.Web.Controllers
             }
         }
         //---------------------------------------------------------------------------
+
         [HttpPost("cadastrar")]
         public IActionResult Post([FromBody] Evento evento)
         {
@@ -55,16 +56,13 @@ namespace DJERICMAX_App.Web.Controllers
             {
                 evento.Validate();
                 if (!evento.EhValido)
-                {
                     return BadRequest(evento.ObterMensagensValidacao());
-                }
 
-                // Obter evento existente do banco para evitar conflitos
                 var eventoExistente = _eventoRepositorio.ObterEventoCompleto(evento.Id);
 
                 if (eventoExistente != null)
                 {
-                    // Atualizar propriedades do evento existente
+                    // Atualiza propriedades simples
                     eventoExistente.NomeEvento = evento.NomeEvento;
                     eventoExistente.HoraInicio = evento.HoraInicio;
                     eventoExistente.HoraFinal = evento.HoraFinal;
@@ -86,13 +84,16 @@ namespace DJERICMAX_App.Web.Controllers
                     eventoExistente.Proposta = evento.Proposta;
                     eventoExistente.Fechado = evento.Fechado;
                     eventoExistente.Realizado = evento.Realizado;
-                    
-                    eventoExistente.GerarParcelas();
+                    eventoExistente.Cancelado = evento.Cancelado;
+
+                    // Substitui itens de pedido e parcelas
+                    eventoExistente.ItensPedido = evento.ItensPedido;
+                    eventoExistente.Parcelas = evento.Parcelas;
+
                     _eventoRepositorio.Atualizar(eventoExistente);
                 }
                 else
                 {
-                    evento.GerarParcelas();
                     _eventoRepositorio.Adicionar(evento);
                 }
 
@@ -103,7 +104,6 @@ namespace DJERICMAX_App.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         //---------------------------------------------------------------------------
         [HttpDelete("{id}")]

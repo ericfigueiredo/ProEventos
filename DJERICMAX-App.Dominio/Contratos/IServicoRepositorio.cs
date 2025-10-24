@@ -7,5 +7,6 @@ namespace DJERICMAX_App.Dominio.Contratos
     {
         Servico ObterServicoComItensPedido(int id);
         IEnumerable<Servico> ObterTodosComItensPedido();
+        void Detach(ItemPedido item);
     }
 }

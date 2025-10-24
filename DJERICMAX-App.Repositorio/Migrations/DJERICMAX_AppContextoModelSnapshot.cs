@@ -79,6 +79,8 @@ namespace DJERICMAX_App.Repositorio.Migrations
                     b.Property<string>("BairroEvento")
                         .HasMaxLength(30);
 
+                    b.Property<bool>("Cancelado");
+
                     b.Property<string>("CepEvento")
                         .HasMaxLength(9);
 

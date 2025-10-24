@@ -31,6 +31,7 @@ namespace DJERICMAX_App.Dominio.Entidades
         public bool Proposta { get; set; }
         public bool Fechado { get; set; }
         public bool Realizado { get; set; }
+        public bool Cancelado { get; set; }
 
         // Relações
         public int ClienteId { get; set; }
