@@ -9,121 +9,179 @@ import { Router } from '@angular/router';
   styleUrls: ['./cadastrar-servico.component.scss']
 })
 export class CadastrarServicoComponent implements OnInit {
-  public servico: Servico;
-  public arquivoSelecionado: File;
-  public ativar_spinner: boolean;
-  public mensagem:string;
-  public servicoCadastrado: boolean;
+  public servico: Servico = new Servico();
+  public arquivoSelecionado: File | null = null;
+  public ativar_spinner = false;
+  public mensagem = '';
   public imagemPreview: string | ArrayBuffer | null = null;
-  @Output() fecharModal = new EventEmitter<void>();
-  @Input() info: string;
-  @Input() tipo: string;
-  @Input() tab: string;
 
-  constructor(private servicoService: ServicoService,
-              private router: Router  ) { }
+  private imagemAntiga: string | null = null;
+  public imagemTemporaria: string | null = null;
+  public imagemMarcadaParaExcluir = false;
+
+  @Output() fecharModal = new EventEmitter<void>();
+  @Input() info!: string;
+  @Input() tipo!: string;
+  @Input() tab!: string;
+
+  constructor(private servicoService: ServicoService, private router: Router) { }
 
   ngOnInit() {
-    var servicoSession = sessionStorage.getItem('servicoSession');
+    const servicoSession = sessionStorage.getItem('servicoSession');
     if (servicoSession) {
       this.servico = JSON.parse(servicoSession);
-    } else {
-      this.servico = new Servico();
+      this.imagemAntiga = this.servico.nomeArquivo || null;
     }
   }
 
-   fechar() {
+  fechar() {
     this.fecharModal.emit();
   }
 
-   public inputChange(event: any) {
-    const files = event.target.files;
-    this.arquivoSelecionado = files.item(0);
+  public inputChange(event: any) {
+    const file = event.target.files.item(0);
+    if (!file) return;
 
-    if (this.arquivoSelecionado) {
-      // Verifica se é uma imagem
-      if (!this.arquivoSelecionado.type.match('image.*')) {
-        alert('Por favor, selecione apenas imagens!');
-        this.limparImagem();
-        return;
-      }
-      // Cria o preview da imagem
-      this.criarPreviewImagem(this.arquivoSelecionado);
-      // Faz o upload do arquivo
-      this.ativar_spinner = true;
-      this.servicoService.enviarArquivo(this.arquivoSelecionado).subscribe(
-        (nomeArquivo) => {
-          this.servico.nomeArquivo = nomeArquivo;
+    if (!file.type.match('image.*')) {
+      alert('Selecione apenas imagens!');
+      this.limparImagem();
+      return;
+    }
+
+    this.arquivoSelecionado = file;
+    this.criarPreviewImagem(file);
+    this.uploadTemporario(file);
+  }
+
+  private criarPreviewImagem(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e: ProgressEvent) => {
+      const target = e.target as FileReader;
+      this.imagemPreview = target.result || null;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  private uploadTemporario(file: File) {
+  this.ativar_spinner = true;
+  this.servicoService.enviarArquivo(file).subscribe(
+    (res: any) => {
+      this.imagemTemporaria = res.arquivo;
+      this.imagemMarcadaParaExcluir = false;
+      this.ativar_spinner = false;
+    },
+    (e) => {
+      console.error('Erro upload temporário:', e);
+      this.ativar_spinner = false;
+      this.limparImagem();
+    }
+  );
+}
+
+  public removerImagem() {
+    this.imagemMarcadaParaExcluir = true;
+    this.imagemTemporaria = null;
+    this.imagemPreview = null;
+    this.arquivoSelecionado = null;
+    const inputFile = document.getElementById('inputFile') as HTMLInputElement;
+    if (inputFile) inputFile.value = '';
+  }
+
+  public desfazerRemocaoImagem() {
+    this.imagemMarcadaParaExcluir = false;
+  }
+
+  public cancelarImagemTemporaria() {
+    if (!this.imagemTemporaria) {
+      this.limparImagem();
+      return;
+    }
+
+    this.ativar_spinner = true;
+    this.servicoService.cancelarImagem(this.imagemTemporaria).subscribe(
+      () => this.limparImagem(),
+      (erro) => console.warn('Falha ao remover imagem temporária:', erro)
+    ).add(() => this.ativar_spinner = false);
+  }
+
+  public cadastrarServico() {
+    this.ativar_spinner = true;
+
+    const salvar = () => {
+      this.servicoService.cadastrar(this.servico).subscribe(
+        (res) => {
+          sessionStorage.removeItem('servicoSession');
+          this.fechar();
           this.ativar_spinner = false;
         },
         (e) => {
-          console.log(e);
+          console.error(e);
+          this.mensagem = e.error.erro || 'Erro ao salvar serviço.';
           this.ativar_spinner = false;
-          this.limparImagem();
         }
       );
-    }
-  }
-
-  private criarPreviewImagem(arquivo: File): void {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.imagemPreview = e.target.result;
     };
-    reader.readAsDataURL(arquivo);
-  }
 
-  public removerImagem(): void {
-    this.limparImagem();
-
-    // Limpa o nome do arquivo no usuário se existir
-    if (this.servico.nomeArquivo) {
-      this.servico.nomeArquivo = null;
+   if (this.imagemTemporaria) {
+    this.servicoService.confirmarImagem({
+      imagemNova: this.imagemTemporaria,
+      imagemAntiga: this.imagemAntiga
+    }).subscribe(() => {
+      this.servico.nomeArquivo = this.imagemTemporaria;
+      this.imagemAntiga = this.imagemTemporaria;
+      this.imagemTemporaria = null;
+      salvar();
+    },
+    (erro) => {
+      console.log('Erro ao confirmar imagem:', erro);
+      this.mensagem = 'Não foi possível confirmar a imagem.';
+      this.ativar_spinner = false;
     }
-  }
+  );
+  return;
+}
 
-  private limparImagem(): void {
-    this.imagemPreview = null;
-    this.arquivoSelecionado = null;
-
-    // Limpa o input file
-    const inputFile = document.getElementById('inputFile') as HTMLInputElement;
-    if (inputFile) {
-      inputFile.value = '';
-    }
-  }
-
-  public cadastrarServico(){
-    this.ativarEspera();
-    this.servicoService.cadastrar(this.servico)
-      .subscribe(
-        servicoJson =>{
-          console.log(servicoJson);
-          this.mensagem = "";
-          this.desativarEspera()
-          this.fechar();
-          sessionStorage.removeItem('servicoSession');
+    if (this.imagemMarcadaParaExcluir && this.imagemAntiga) {
+      const nomeAntigo = this.imagemAntiga;
+      this.servicoService.deletarArquivo(nomeAntigo).subscribe(
+        () => {
+          this.servico.nomeArquivo = null;
+          this.imagemAntiga = null;
+          this.imagemMarcadaParaExcluir = false;
+          salvar();
         },
-        e => {
-          console.log(e.error);
-          this.mensagem = e.error;
-          this.desativarEspera()
-          this.fechar();
+        () => {
+          this.servico.nomeArquivo = null;
+          this.imagemAntiga = null;
+          this.imagemMarcadaParaExcluir = false;
+          salvar();
         }
-
       );
+      return;
+    }
+
+    salvar();
   }
 
-  public cancelar(){
+  public cancelar() {
+    if (this.imagemTemporaria) {
+      this.servicoService.cancelarImagem(this.imagemTemporaria).subscribe(
+        () => console.log('Imagem temporária removida.'),
+        (erro) => console.warn('Erro ao remover imagem temporária:', erro)
+      );
+      this.imagemTemporaria = null;
+    }
+
+    this.imagemMarcadaParaExcluir = false;
     sessionStorage.removeItem('servicoSession');
     this.fechar();
   }
 
-  public ativarEspera(){
-    this.ativar_spinner = true;
+  private limparImagem() {
+    this.imagemPreview = null;
+    this.arquivoSelecionado = null;
+    this.imagemTemporaria = null;
+    const inputFile = document.getElementById('inputFile') as HTMLInputElement;
+    if (inputFile) inputFile.value = '';
   }
-  public desativarEspera(){
-    this.ativar_spinner = false;
-  }
-
 }

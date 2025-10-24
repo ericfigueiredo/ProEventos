@@ -46,8 +46,8 @@
               </td>
               <td style="text-align: center">
                 <a (click)="mostrarCliente(e)" style="cursor: pointer;"
-                  title="Clique para ver os dados de {{e.cliente.nome}}">
-                  {{e.cliente.nome}} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15l5-5H7z"/></svg>
+                  title="Clique para ver os dados do cliente">
+                  {{e?.cliente?.nome}} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15l5-5H7z"/></svg>
                 </a>
               </td>
               <td style="text-align: center">
@@ -87,7 +87,13 @@
                 </a>
               </td>
               <td><!-- Excluir Evento -->
-                <a class="btn del" data-toggle="modal"title="Excluir Evento"
+                <a class="btn del" data-toggle="modal" title="Cancelar Evento"
+                (click)="abrirModal(e,'cancelarEvento', 'evento', i)" data-target="#modalExcluirEvento">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="#ff00c2" d="M149.3 0h-42.7v64h42.7zm256 0h-42.7v64h42.7zM148.9 426.7h214.3c33 0 52.3-22.2 35.9-49.4L286 190.9c-16.5-27.2-43.4-27.2-59.9 0L113 377.3c-16.5 27.1 2.9 49.4 35.9 49.4m85.8-192h42.7v106.7h-42.7zm0 128h42.7v42.7h-42.7zM426.7 0v85.3h-85.3V0H170.7v85.3H85.3V0H0v512h512V0zm42.6 469.3H42.7V128h426.7v341.3z"/></svg>
+                </a>
+              </td>
+              <td><!-- Excluir Evento -->
+                <a class="btn del" data-toggle="modal" title="Excluir Evento"
                 (click)="abrirModal(e,'excluirEvento', 'evento', i)" data-target="#modalExcluirEvento">
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 24 24"><path fill="red" d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H6v12h12zm-4.586 6l1.768 1.768l-1.414 1.414L12 15.414l-1.768 1.768l-1.414-1.414L10.586 14l-1.768-1.768l1.414-1.414L12 12.586l1.768-1.768l1.414 1.414zM9 4v2h6V4z"/></svg>
                 </a>
@@ -135,17 +141,17 @@
                     <th class="thTable" style="width: 10%; text-align: center;">UF</th>
                   </tr>
                   <tr>
-                    <td>{{e.cliente.nome}} {{e.cliente.sobreNome}}</td>
-                    <td>{{e.cliente.cpf}}</td>
-                    <td>{{e.cliente.telefone}}</td>
-                    <td>{{e.cliente.email}}</td>
+                    <td>{{e?.cliente?.nome}} {{e?.cliente?.sobreNome}}</td>
+                    <td>{{e?.cliente?.cpf}}</td>
+                    <td>{{e?.cliente?.telefone}}</td>
+                    <td>{{e?.cliente?.email}}</td>
                     <td><input type="checkbox" class="btn sem-clique"
-                      [checked]="e.cliente.ehCliente === 1"
+                      [checked]="e?.cliente?.ehCliente === 1"
                        (click)="$event.preventDefault()" />
                     </td>
-                    <td>{{e.cliente.bairro}}</td>
-                    <td>{{e.cliente.cidade}}</td>
-                    <td>{{e.cliente.uf}}</td>
+                    <td>{{e?.cliente?.bairro}}</td>
+                    <td>{{e?.cliente?.cidade}}</td>
+                    <td>{{e?.cliente?.uf}}</td>
                     <td><!-- Visualizar Cliente -->
                       <a class="btn edit" title="Visualizar Cliente"
                         (click)="abrirModal(e, 'edit', 'evento', i)">

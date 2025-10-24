@@ -37,7 +37,7 @@ export class ListarEventoComponent implements OnInit {
         console.log(eventos);
         this.eventos = eventos;
       },
-      (e) => {}
+      (e) => { }
     );
   }
 
